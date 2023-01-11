@@ -1,13 +1,20 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import './App.scss'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap-grid.min.css';
+import './sass/App.scss';
+
+import Navbar from './component/Navbar';
+
+
 
 function App() {
 
   return (
     <Router>
 
+      <Navbar />
+
       <Routes>
-        <Route />
+        {/* <Route index element={} /> */}
       </Routes>
       
     </Router>
