@@ -1,7 +1,7 @@
 import '../sass/Navigation.scss';
 import { NavLink, Link } from "react-router-dom";
 
-import { useState, useRef, useEffect, useContext } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark, faPhone, faEnvelope } from "@fortawesome/free-solid-svg-icons";
@@ -9,33 +9,23 @@ import { faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 import ChangeLanguage from './ChangeLanguage';
 
-import { useGetData } from '../hooks/useGetData';
-import { Context } from '../Context/Context';
+import UseTranslator from '../hooks/UseTranslator';
 
 
 
 const Navbar = () => {
 
-    const { error, loading, data, getData } = useGetData();
 
-    const [ language, setLanguage ] = useContext( Context );
-
-    const [ currentLanguageData, setCurrentLanguageData ] = useState();
-
-
-    /* #region  Usestates */
     const [ isMenuOpen, setIsMenuOpen ] = useState( false );
 
     const [ scrolledYPos, setScrolledYPos ] = useState( 0 );
-    /* #endregion */
 
     const headerRef = useRef();
 
-    /* #region  Menu handling */
+    const [selectedData] = UseTranslator("Navigation");    
+
+
     const handleClick = () => setIsMenuOpen( !isMenuOpen );
-
-
-    /* #endregion */
 
     const handleStylingOnScroll = () => {
         const scrollY = window.scrollY;
@@ -75,22 +65,7 @@ const Navbar = () => {
         }
 
 
-    }, [] )
-
-    useEffect( () => {
-
-        if ( data ) {
-            setCurrentLanguageData( data.records.filter( d => d.fields.Code[ 0 ] === language ) );
-        }
-
-    }, [ data ] )
-
-    useEffect( () => {
-        getData( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/Navigation', {
-            'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLEKEY
-        } );
-
-    }, [ language ] )
+    }, [] );
 
 
     return (
@@ -98,14 +73,16 @@ const Navbar = () => {
 
         <header className="container-fluid px-0 header" ref={ headerRef }>
 
+            {/* <UseTranslator data={data} getData={getData} airtableName="Navigation" /> */}
+
             {
-                currentLanguageData &&
+                selectedData &&
 
                 <>
                     <nav className=" container-xl topnav">
-                        <h1 className="big_heading">{ currentLanguageData[ 0 ].fields.Header_Title }</h1>
+                        <h1 className="big_heading">{ selectedData[ 0 ].fields.Header_Title }</h1>
 
-                        <h1 className="small_heading">{ currentLanguageData[ 0 ].fields.Header_Title2 }</h1>
+                        <h1 className="small_heading">{ selectedData[ 0 ].fields.Header_Title2 }</h1>
 
 
                         <div className="info">
@@ -117,7 +94,7 @@ const Navbar = () => {
                         <div className="soMeAndLanguage">
                             <FontAwesomeIcon icon={ faFacebookF } />
                             <FontAwesomeIcon icon={ faInstagram } />
-                            <ChangeLanguage currentLanguageData={currentLanguageData} />
+                            <ChangeLanguage currentLanguageData={selectedData} />
 
                         </div>
                     </nav>
@@ -137,29 +114,29 @@ const Navbar = () => {
 
                             <li>
                                 <h2 className="small_heading">
-                                    <span>
+                                    {/* <span>
                                         { currentLanguageData[ 0 ].fields.Header_Title.split( '-' )[ 0 ] } -
                                     </span>
-                                    <span>{ currentLanguageData[ 0 ].fields.Header_Title.split( '-' )[ 1 ] }</span>
+                                    <span>{ currentLanguageData[ 0 ].fields.Header_Title.split( '-' )[ 1 ] }</span> */}
                                 </h2>
                             </li>
 
                             <li>
-                                <NavLink to="/rooms">{currentLanguageData[0].fields.Rooms}</NavLink>
+                                <NavLink to="/rooms">{selectedData[0].fields.Rooms}</NavLink>
                             </li>
 
                             <li>
-                                <NavLink to="/events">{currentLanguageData[0].fields.Events}</NavLink>
+                                <NavLink to="/events">{selectedData[0].fields.Events}</NavLink>
                             </li>
 
                             <li>
-                                <NavLink to="/activities">{currentLanguageData[0].fields.Activities}</NavLink>
+                                <NavLink to="/activities">{selectedData[0].fields.Activities}</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/services">{currentLanguageData[0].fields.Services}</NavLink>
+                                <NavLink to="/services">{selectedData[0].fields.Services}</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/news">{currentLanguageData[0].fields.News}</NavLink>
+                                <NavLink to="/news">{selectedData[0].fields.News}</NavLink>
                             </li>
 
                             <li>
@@ -170,7 +147,7 @@ const Navbar = () => {
                             </li>
 
                             <li>
-                                <button className="btn_bookroom">{currentLanguageData[0].fields.BookRoom}</button>
+                                <button className="btn_bookroom">{selectedData[0].fields.BookRoom}</button>
                             </li>
                         </ul>
                         <div className="hamburger" onClick={ handleClick }>

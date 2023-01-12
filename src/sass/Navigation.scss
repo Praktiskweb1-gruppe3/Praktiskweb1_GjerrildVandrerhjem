@@ -56,6 +56,12 @@
     }
 }
 
+.langSelect{
+    background-color: transparent;
+    border:none;
+    color: $col_text;
+}
+
 .navbarSeperator {
     color: $col_text;
 }
@@ -128,6 +134,7 @@
         font-size: 2rem;
         vertical-align: middle;
     }
+
 }
 
 .hamburger {

@@ -15,10 +15,11 @@ function App() {
 
   const [language, setLanguage] = useState('da');
 
+
   return (
     <Router>
 
-      <Context.Provider value={[language, setLanguage]}>      
+      <Context.Provider value={{language, setLanguage}}>      
 
       <Navbar />
 
