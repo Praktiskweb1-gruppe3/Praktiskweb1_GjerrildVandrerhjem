@@ -108,10 +108,11 @@
     background-color: $col_nav_highlighted;
     color: $col_text_highlighted;
     font-size: clamp(1.8rem, calc(1rem + 1vw), 2.5rem);
-    border: 2px solid $col_text;
+    border:none;
     cursor: pointer;
     transition: scale 1s ease-in-out;
     font-family: $font_header;
+    border-radius: .4rem;
 
     &:hover {
         background-color: $caribbean-green;
