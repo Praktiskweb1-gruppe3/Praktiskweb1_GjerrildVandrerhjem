@@ -127,6 +127,13 @@
 
 }
 
+.soMeAndLanguage, .soMe{
+    a{
+        color: $col_text;
+        text-decoration: none;
+    }
+}
+
 .soMe {
     display: none;
 
@@ -219,9 +226,16 @@
 
         li:nth-child(6){
             order: 7;
+
         }
         li:nth-child(7){
             order: 8;
+
+            a:hover {
+                border: none;
+                padding-bottom: 0;
+
+            }
         }
 
         li:nth-child(8){

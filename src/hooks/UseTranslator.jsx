@@ -19,8 +19,6 @@ const UseTranslator = (airtableName) => {
     }, [ data ] )
 
     useEffect( () => {
-
-        console.log(airtableName);
         getData( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/' + airtableName, {
             'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLEKEY
         } );

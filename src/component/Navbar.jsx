@@ -22,7 +22,7 @@ const Navbar = () => {
 
     const headerRef = useRef();
 
-    const [selectedData] = UseTranslator("Navigation");    
+    const [ selectedData ] = UseTranslator( "Navigation" );
 
 
     const handleClick = () => setIsMenuOpen( !isMenuOpen );
@@ -73,8 +73,6 @@ const Navbar = () => {
 
         <header className="container-fluid px-0 header" ref={ headerRef }>
 
-            {/* <UseTranslator data={data} getData={getData} airtableName="Navigation" /> */}
-
             {
                 selectedData &&
 
@@ -92,9 +90,9 @@ const Navbar = () => {
                         </div>
 
                         <div className="soMeAndLanguage">
-                            <FontAwesomeIcon icon={ faFacebookF } />
-                            <FontAwesomeIcon icon={ faInstagram } />
-                            <ChangeLanguage currentLanguageData={selectedData} />
+                            <a href='https://www.facebook.com/profile.php?id=100085306731927' target="_blank"><FontAwesomeIcon icon={ faFacebookF } /></a>
+                            <a href='https://www.instagram.com/danhostel_gjerrild_vandrerhjem/' target="_blank"><FontAwesomeIcon icon={ faInstagram } /></a>
+                            <ChangeLanguage currentLanguageData={ selectedData } />
 
                         </div>
                     </nav>
@@ -107,7 +105,7 @@ const Navbar = () => {
                             {/* <img src="" alt="" /> */ }
 
                             {/* logo placeholder */ }
-                             <div style={ { width: '250px', height: '105px', backgroundColor: 'skyblue' } }></div>
+                            <div style={ { width: '250px', height: '105px', backgroundColor: 'skyblue' } }></div>
                         </Link>
 
                         <ul className={ isMenuOpen ? "navbar__menu active" : "navbar__menu" }>
@@ -122,39 +120,46 @@ const Navbar = () => {
                             </li>
 
                             <li>
-                                <NavLink to="/rooms">{selectedData[0].fields.Rooms}</NavLink>
+                                <NavLink to="/rooms">{ selectedData[ 0 ].fields.Rooms }</NavLink>
                             </li>
 
                             <li>
-                                <NavLink to="/events">{selectedData[0].fields.Events}</NavLink>
+                                <NavLink to="/events">{ selectedData[ 0 ].fields.Events }</NavLink>
                             </li>
 
                             <li>
-                                <NavLink to="/activities">{selectedData[0].fields.Activities}</NavLink>
+                                <NavLink to="/activities">{ selectedData[ 0 ].fields.Activities }</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/services">{selectedData[0].fields.Services}</NavLink>
+                                <NavLink to="/services">{ selectedData[ 0 ].fields.Services }</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/news">{selectedData[0].fields.News}</NavLink>
+                                <NavLink to="/news">{ selectedData[ 0 ].fields.News }</NavLink>
                             </li>
 
                             <li>
                                 <div className="soMe">
-                                    <FontAwesomeIcon icon={ faFacebookF } />
-                                    <FontAwesomeIcon icon={ faInstagram } />
+                                    <a
+                                        href='https://www.facebook.com/profile.php?id=100085306731927' target="_blank">
+                                        <FontAwesomeIcon icon={ faFacebookF } />
+                                    </a>
+
+                                    <a
+                                        href='https://www.instagram.com/danhostel_gjerrild_vandrerhjem/' target="_blank">
+                                        <FontAwesomeIcon icon={ faInstagram } />
+                                    </a>
                                 </div>
                             </li>
 
                             <li>
-                                <button className="btn_bookroom">{selectedData[0].fields.BookRoom}</button>
+                                <button className="btn_bookroom">{ selectedData[ 0 ].fields.BookRoom }</button>
                             </li>
                         </ul>
                         <div className="hamburger" onClick={ handleClick }>
                             { isMenuOpen ? <FontAwesomeIcon icon={ faXmark } /> : <FontAwesomeIcon icon={ faBars } /> }
                         </div>
 
-                    </nav> 
+                    </nav>
                 </>
 
             }
