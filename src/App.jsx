@@ -5,9 +5,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 
 import Navbar from './component/Navbar';
-import ChangeLanguage from './component/ChangeLanguage';
 
 import { Context } from './Context/Context';
+import ImageTest from './component/ImageTest';
 
 
 
@@ -27,7 +27,7 @@ function App() {
       <Routes>
 
         {/* Forside */}
-        {/* <Route index element={} /> */}
+        <Route index element={<ImageTest />} />
 
         {/* Værelser */} 
         {/* <Route path="/rooms" element={} /> */}

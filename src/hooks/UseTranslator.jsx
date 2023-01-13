@@ -4,11 +4,11 @@ import { Context } from '../Context/Context';
 
 import { useGetData } from './useGetData';
 
-const UseTranslator = (airtableName) => {
+const UseTranslator = ( airtableName, sort = false ) => {
 
     const { error, loading, data, getData } = useGetData();
-    const  {language}  = useContext( Context );
-    const [currentLanguageData, setCurrentLanguageData] = useState();
+    const { language } = useContext( Context );
+    const [ currentLanguageData, setCurrentLanguageData ] = useState();
 
     useEffect( () => {
 
@@ -19,13 +19,24 @@ const UseTranslator = (airtableName) => {
     }, [ data ] )
 
     useEffect( () => {
-        getData( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/' + airtableName, {
-            'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLEKEY
-        } );
+        if(sort){
+           getData( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/' + airtableName, {
+                'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLEKEY
+            }, {
+                "sort[0][field]": "Order"
+            }); 
+        }
+        else{
+            getData( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/' + airtableName, {
+                'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLEKEY
+            })
+        }
+            
+       
 
     }, [ language ] );
 
-    return [currentLanguageData];
+    return [ currentLanguageData ];
 
 }
 

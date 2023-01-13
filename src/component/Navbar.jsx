@@ -15,7 +15,6 @@ import UseTranslator from '../hooks/UseTranslator';
 
 const Navbar = () => {
 
-
     const [ isMenuOpen, setIsMenuOpen ] = useState( false );
 
     const [ scrolledYPos, setScrolledYPos ] = useState( 0 );
@@ -112,10 +111,10 @@ const Navbar = () => {
 
                             <li>
                                 <h2 className="small_heading">
-                                    {/* <span>
-                                        { currentLanguageData[ 0 ].fields.Header_Title.split( '-' )[ 0 ] } -
+                                    <span>
+                                        { selectedData[ 0 ].fields.Header_Title.split( '-' )[ 0 ] } -
                                     </span>
-                                    <span>{ currentLanguageData[ 0 ].fields.Header_Title.split( '-' )[ 1 ] }</span> */}
+                                    <span>{ selectedData[ 0 ].fields.Header_Title.split( '-' )[ 1 ] }</span>
                                 </h2>
                             </li>
 
@@ -163,8 +162,6 @@ const Navbar = () => {
                 </>
 
             }
-
-
         </header>
     )
 }
