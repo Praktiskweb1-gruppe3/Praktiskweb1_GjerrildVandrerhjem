@@ -8,21 +8,29 @@
 .servicesRow {
     :nth-child(odd){
         .services__card{
-            margin-left: auto;
+            margin-left: 1rem;
+            margin-right: auto;
         }
     }
     :nth-child(even){
         .services__card{
-            margin-right: auto;
+            margin-right: 1rem;
+            margin-left: auto;
         }
     }
 }
 
 .services__card{
     background-color: $col_card_background;
-    border: 1px solid $grey;
+    border: 2px solid $grey;
 
     max-width: 450px;
+    margin-block: 1.75rem;
+    border-radius: .4rem;
+
+    img{
+        border-radius: .4rem .4rem 0 0;
+    }    
 }
 
 .card__body{
@@ -31,9 +39,16 @@
 }
 .card__title{
     text-align: center;
-    font-size: clamp(1.2rem, calc(.8rem + .8vw), 2rem);
+    font-size: clamp(1.6rem, calc(1rem + 1vw), 2.5rem);
 }
-.card_description{
-    padding-inline: .5rem;
+.card__description{
+    padding: 1rem;
+    font-size: clamp(1.2rem, calc(.8rem + .8vw), 1.8rem);
+    white-space: pre-line;
+}
 
+
+
+.resturant{
+    margin-top: 5rem;
 }
