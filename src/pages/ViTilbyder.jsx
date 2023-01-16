@@ -2,9 +2,9 @@ import React from 'react';
 
 import UseTranslator from '../hooks/UseTranslator';
 
-const ImageTest = () => {
+const ViTilbyder = () => {
 
-    const [ selectedData ] = UseTranslator( "Services", true );
+    const {filteredData, error, loading} = UseTranslator( "Services", true );
 
     const largeImgPath = "./assets/images/big/"
     const mediumImgPath = "./assets/images/medium/"
@@ -13,12 +13,12 @@ const ImageTest = () => {
     return (
         <>
             {
-                selectedData &&
+                filteredData &&
 
                 <div>
                     {
-                        selectedData.map( ( service ) => (
-                            <div style={ { width: '350px', border: '2px solid black', margin: '25px' } }>
+                        filteredData.map( ( service ) => (
+                            <div key={service.id} style={ { width: '350px', border: '2px solid black', margin: '25px' } }>
                                 <p>{ service.fields.Service_Name }</p>
                                 <p>{ service.fields.Name }</p>
                                 <p>{ service.fields.Service_Description }</p>
@@ -47,4 +47,4 @@ const ImageTest = () => {
     )
 }
 
-export default ImageTest
+export default ViTilbyder

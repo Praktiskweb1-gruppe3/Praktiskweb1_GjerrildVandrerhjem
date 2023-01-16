@@ -8,12 +8,12 @@ const UseTranslator = ( airtableName, sort = false, sortby = "Order" ) => {
 
     const { error, loading, data, getData } = useGetData();
     const { language } = useContext( Context );
-    const [ currentLanguageData, setCurrentLanguageData ] = useState();
+    const [ filteredData, setFilteredData ] = useState();
 
     useEffect( () => {
 
         if ( data ) {
-            setCurrentLanguageData( data.records.filter( d => d.fields.ISO[ 0 ] === language ) );
+            setFilteredData( data.records.filter( d => d.fields.ISO[ 0 ] === language ) );
         }
 
     }, [ data ] )
@@ -36,7 +36,7 @@ const UseTranslator = ( airtableName, sort = false, sortby = "Order" ) => {
 
     }, [ language ] );
 
-    return [ currentLanguageData ];
+    return  { filteredData, error, loading} ;
 
 }
 

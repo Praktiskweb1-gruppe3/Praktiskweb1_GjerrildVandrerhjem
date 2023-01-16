@@ -21,7 +21,7 @@ const Navbar = () => {
 
     const headerRef = useRef();
 
-    const [ selectedData ] = UseTranslator( "Navigation" );
+    const {filteredData, error, loading} = UseTranslator( "Navigation" );
 
 
     const handleClick = () => setIsMenuOpen( !isMenuOpen );
@@ -73,13 +73,13 @@ const Navbar = () => {
         <header className="container-fluid px-0 header" ref={ headerRef }>
 
             {
-                selectedData &&
+                filteredData &&
 
                 <>
                     <nav className=" container-xl topnav">
-                        <h1 className="big_heading">{ selectedData[ 0 ].fields.Header_Title }</h1>
+                        <h1 className="big_heading">{ filteredData[ 0 ].fields.Header_Title }</h1>
 
-                        <h1 className="small_heading">{ selectedData[ 0 ].fields.Header_Title2 }</h1>
+                        <h1 className="small_heading">{ filteredData[ 0 ].fields.Header_Title2 }</h1>
 
 
                         <div className="info">
@@ -91,7 +91,7 @@ const Navbar = () => {
                         <div className="soMeAndLanguage">
                             <a href='https://www.facebook.com/profile.php?id=100085306731927' target="_blank"><FontAwesomeIcon icon={ faFacebookF } /></a>
                             <a href='https://www.instagram.com/danhostel_gjerrild_vandrerhjem/' target="_blank"><FontAwesomeIcon icon={ faInstagram } /></a>
-                            <ChangeLanguage currentLanguageData={ selectedData } />
+                            <ChangeLanguage currentLanguageData={ filteredData } />
 
                         </div>
                     </nav>
@@ -112,28 +112,28 @@ const Navbar = () => {
                             <li>
                                 <h2 className="small_heading">
                                     <span>
-                                        { selectedData[ 0 ].fields.Header_Title.split( '-' )[ 0 ] } -
+                                        { filteredData[ 0 ].fields.Header_Title.split( '-' )[ 0 ] } -
                                     </span>
-                                    <span>{ selectedData[ 0 ].fields.Header_Title.split( '-' )[ 1 ] }</span>
+                                    <span>{ filteredData[ 0 ].fields.Header_Title.split( '-' )[ 1 ] }</span>
                                 </h2>
                             </li>
 
                             <li>
-                                <NavLink to="/rooms">{ selectedData[ 0 ].fields.Rooms }</NavLink>
+                                <NavLink to="/rooms">{ filteredData[ 0 ].fields.Rooms }</NavLink>
                             </li>
 
                             <li>
-                                <NavLink to="/events">{ selectedData[ 0 ].fields.Events }</NavLink>
+                                <NavLink to="/events">{ filteredData[ 0 ].fields.Events }</NavLink>
                             </li>
 
                             <li>
-                                <NavLink to="/activities">{ selectedData[ 0 ].fields.Activities }</NavLink>
+                                <NavLink to="/activities">{ filteredData[ 0 ].fields.Activities }</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/services">{ selectedData[ 0 ].fields.Services }</NavLink>
+                                <NavLink to="/services">{ filteredData[ 0 ].fields.Services }</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/news">{ selectedData[ 0 ].fields.News }</NavLink>
+                                <NavLink to="/news">{ filteredData[ 0 ].fields.News }</NavLink>
                             </li>
 
                             <li>
@@ -151,7 +151,7 @@ const Navbar = () => {
                             </li>
 
                             <li>
-                                <button className="btn_bookroom">{ selectedData[ 0 ].fields.BookRoom }</button>
+                                <button className="btn_bookroom">{ filteredData[ 0 ].fields.BookRoom }</button>
                             </li>
                         </ul>
                         <div className="hamburger" onClick={ handleClick }>

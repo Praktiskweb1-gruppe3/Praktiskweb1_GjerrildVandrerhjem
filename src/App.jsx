@@ -7,7 +7,8 @@ import { useState } from 'react';
 import Navbar from './component/Navbar';
 
 import { Context } from './Context/Context';
-import ImageTest from './component/ImageTest';
+// import ImageTest from './component/ImageTest';
+import ViTilbyder from './pages/ViTilbyder';
 
 
 
@@ -27,7 +28,7 @@ function App() {
       <Routes>
 
         {/* Forside */}
-        <Route index element={<ImageTest />} />
+        <Route index element={<div>Test</div>} />
 
         {/* Værelser */} 
         {/* <Route path="/rooms" element={} /> */}
@@ -39,7 +40,7 @@ function App() {
         {/* <Route path="/activities" element={} /> */}
 
         {/* Vi tilbyder */} 
-        {/* <Route path="/services" element={} /> */}
+        <Route path="/services" element={<ViTilbyder />} />
 
 
         {/* Nyheder */} 
