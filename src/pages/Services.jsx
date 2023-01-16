@@ -28,6 +28,11 @@ const Services = () => {
 
     return (
         <Container fluid className='services'>
+
+            {/* {error && } */}
+
+            {/* {loading && } */}
+
             {
                 filteredData &&
 
@@ -40,6 +45,7 @@ const Services = () => {
                                     key={ service.id }
                                     xs={ 12 }
                                     lg={ 6 }
+                                    className="d-flex"
                                 >
                                     <div className='services__card'>
                                         <picture>
@@ -72,16 +78,17 @@ const Services = () => {
             }
 
             <Container fluid="lg" className='resturant'>
+                {/* Text section with 3 images */ }
                 {
                     filteredDataResturant &&
                     <Row >
-                        <Col lg={ 6 }>
-                            <h1>{ filteredDataResturant[ 0 ].fields.Titel }</h1>
+                        <h1>{ filteredDataResturant[ 0 ].fields.Titel }</h1>
+                        <Col lg={ 6 } >
 
                             <Row>
-                                <Col lg={{span:10, offset: 2}}>
+                                <Col lg={ { span: 12 } }>
                                     <div className='mainText'
-                                        style={ { fontSize: '2rem' } }>
+                                        style={ { fontSize: '2rem', lineHeight: '1.4', whiteSpace: 'pre-line' } }>
 
                                         { parse( filteredDataResturant[ 0 ].fields.Text ) }
 
@@ -91,62 +98,80 @@ const Services = () => {
 
                         </Col>
 
-                        <Col lg={ {span: 4} }>
+                        <Col lg={ { span: 6 } }>
 
-                            <figure className='resturant_big_image'>
-                                <picture>
-                                <source media="(max-width: 575px)" srcSet={ smallImgPath + filteredDataResturant[ 0 ].fields.Image_Name[ 2 ] } />
-                                <source media="(max-width: 991px)" srcSet={ mediumImgPath + filteredDataResturant[ 0 ].fields.Image_Name[ 2 ] } />
-                                <source media="(min-width: 992px)" srcSet={ largeImgPath + filteredDataResturant[ 0 ].fields.Image_Name[ 2 ] } />
-
-                                <img
-                                    style={ { width: '100%', height: 'auto', display: 'block' } }
-                                    src={ largeImgPath + filteredDataResturant[ 0 ].fields.Image_Name[ 2 ] }
-                                    alt={ filteredDataResturant[ 0 ].fields.Image_Description[ 2 ] }
-                                />
-
-                            </picture>
-                            </figure>
-
-                            
-
+                            {/* Images with text */ }
                             <Row>
-                                <Col lg={ 6 }>
-                                    <picture>
-                                        <source media="(max-width: 575px)" srcSet={ smallImgPath + filteredDataResturant[ 0 ].fields.Image_Name[ 1 ] } />
-                                        <source media="(max-width: 991px)" srcSet={ mediumImgPath + filteredDataResturant[ 0 ].fields.Image_Name[ 1 ] } />
-                                        <source media="(min-width: 992px)" srcSet={ largeImgPath + filteredDataResturant[ 0 ].fields.Image_Name[ 1 ] } />
+                                {
+                                    filteredDataResturant[ 0 ].fields.Image_Name.map( ( img, i ) => (
+                                        // If it is the third image, make the big and reorder the flexbox to put it first. 
+                                        // order start with 1, i starts with 0. Therefore (i+1)
+                                        <Col
+                                            lg={ { span: i === 2 ? 12 : 6, order: i === 2 ? 1 : ( i + 1 ) + 1 } }
+                                            key={ "resturant_image" + i }
+                                            className={ "resturant_image" + ( i + 1 ) }>
 
-                                        <img
-                                            style={ { width: '100%', height: 'auto', display: 'block' } }
-                                            src={ largeImgPath + filteredDataResturant[ 0 ].fields.Image_Name[ 1 ] }
-                                            alt={ filteredDataResturant[ 0 ].fields.Image_Description[ 1 ] }
-                                        />
+                                            <picture>
+                                                <source media="(max-width: 575px)" srcSet={ smallImgPath + img } />
+                                                <source media="(max-width: 991px)" srcSet={ mediumImgPath + img } />
+                                                <source media="(min-width: 992px)" srcSet={ largeImgPath + img } />
 
-                                    </picture>
-                                </Col>
+                                                <img
+                                                    style={ { width: '100%', height: 'auto', display: 'block' } }
+                                                    src={ largeImgPath + img }
+                                                    alt={ filteredDataResturant[ 0 ].fields.Image_Description[ i ] }
+                                                />
 
-                                <Col lg={ 6 }>
-                                    <picture>
-                                        <source media="(max-width: 575px)" srcSet={ smallImgPath + filteredDataResturant[ 0 ].fields.Image_Name[ 0 ] } />
-                                        <source media="(max-width: 991px)" srcSet={ mediumImgPath + filteredDataResturant[ 0 ].fields.Image_Name[ 0 ] } />
-                                        <source media="(min-width: 992px)" srcSet={ largeImgPath + filteredDataResturant[ 0 ].fields.Image_Name[ 0] } />
-
-                                        <img
-                                            style={ { width: '100%', height: 'auto', display: 'block' } }
-                                            src={ largeImgPath + filteredDataResturant[ 0 ].fields.Image_Name[ 0 ] }
-                                            alt={ filteredDataResturant[ 0 ].fields.Image_Description[ 0 ] }
-                                        />
-
-                                    </picture>
-
-                                </Col>
+                                            </picture>
+                                        </Col>
+                                    ) )
+                                }
                             </Row>
 
                         </Col>
 
                     </Row>
                 }
+
+                <Row>
+                    <Col lg={ { span: 12 } }>
+                        <hr className='resturant__ruler' />
+
+                    </Col>
+                </Row>
+
+                {/* Image Galleri */ }
+                <Container fluid className='resturant__gallery'>
+
+                    { filteredDataResturant &&
+                        <Row>
+                            <h2>{ filteredDataResturant[ 0 ].fields.Galleri_Title }</h2>
+                            {filteredDataResturant[ 0 ].fields.Image_Name_Galleri.map( ( gImg, i ) => (
+                            <Col className='px-3' lg={ 3 } key={ "resturant__gallery" + i }>
+                                <picture>
+                                    <source media="(max-width: 575px)" srcSet={ smallImgPath + gImg } />
+                                    <source media="(max-width: 991px)" srcSet={ mediumImgPath + gImg } />
+                                    <source media="(min-width: 992px)" srcSet={ largeImgPath + gImg } />
+
+                                    <img
+                                        style={ { width: '100%', height: 'auto', display: 'block' } }
+
+                                        src={ largeImgPath + gImg }
+                                        alt={ filteredDataResturant[ 0 ].fields.Image_Description_Galleri[ i ] }
+                                        className="gallery__image"
+                                    />
+
+                                </picture>
+
+                            </Col>
+
+                            ) )}
+                        </Row>
+                    }
+
+                </Container>
+
+
             </Container>
 
         </Container>
