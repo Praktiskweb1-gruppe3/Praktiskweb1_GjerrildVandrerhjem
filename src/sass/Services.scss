@@ -1,0 +1,39 @@
+@import 'variables';
+
+.services{
+    background-color: $col_background;
+    padding-top: 5rem;
+}
+
+.servicesRow {
+    :nth-child(odd){
+        .services__card{
+            margin-left: auto;
+        }
+    }
+    :nth-child(even){
+        .services__card{
+            margin-right: auto;
+        }
+    }
+}
+
+.services__card{
+    background-color: $col_card_background;
+    border: 1px solid $grey;
+
+    max-width: 450px;
+}
+
+.card__body{
+    padding-inline: .5rem;
+    background-color: $col_background;
+}
+.card__title{
+    text-align: center;
+    font-size: clamp(1.2rem, calc(.8rem + .8vw), 2rem);
+}
+.card_description{
+    padding-inline: .5rem;
+
+}

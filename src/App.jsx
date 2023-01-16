@@ -8,7 +8,7 @@ import Navbar from './component/Navbar';
 
 import { Context } from './Context/Context';
 // import ImageTest from './component/ImageTest';
-import ViTilbyder from './pages/ViTilbyder';
+import Services from './pages/Services';
 
 
 
@@ -40,7 +40,7 @@ function App() {
         {/* <Route path="/activities" element={} /> */}
 
         {/* Vi tilbyder */} 
-        <Route path="/services" element={<ViTilbyder />} />
+        <Route path="/services" element={<Services />} />
 
 
         {/* Nyheder */} 
