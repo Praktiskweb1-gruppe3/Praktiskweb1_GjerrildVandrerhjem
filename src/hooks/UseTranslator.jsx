@@ -4,7 +4,7 @@ import { Context } from '../Context/Context';
 
 import { useGetData } from './useGetData';
 
-const UseTranslator = ( airtableName, sort = false ) => {
+const UseTranslator = ( airtableName, sort = false, sortby = "Order" ) => {
 
     const { error, loading, data, getData } = useGetData();
     const { language } = useContext( Context );
@@ -23,7 +23,7 @@ const UseTranslator = ( airtableName, sort = false ) => {
            getData( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/' + airtableName, {
                 'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLEKEY
             }, {
-                "sort[0][field]": "Order"
+                "sort[0][field]": sortby
             }); 
         }
         else{
