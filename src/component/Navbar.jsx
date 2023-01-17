@@ -21,7 +21,11 @@ const Navbar = () => {
 
     const headerRef = useRef();
 
-    const {filteredData, error, loading} = UseTranslator( "Navigation" );
+    const { filteredData, error, loading } = UseTranslator( "Navigation" );
+
+    const imgPathMobile = './assets/images/mobile/';
+    const imgPathTablet = './assets/images/tablet/';
+    const imgPathDesktop = './assets/images/desktop/';
 
 
     const handleClick = () => setIsMenuOpen( !isMenuOpen );
@@ -98,10 +102,21 @@ const Navbar = () => {
 
                     <hr className="navbarSeperator" />
 
-                    <nav className="container-xl navbar">
+                    <nav className="container-xl navbar px-4 px-lg-0">
 
-                        <Link to="/">
-                             <img src={"./assets/images/big/" + filteredData[0].fields.Image_Name} alt="" /> 
+                        <Link to="/" className='logoContainer'>
+                            <picture>
+                                <source media='(max-width: 575px)' srcSet={ imgPathMobile + filteredData[ 0 ].fields.Image_Name } />
+
+                                <source media='(max-width: 991px)' srcSet={ imgPathTablet + filteredData[ 0 ].fields.Image_Name } />
+
+                                <source media='(min-width: 992px)' srcSet={ imgPathDesktop + filteredData[ 0 ].fields.Image_Name } />
+
+                                <img
+                                    className='navbar__logo'
+                                    src={ imgPathDesktop + filteredData[ 0 ].fields.Image_Name }
+                                    alt={ filteredData[ 0 ].fields.Image_Description } />
+                            </picture>
 
                         </Link>
 

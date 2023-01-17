@@ -13,9 +13,9 @@ const Aktiviteter = () => {
 
   const { filteredData, error, loading } = UseTranslator('Activities', true)
 
-  const largeImgPath = "./assets/images/big/"
-  const mediumImgPath = "./assets/images/medium/"
-  const smallImgPath = "./assets/images/small/"
+  const largeImgPath = './assets/images/desktop/';
+  const mediumImgPath = './assets/images/tablet/';
+  const smallImgPath = './assets/images/mobile/';
 
   const coordinates = useRef([])
 
