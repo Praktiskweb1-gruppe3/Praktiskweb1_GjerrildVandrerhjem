@@ -46,9 +46,14 @@ const Aktiviteter = () => {
     }
   }, [filteredData, coordinates.current])
 
+  useEffect( () => {
+
+    document.querySelector( '#root' ).style.backgroundColor = '#FAFAFF';
+}, [] )
+
 
   return (
-    <Container fluid>
+    <Container fluid className='aktiviteter'>
 
       {
         filteredData && <>

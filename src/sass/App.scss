@@ -1,30 +1,34 @@
 @import 'variables';
 
-html{
+html {
     color: $col_text;
     font-size: 10px;
     box-sizing: border-box;
     font-family: $font_text;
 }
 
-*, *::after, *::after{
+*,
+*::after,
+*::after {
     box-sizing: inherit;
     margin: 0;
     padding: 0;
 }
 
-.mainText{
-    font-size: 2rem;
+.mainText {
+    font-size: clamp(1.4rem, calc(1rem + 1vw), 2rem);
+    line-Height: 1.4;
+    white-space: pre-line;
 }
 
-h1{
+h1 {
     font-size: 4rem;
     text-align: center;
 }
 
-h2{
-    font-size: 2.5rem; 
-    text-align: center; 
+h2 {
+    font-size: 2.5rem;
+    text-align: center;
 }
 
 img {

@@ -27,7 +27,7 @@ const Services = () => {
 
 
     return (
-        <Container fluid className='services'>
+        <Container fluid className='services xxs'>
 
             {/* {error && } */}
 
@@ -36,16 +36,16 @@ const Services = () => {
             {
                 filteredData &&
 
-                <Container fluid="lg" >
+                <Container fluid="lg" className='xxs' >
                     <Row className='servicesRow'>
                         <h1>{ filteredData[ 0 ].fields.Service_Name }</h1>
                         {
                             filteredData.slice( 1 ).map( service => (
                                 <Col
                                     key={ service.id }
-                                    xs={ 12 }
-                                    lg={ 6 }
-                                    className="d-flex"
+                                    xs={{span: 10, offset: 1} }
+                                    sm={{span:6, offset: 0}}
+                                    className="d-flex xxs"
                                 >
                                     <div className='services__card'>
                                         <picture>
@@ -54,7 +54,6 @@ const Services = () => {
                                             <source media="(min-width: 992px)" srcSet={ largeImgPath + service.fields.Image_Name[ 0 ] } />
 
                                             <img
-                                                style={ { width: '100%', height: 'auto', display: 'block' } }
                                                 src={ largeImgPath + service.fields.Image_Name[ 0 ] }
                                                 alt={ service.fields.Image_Description }
                                             />
@@ -66,8 +65,6 @@ const Services = () => {
                                             <div className='card__description'>{ parse( service.fields.Service_Description ) }</div>
                                         </div>
                                     </div>
-
-
 
                                 </Col>
                             ) )
@@ -83,12 +80,11 @@ const Services = () => {
                     filteredDataResturant &&
                     <Row >
                         <h1>{ filteredDataResturant[ 0 ].fields.Titel }</h1>
-                        <Col lg={ 6 } >
+                        <Col xs={{span: 12, order: 2}} lg={ 6 } >
 
                             <Row>
                                 <Col lg={ { span: 12 } }>
-                                    <div className='mainText'
-                                        style={ { fontSize: '2rem', lineHeight: '1.4', whiteSpace: 'pre-line' } }>
+                                    <div className='mainText'>
 
                                         { parse( filteredDataResturant[ 0 ].fields.Text ) }
 
@@ -98,7 +94,7 @@ const Services = () => {
 
                         </Col>
 
-                        <Col lg={ { span: 6 } }>
+                        <Col md={{span: 12, order: 1}} lg={ { span: 6 } }>
 
                             {/* Images with text */ }
                             <Row>
@@ -107,9 +103,11 @@ const Services = () => {
                                         // If it is the third image, make the big and reorder the flexbox to put it first. 
                                         // order start with 1, i starts with 0. Therefore (i+1)
                                         <Col
-                                            lg={ { span: i === 2 ? 12 : 6, order: i === 2 ? 1 : ( i + 1 ) + 1 } }
+                                            xs={{order: i === 2 ? 1 : ( i + 1 ) + 1 }}
+                                            md={{ span: i === 2 ? 12 : 6 }}
+                                            // lg={ { span: i === 2 ? 12 : 6 }}
                                             key={ "resturant_image" + i }
-                                            className={ "resturant_image" + ( i + 1 ) }>
+                                            className={ "resturant_image" + ( i + 1 )  + `${i === 2 ? ' d-none d-md-block' : ''} ` }>
 
                                             <picture>
                                                 <source media="(max-width: 575px)" srcSet={ smallImgPath + img } />
@@ -117,7 +115,6 @@ const Services = () => {
                                                 <source media="(min-width: 992px)" srcSet={ largeImgPath + img } />
 
                                                 <img
-                                                    style={ { width: '100%', height: 'auto', display: 'block' } }
                                                     src={ largeImgPath + img }
                                                     alt={ filteredDataResturant[ 0 ].fields.Image_Description[ i ] }
                                                 />
@@ -133,7 +130,7 @@ const Services = () => {
                     </Row>
                 }
 
-                <Row>
+                <Row className='d-none d-md-block'>
                     <Col lg={ { span: 12 } }>
                         <hr className='resturant__ruler' />
 
@@ -141,13 +138,16 @@ const Services = () => {
                 </Row>
 
                 {/* Image Galleri */ }
-                <Container fluid className='resturant__gallery'>
+                <Container fluid className='resturant__gallery d-none d-md-block'>
 
                     { filteredDataResturant &&
                         <Row>
                             <h2>{ filteredDataResturant[ 0 ].fields.Galleri_Title }</h2>
                             {filteredDataResturant[ 0 ].fields.Image_Name_Galleri.map( ( gImg, i ) => (
-                            <Col className='px-3' lg={ 3 } key={ "resturant__gallery" + i }>
+                            <Col className='px-3' 
+                            md={4}
+                            lg={ 3 } 
+                            key={ "resturant__gallery" + i }>
                                 <picture>
                                     <source media="(max-width: 575px)" srcSet={ smallImgPath + gImg } />
                                     <source media="(max-width: 991px)" srcSet={ mediumImgPath + gImg } />

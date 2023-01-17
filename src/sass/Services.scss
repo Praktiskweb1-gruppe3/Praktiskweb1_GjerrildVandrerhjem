@@ -33,6 +33,7 @@
     background-color: $col_card_background;
     border: 2px solid $grey;
 
+    width: 100%;
     max-width: 450px;
     margin-block: 1.75rem;
     border-radius: .4rem;
@@ -99,4 +100,41 @@
 .gallery__image {
     margin-block: 1rem;
     border-radius: .4rem;
+}
+
+
+
+@media only screen and (max-width: 767px) {
+
+    .servicesRow {
+
+        :nth-child(odd),
+        :nth-child(even) {
+            .services__card {
+                margin-inline: 0;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 399px) {
+
+    .services.xxs.container-fluid,
+    .xss.container-lg,
+    .servicesRow>div.xxs {
+        padding-inline: 0;
+    }
+
+    .servicesRow>.offset-1 {
+        margin-left: 0;
+    }
+
+    .servicesRow>.xxs.col-10 {
+        width: 100%;
+    }
+
+    .services__card {
+        border: 0;
+    }
+
 }
