@@ -2,10 +2,18 @@
 
 //*Aktiviteter Container
 
+.text {
+    text-align: center;
+}
 
 .aktiviteter_image {
     position: relative;
     margin-top:  1.5rem;
+    border-radius: 50%;
+
+    .image_activity {
+        border-radius: .4rem;
+    }
 
     figcaption{
         position: absolute;
@@ -29,6 +37,7 @@
     position: relative;
     z-index: 1;
     margin-bottom: 5rem;
+    border-radius: .4rem;
 }
 
 //*Media query

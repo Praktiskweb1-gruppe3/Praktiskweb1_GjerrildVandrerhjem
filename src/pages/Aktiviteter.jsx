@@ -35,7 +35,7 @@ const Aktiviteter = () => {
 
     }
 
-    if(coordinates.current.length >= 1) {
+    if (coordinates.current.length >= 1) {
       initMapAllActivites(coordinates.current)
     }
 
@@ -57,7 +57,6 @@ const Aktiviteter = () => {
               <h1>{ filteredData[0].fields.Name }</h1>
               <h2>{ filteredData[1].fields.Name }</h2>
 
-
               <p className='mainText text'>{ filteredData[1].fields.Description }</p>
             </Col>
           </Row>
@@ -75,7 +74,7 @@ const Aktiviteter = () => {
 
                       <source media="(min-width: 992px)" srcSet={ largeImgPath + a.fields.Image_Name[0] } />
 
-                      <img src={ mediumImgPath + a.fields.Image_Name[0] } alt={ a.fields.Image_Description } />
+                      <img src={ mediumImgPath + a.fields.Image_Name[0] } alt={ a.fields.Image_Description } className='image_activity' />
                     </picture>
                     <figcaption>{ a.fields.Image_Text[0] }</figcaption>
                   </figure>
@@ -91,7 +90,7 @@ const Aktiviteter = () => {
           </Row>
 
           <Row>
-          <Col lg={{span: 10, offset: 1}}>
+            <Col lg={ { span: 10, offset: 1 } }>
               <div id='mapContainer'>
 
               </div>

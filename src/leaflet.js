@@ -45,7 +45,7 @@ export const initMapAllActivites = (coordinates) => {
     }).addTo(myMap);
 
     console.log(coordinates)
-    myMap.setView([coordinates[0].lat, coordinates[0].long], 10);
+    myMap.setView([coordinates[0].lat, coordinates[0].long], 9);
 
     coordinates.forEach(coord => {
 

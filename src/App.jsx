@@ -7,9 +7,8 @@ import { useState } from 'react';
 import Navbar from './component/Navbar';
 
 import { Context } from './Context/Context';
-// import ImageTest from './component/ImageTest';
 import Services from './pages/Services';
-
+import Aktiviteter from './pages/Aktiviteter';
 
 
 function App() {

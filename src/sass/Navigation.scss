@@ -5,11 +5,10 @@
     position: sticky;
     top: 0;
     z-index: 10;
-    margin: 0 auto 100px auto;
+    margin: 0  auto;
     transform: translateX(0);
     transition: transform 1s;
     background: $col_header;
-    font-family: $font_header;
 
 
     /* #region  On scroll */
@@ -22,7 +21,6 @@
         text-transform: uppercase;
         color: $col_text;
         font-size: 2rem;
-        font-family: $font_header;
     }
 
     h2{
@@ -121,7 +119,7 @@
     border:none;
     cursor: pointer;
     transition: scale 1s ease-in-out;
-    font-family: $font_header;
+    font-family: $font_text;
     border-radius: .4rem;
 
     &:hover {
