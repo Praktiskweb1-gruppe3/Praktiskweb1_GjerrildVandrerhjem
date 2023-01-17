@@ -9,6 +9,7 @@ import Navbar from './component/Navbar';
 import { Context } from './Context/Context';
 // import ImageTest from './component/ImageTest';
 import ViTilbyder from './pages/ViTilbyder';
+import Aktiviteter from './pages/Aktiviteter';
 
 
 
@@ -37,7 +38,7 @@ function App() {
         {/* <Route path="/events" element={} /> */}
 
         {/* Aktiviteter */} 
-        {/* <Route path="/activities" element={} /> */}
+        <Route path="/activities" element={<Aktiviteter />} />
 
         {/* Vi tilbyder */} 
         <Route path="/services" element={<ViTilbyder />} />

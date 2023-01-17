@@ -101,10 +101,8 @@ const Navbar = () => {
                     <nav className="container-xl navbar">
 
                         <Link to="/">
-                            {/* <img src="" alt="" /> */ }
+                             <img src={"./assets/images/big/" + filteredData[0].fields.Image_Name} alt="" /> 
 
-                            {/* logo placeholder */ }
-                            <div style={ { width: '250px', height: '105px', backgroundColor: 'skyblue' } }></div>
                         </Link>
 
                         <ul className={ isMenuOpen ? "navbar__menu active" : "navbar__menu" }>
