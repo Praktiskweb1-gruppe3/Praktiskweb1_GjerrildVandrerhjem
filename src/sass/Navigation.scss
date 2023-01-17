@@ -4,8 +4,8 @@
 .header {
     position: sticky;
     top: 0;
-    z-index: 1;
-    margin: 0 auto;
+    z-index: 10;
+    margin: 0 auto 100px auto;
     transform: translateX(0);
     transition: transform 1s;
     background: $col_header;

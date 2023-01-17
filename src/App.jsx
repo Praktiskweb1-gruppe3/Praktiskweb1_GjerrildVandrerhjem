@@ -37,7 +37,7 @@ function App() {
         {/* <Route path="/events" element={} /> */}
 
         {/* Aktiviteter */} 
-        {/* <Route path="/activities" element={} /> */}
+        <Route path="/activities" element={<Aktiviteter />} />
 
         {/* Vi tilbyder */} 
         <Route path="/services" element={<Services />} />

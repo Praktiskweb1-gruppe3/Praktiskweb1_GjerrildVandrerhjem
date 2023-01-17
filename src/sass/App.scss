@@ -1,8 +1,10 @@
 @import 'variables';
 
 html{
+    color: $col_text;
     font-size: 10px;
     box-sizing: border-box;
+    font-family: $font_header;
 }
 
 *, *::after, *::after{
@@ -11,3 +13,22 @@ html{
     padding: 0;
 }
 
+.mainText{
+    font-size: 2rem;
+}
+
+h1{
+    font-size: 4rem;
+    text-align: center;
+}
+
+h2{
+    font-size: 2.5rem; 
+    text-align: center; 
+}
+
+img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
