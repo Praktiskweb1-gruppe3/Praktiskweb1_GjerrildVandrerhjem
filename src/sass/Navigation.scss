@@ -127,9 +127,10 @@
 
 .logoContainer{
     width: calc(20vw + 12rem);
+    display: block;
 }
 
-.navbar__logo{
+.navbar__logo, .footer_logo{
     width: 100%;
     max-width: 420px;
     margin-inline: auto;

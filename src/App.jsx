@@ -11,6 +11,7 @@ import Services from './pages/Services';
 import Aktiviteter from './pages/Aktiviteter';
 
 import Footer from './component/Footer';
+import Kontakt from './pages/Kontakt';
 
 
 function App() {
@@ -21,38 +22,39 @@ function App() {
   return (
     <Router>
 
-      <Context.Provider value={{language, setLanguage}}>      
+      <Context.Provider value={ { language, setLanguage } }>
 
-      <Navbar />
-
-
-      <Routes>
-
-        {/* Forside */}
-        <Route index element={<div>Test</div>} />
-
-        {/* Værelser */} 
-        {/* <Route path="/rooms" element={} /> */}
-
-        {/* Events */} 
-        {/* <Route path="/events" element={} /> */}
-
-        {/* Aktiviteter */} 
-        <Route path="/activities" element={<Aktiviteter />} />
-
-        {/* Vi tilbyder */} 
-        <Route path="/services" element={<Services />} />
+        <Navbar />
 
 
-        {/* Nyheder */} 
-        {/* <Route path="/news" element={} /> */}
+        <Routes>
+
+          {/* Forside */ }
+          <Route index element={ <div>Test</div> } />
+
+          {/* Værelser */ }
+          {/* <Route path="/rooms" element={} /> */ }
+
+          {/* Events */ }
+          {/* <Route path="/events" element={} /> */ }
+
+          {/* Aktiviteter */ }
+          <Route path="/activities" element={ <Aktiviteter /> } />
+
+          {/* Vi tilbyder */ }
+          <Route path="/services" element={ <Services /> } />
 
 
+          {/* Nyheder */ }
+          {/* <Route path="/news" element={} /> */ }
+
+          {/* Kontakt */ }
+          <Route path="/kontakt" element={ <Kontakt /> } />
 
 
-      </Routes>
+        </Routes>
 
-      <Footer/>
+        <Footer />
 
       </Context.Provider>
     </Router>

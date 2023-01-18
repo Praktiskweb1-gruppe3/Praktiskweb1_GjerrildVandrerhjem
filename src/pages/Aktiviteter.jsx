@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 
 import UseTranslator from '../hooks/UseTranslator';
+
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
