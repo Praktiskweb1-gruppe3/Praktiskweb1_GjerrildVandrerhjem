@@ -9,6 +9,7 @@ import Navbar from './component/Navbar';
 import { Context } from './Context/Context';
 import Services from './pages/Services';
 import Aktiviteter from './pages/Aktiviteter';
+import About from './pages/About';
 
 import Footer from './component/Footer';
 
@@ -46,6 +47,9 @@ function App () {
 
           {/* Nyheder */ }
           {/* <Route path="/news" element={} /> */ }
+
+          {/* Om os */}
+          <Route path="/about" element={<About />} />
 
 
 
