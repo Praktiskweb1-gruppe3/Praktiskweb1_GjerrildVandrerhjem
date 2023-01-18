@@ -3,6 +3,10 @@
 .footer_container {
     background-color: $col_header;
     padding: 2em;
+
+    .mainText{
+        font-size: clamp(1.4rem, calc(.8rem + 1vw), 2rem);
+    }
 }
 
 .footer_logo {
@@ -13,10 +17,15 @@
     text-decoration: none;
     list-style-type: none;
     align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 4rem;
+
 
     li a {
         text-decoration: none;
         color: $col_text;
+        display: block;
     }
 
     a:hover {
@@ -25,7 +34,7 @@
 }
 
 .divider {
-    padding: 12px;
+    padding-inline: 12px;
     height: auto;
     border-right: solid $col_ruler 1px;
 }
@@ -52,17 +61,57 @@
 
 }
 
-// .info {
-//    margin: 1.5rem;
-// }
+.footer_container .info {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1rem;
+    margin-top: 4rem;
+
+    a {
+        text-decoration: none;
+        color: $col_text;
+
+        &:hover {
+            color: $caribbean-green;
+        }
+    }
+}
 
 .icon {
     font-size: 1rem;
-    margin: 2.5rem .5rem 0 11rem;
 }
 
 .copyright {
     background-color: $col_background;
     padding: 1em;
     text-align: center;
+}
+
+
+
+@media only screen and (max-width: 575px) {
+
+    .footer_container .info{
+        margin-top: 1rem;
+    }
+
+    .footer_menu {
+        margin-top: 1rem;        
+    }
+    .soMe_footer {
+        margin-top: 0;
+    }
+
+    .footer_menu .soMe_footer {
+        display: none;
+    }
+
+    .divider {
+        border-right: 0;
+        border-top: solid $col_ruler 1px;
+        margin-top: 1.2rem;
+    }
+    
 }
