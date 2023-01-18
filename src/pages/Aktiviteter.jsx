@@ -46,6 +46,8 @@ const Aktiviteter = () => {
     }
   }, [filteredData, coordinates.current])
 
+  
+
 
   return (
     <Container fluid>

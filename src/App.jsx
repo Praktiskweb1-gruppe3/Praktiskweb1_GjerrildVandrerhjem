@@ -10,6 +10,8 @@ import { Context } from './Context/Context';
 import Services from './pages/Services';
 import Aktiviteter from './pages/Aktiviteter';
 
+import Footer from './component/Footer';
+
 
 function App() {
 
@@ -49,6 +51,9 @@ function App() {
 
 
       </Routes>
+
+      <Footer/>
+
       </Context.Provider>
     </Router>
   )
