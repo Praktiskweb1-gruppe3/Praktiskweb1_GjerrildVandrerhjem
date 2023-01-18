@@ -8,6 +8,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
+import parse from 'html-react-parser'
+
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 const Kontakt = () => {
@@ -28,7 +30,7 @@ const Kontakt = () => {
 
                         <Col>
                             <h1>{ filteredData[0].fields.Kontakt_Title }</h1>
-                            <p className='mainText text'>{ filteredData[0].fields.Kontakt_Description }</p>
+                            <div className='mainText text'>{ parse(filteredData[0].fields.Kontakt_Description) }</div>
                         </Col>
                     </Row>
 
