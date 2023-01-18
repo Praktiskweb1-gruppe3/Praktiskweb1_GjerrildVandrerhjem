@@ -61,8 +61,11 @@ const Footer = () => {
 
                             <h2>{ filteredData[0].fields.Kontakt_Os }</h2>
 
-                            <p className='mainText info'> <FontAwesomeIcon icon={ faLocationDot } /> Dyrehavevej 8 </p>
-                            <p className='mainText info'> <FontAwesomeIcon icon={ faPhone } /> +45 40224199</p>
+                            <div className='info'>
+                                <p className='mainText'> <FontAwesomeIcon icon={ faLocationDot } /> Dyrehavevej 9 </p>
+                                <p className='mainText'> <FontAwesomeIcon icon={ faPhone } /> +45 40224199</p>
+                            </div>
+
                             <ul className="footer_menu">
                                 <li>
                                     <NavLink to='/' className='mainText info'> <FontAwesomeIcon icon={ faEnvelope } /> info@gjerrildvandrerhjem.dk</NavLink>
@@ -73,15 +76,15 @@ const Footer = () => {
                             <ul className="footer_menu">
                                 <li>
                                     <div className="soMe_footer">
-                                        <NavLink
+                                        <a
                                             href='https://www.facebook.com/profile.php?id=100085306731927' target="_blank">
                                             <FontAwesomeIcon icon={ faFacebookF } />
-                                        </NavLink>
+                                        </a>
 
-                                        <NavLink
+                                        <a
                                             href='https://www.instagram.com/danhostel_gjerrild_vandrerhjem/' target="_blank">
                                             <FontAwesomeIcon icon={ faInstagram } />
-                                        </NavLink>
+                                        </a>
                                     </div>
                                 </li>
                             </ul>

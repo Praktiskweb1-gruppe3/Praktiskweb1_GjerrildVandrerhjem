@@ -8,9 +8,16 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+
 const Kontakt = () => {
 
     const { filteredData, error, loading } = UseTranslator("Kontakt");
+
+    useEffect( () => {
+
+        document.querySelector( '#root' ).style.backgroundColor = '#FAFAFF';
+    }, [] )
 
     return (
         <Container fluid className='kontakt'>
@@ -56,11 +63,11 @@ const Kontakt = () => {
 
                                 <Col lg={ 12 }>
                                     <label className='mainText title' htmlFor='besked'>{ filteredData[0].fields.Besked }</label>
-                                        <textarea type="text" id="besked" placeholder={ filteredData[0].fields.Besked_Description } className='message_input' />
-                                    
+                                    <textarea type="text" id="besked" placeholder={ filteredData[0].fields.Besked_Description } className='message_input' />
 
-                                    <Col lg={{span: 6, offset:3}}>
-                                        <input type="submit" value={ filteredData[0].fields.Send } className='send_submit-input mainText'></input>
+
+                                    <Col lg={ { span: 6, offset: 3 } }>
+                                        <button type="submit" className='send_submit-input mainText'>{ filteredData[0].fields.Send }</button>
                                     </Col>
                                 </Col>
                             </Row>
@@ -68,7 +75,18 @@ const Kontakt = () => {
                         </Col>
 
                         <Col lg={ { span: 3, offset: 1 } } className="mt-4">
-                            <div style={ { backgroundColor: 'blue', height: '100%', width: '100%' } }></div>
+                            <MapContainer center={[56.503961730282896, 10.816764100376847]} zoom={12} id="mapContainer__kontakt" >
+                                <TileLayer
+                                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                    url='https://tile.openstreetmap.org/{z}/{x}/{y}.png' />
+
+                                <Marker position={[56.503961730282896, 10.816764100376847]}>
+                                    <Popup>
+                                        Gjerrild Vandrerhjem <br /> Dyrehavevej 9 <br />
+                                        8500 Grenaa
+                                    </Popup>
+                                </Marker>
+                            </MapContainer>
                         </Col>
 
                     </Row>

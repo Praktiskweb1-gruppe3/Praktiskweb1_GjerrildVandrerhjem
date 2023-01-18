@@ -12,7 +12,7 @@
 .footer_menu {
     text-decoration: none;
     list-style-type: none;
-    align-items:center;
+    align-items: center;
 
     li a {
         text-decoration: none;
@@ -27,27 +27,34 @@
 .divider {
     padding: 12px;
     height: auto;
-    border-right: solid #49473c 1px;
+    border-right: solid $col_ruler 1px;
 }
 
 .soMe_footer {
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 4rem;
 
     a {
+        display: inline-block;
         color: $col_text;
         text-decoration: none;
+
+        svg {
+            font-size: 3rem;
+            margin: 0 auto;
+            vertical-align: middle;
+        }
     }
 
-    svg {
-        font-size: 3rem;
-        margin: 0 auto;
-        padding: 5rem;
-        vertical-align: middle;
-    }
+
 }
 
-.info {
-   margin: 1.5rem;
-}
+// .info {
+//    margin: 1.5rem;
+// }
 
 .icon {
     font-size: 1rem;

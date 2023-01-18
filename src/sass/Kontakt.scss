@@ -2,6 +2,7 @@
 
 .kontakt {
     padding-top: 5rem;
+    margin-bottom: 5rem;
     background-color: $col_background;
 }
 
@@ -53,5 +54,23 @@
     border-radius: .4rem;
     border: $col_topnav_border 1px solid;
     margin-inline: auto;
+    appearance: none;
+    cursor: pointer;
+    transition: scale 1s ease-in-out;
+    margin-block: 2rem;
+
+    &:hover {
+        background-color: $caribbean-green;
+        transform: scale(1.1);
+    }
+
     
+}
+
+#mapContainer__kontakt {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    border-radius: .4rem;
 }
