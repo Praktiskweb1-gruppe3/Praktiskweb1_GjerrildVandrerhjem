@@ -1,0 +1,10 @@
+@import 'variables';
+
+.leaflet-popup-content{
+    font-size: 1.3rem;
+}
+
+.leaflet-popup-content-wrapper{
+    background-color: $col_background;
+    color: $col_text;
+}
