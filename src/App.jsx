@@ -9,6 +9,7 @@ import Navbar from './component/Navbar';
 import { Context } from './Context/Context';
 import Services from './pages/Services';
 import Aktiviteter from './pages/Aktiviteter';
+import About from './pages/About';
 
 import Footer from './component/Footer';
 import Kontakt from './pages/Kontakt';
@@ -48,7 +49,10 @@ function App () {
           {/* <Route path="/news" element={} /> */ }
 
           {/* Kontakt */ }
-          <Route path="/kontakt" element={ <Kontakt /> } />
+          <Route path="/kontakt" element={ <Kontakt /> } />          {/* Om os */}
+          <Route path="/about" element={<About />} />
+
+
 
 
         </Routes>
