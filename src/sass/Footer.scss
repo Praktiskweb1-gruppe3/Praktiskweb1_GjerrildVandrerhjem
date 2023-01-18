@@ -1,0 +1,61 @@
+@import "variables";
+
+.footer_container {
+    background-color: $col_header;
+    padding: 2em;
+}
+
+.footer_logo {
+    width: auto;
+}
+
+.footer_menu {
+    text-decoration: none;
+    list-style-type: none;
+    align-items:center;
+
+    li a {
+        text-decoration: none;
+        color: $col_text;
+    }
+
+    a:hover {
+        color: $caribbean-green;
+    }
+}
+
+.divider {
+    padding: 12px;
+    height: auto;
+    border-right: solid #49473c 1px;
+}
+
+.soMe_footer {
+
+    a {
+        color: $col_text;
+        text-decoration: none;
+    }
+
+    svg {
+        font-size: 3rem;
+        margin: 0 auto;
+        padding: 5rem;
+        vertical-align: middle;
+    }
+}
+
+.info {
+   margin: 1.5rem;
+}
+
+.icon {
+    font-size: 1rem;
+    margin: 2.5rem .5rem 0 11rem;
+}
+
+.copyright {
+    background-color: $col_background;
+    padding: 1em;
+    text-align: center;
+}
