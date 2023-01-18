@@ -11,6 +11,7 @@ import Services from './pages/Services';
 import Aktiviteter from './pages/Aktiviteter';
 
 import Footer from './component/Footer';
+import Kontakt from './pages/Kontakt';
 
 
 function App () {
@@ -21,11 +22,10 @@ function App () {
   return (
     <Router>
 
+      
       <Context.Provider value={ { language, setLanguage } }>
 
-        <Navbar />
-
-
+        <Navbar />        
         <Routes>
 
           {/* Forside */ }
@@ -47,12 +47,13 @@ function App () {
           {/* Nyheder */ }
           {/* <Route path="/news" element={} /> */ }
 
+          {/* Kontakt */ }
+          <Route path="/kontakt" element={ <Kontakt /> } />
 
 
+        </Routes>
 
-      </Routes>
-
-      <Footer/>
+        <Footer />
 
       </Context.Provider>
     </Router>

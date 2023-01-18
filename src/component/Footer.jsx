@@ -16,6 +16,10 @@ const Footer = () => {
 
     const { filteredData, error, loading } = UseTranslator("Footer");
 
+    const imgPathDesktop = './assets/images/desktop/';
+    const imgPathTablet = './assets/images/tablet/';
+    const imgPathMobile = './assets/images/mobile/';
+
     return (
         <Container fluid >
             {
@@ -23,8 +27,20 @@ const Footer = () => {
                     <Row className='footer_container'>
                         <Col lg={ 6 } className='divider'>
 
-                            <NavLink to="/">
-                                <img src={ "./assets/images/big/" + filteredData[0].fields.Image_Name } alt="" className='footer_logo' />
+                            <NavLink to="/" className='logoContainer'>
+                                <picture>
+                                    <source media='(max-width: 575px)' srcSet={ imgPathMobile + filteredData[0].fields.Image_Name } />
+
+                                    <source media='(max-width: 991px)' srcSet={ imgPathTablet + filteredData[0].fields.Image_Name } />
+
+                                    <source media='(min-width: 992px)' srcSet={ imgPathDesktop + filteredData[0].fields.Image_Name } />
+
+                                    <img
+                                        className='footer_logo'
+                                        src={ imgPathDesktop + filteredData[0].fields.Image_Name }
+                                        alt={ filteredData[0].fields.Image_Description } />
+                                </picture>
+
                             </NavLink>
 
                             <p className='mainText'>{ filteredData[0].fields.Footer_Title }</p>
@@ -52,7 +68,7 @@ const Footer = () => {
                                     <NavLink to='/' className='mainText info'> <FontAwesomeIcon icon={ faEnvelope } /> info@gjerrildvandrerhjem.dk</NavLink>
                                 </li>
                             </ul>
-                            
+
 
                             <ul className="footer_menu">
                                 <li>
@@ -73,8 +89,8 @@ const Footer = () => {
                         </Col>
                     </Row>
                     <Row className='copyright'>
-                        <Col lg={12}>
-                       <p className='mainText'>&copy; 2023 Gjerrild Vandrehjem - All Rights Reserved</p> 
+                        <Col lg={ 12 }>
+                            <p className='mainText'>&copy; 2023 Gjerrild Vandrehjem - All Rights Reserved</p>
                         </Col>
                     </Row>
                 </>
