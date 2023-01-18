@@ -53,7 +53,7 @@ const Footer = () => {
                             <ul className='footer_menu'>
                                 <li><NavLink to='/galleri' className='mainText info'><FontAwesomeIcon icon={ faGreaterThan } className='icon' /> { filteredData[0].fields.Galleri }</NavLink></li>
                                 <li><NavLink to='/about' className='mainText info'> <FontAwesomeIcon icon={ faGreaterThan } className='icon' /> { filteredData[0].fields.Om_Os }</NavLink></li>
-                                <li><NavLink to='/kontakt' className='mainText info'> <FontAwesomeIcon icon={ faGreaterThan } className='icon' /> { filteredData[0].fields.Kontakt }</NavLink></li>
+                                <li><NavLink to='/contact' className='mainText info'> <FontAwesomeIcon icon={ faGreaterThan } className='icon' /> { filteredData[0].fields.Kontakt }</NavLink></li>
                             </ul>
                         </Col>
 

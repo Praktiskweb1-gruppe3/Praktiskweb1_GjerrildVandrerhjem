@@ -49,7 +49,10 @@ function App () {
           {/* <Route path="/news" element={} /> */ }
 
           {/* Kontakt */ }
-          <Route path="/kontakt" element={ <Kontakt /> } />          {/* Om os */}
+          <Route path="/contact" element={ <Kontakt /> } /> 
+
+
+          {/* Om os */}
           <Route path="/about" element={<About />} />
 
 
