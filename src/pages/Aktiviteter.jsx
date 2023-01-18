@@ -24,13 +24,7 @@ const Aktiviteter = () => {
   const smallImgPath = './assets/images/mobile/';
 
   const [ coordinates, setCoordinates ] = useState( [] )
-
-  const handleClick = ( e ) => {
-
-    const { lat, lng } = e.latlng;
-    console.log( lat, lng );
-
-  }
+  
 
 
   useEffect( () => {
@@ -107,7 +101,7 @@ const Aktiviteter = () => {
               {
                 coordinates?.length >= 1 ? (
 
-                  <MapContainer center={ [ coordinates[ 0 ].lat, coordinates[ 0 ].long ] } zoom={ 10 } id="mapContainer" onClick={ ( e ) => handleClick( e ) }>
+                  <MapContainer center={ [ coordinates[ 0 ].lat, coordinates[ 0 ].long ] } zoom={ 10 } id="mapContainer">
                     <TileLayer
                       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                       url='https://tile.openstreetmap.org/{z}/{x}/{y}.png' />

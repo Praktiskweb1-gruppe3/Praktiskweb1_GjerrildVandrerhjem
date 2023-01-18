@@ -25,4 +25,12 @@ const GetLatLng = () => {
     )
 }
 
+// Used this in the comonent where the map should be clickable to get lat and long
+/*const handleClick = ( e ) => {
+
+    const { lat, lng } = e.latlng;
+    console.log( lat, lng );
+
+  }*/
+
 export default GetLatLng
