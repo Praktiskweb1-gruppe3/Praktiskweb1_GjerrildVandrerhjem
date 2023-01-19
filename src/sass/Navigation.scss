@@ -1,7 +1,7 @@
 @import "variables";
 
 //*Navigation
-.header {
+.header, .admin_header {
     position: sticky;
     top: 0;
     z-index: 10;
@@ -27,6 +27,11 @@
     h2{
         text-align: center;
     }
+}
+
+// Hide as default
+.admin_header{
+    display: none;
 }
 
 .topnav {

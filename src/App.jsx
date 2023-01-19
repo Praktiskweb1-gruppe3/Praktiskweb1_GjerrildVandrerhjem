@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap-grid.min.css';
 import './sass/App.scss';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import Navbar from './component/Navbar';
 
@@ -14,19 +14,23 @@ import About from './pages/About';
 import Footer from './component/Footer';
 import Kontakt from './pages/Kontakt';
 
+// Admin
+import Admin from './pages/Admin/Admin';
+
 
 function App () {
 
   const [ language, setLanguage ] = useState( 'da' );
 
 
+
   return (
     <Router>
 
-      
+
       <Context.Provider value={ { language, setLanguage } }>
 
-        <Navbar />        
+        <Navbar />
         <Routes>
 
           {/* Forside */ }
@@ -49,18 +53,20 @@ function App () {
           {/* <Route path="/news" element={} /> */ }
 
           {/* Kontakt */ }
-          <Route path="/contact" element={ <Kontakt /> } /> 
+          <Route path="/contact" element={ <Kontakt /> } />
 
 
-          {/* Om os */}
-          <Route path="/about" element={<About />} />
+          {/* Om os */ }
+          <Route path="/about" element={ <About /> } />
 
 
+          {/* Admin */ }
+          <Route path="/admin" element={ <Admin  /> } />
 
 
         </Routes>
 
-        <Footer />
+        <Footer  />
 
       </Context.Provider>
     </Router>
