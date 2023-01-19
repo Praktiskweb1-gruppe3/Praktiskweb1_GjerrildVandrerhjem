@@ -164,7 +164,7 @@ const Navbar = () => {
                             </li>
 
                             <li>
-                                <button className="btn_bookroom">{ filteredData[ 0 ].fields.BookRoom }</button>
+                                <button className="btn__bookroom">{ filteredData[ 0 ].fields.BookRoom }</button>
                             </li>
                         </ul>
                         <div className="hamburger" onClick={ handleClick }>

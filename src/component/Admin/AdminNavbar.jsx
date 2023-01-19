@@ -3,25 +3,30 @@ import { NavLink, useLocation } from "react-router-dom";
 
 import { useState, useRef, useEffect } from "react";
 
-import ChangeLanguage from './../ChangeLanguage';
-
 import UseTranslator from '../../hooks/UseTranslator';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 
+import { useCurrentUser, useIsLoggedIn } from 'thin-backend-react';
 
-const Navbar = () => {
-    
+import { logout } from 'thin-backend';
+
+const AdminNavbar = () => {
+
     const [ isMenuOpen, setIsMenuOpen ] = useState( false );
-    
+
     const [ scrolledYPos, setScrolledYPos ] = useState( 0 );
 
     const { filteredData, error, loading } = UseTranslator( "AdminNavigation" );
 
     const headerRef = useRef();
-    
+
     const location = useLocation();
+
+    const getUser = useCurrentUser();
+
+    const isLoggedIn = useIsLoggedIn();
 
     const imgPathMobile = './assets/images/mobile/';
     const imgPathTablet = './assets/images/tablet/';
@@ -48,13 +53,10 @@ const Navbar = () => {
 
     useEffect( () => {
 
-        if(location.pathname === '/admin'){
+        if ( location.pathname === '/admin' ) {
 
             // is being removed in Admin
-            document.querySelector('.footer').style.display = 'none';
-            document.querySelector('.header').style.display = 'none';
-            headerRef.current.style.display = "block";
-    
+            document.querySelector( '.header' ).classList.add('admin');
         }
 
         window.addEventListener( "scroll", handleStylingOnScroll );
@@ -76,23 +78,24 @@ const Navbar = () => {
         }
 
 
-    }, [filteredData] );
+    }, [ ] );
 
     return (
 
-        <header className="container-fluid px-0 admin_header" ref={ headerRef }>
+        <header className="container-fluid px-0 adminHeader " ref={ headerRef }>
 
             {
                 filteredData &&
 
                 <>
                     <nav className=" container-xl topnav">
-                        <h1 className="big_heading">{filteredData[0].fields.Header_Title}</h1>
-
-                        <div className="soMeAndLanguage">
-                            <ChangeLanguage currentLanguageData={ filteredData } />
-
-                        </div>
+                        <h1 className="big_heading">{ filteredData[ 0 ].fields.Header_Title }</h1>
+                        { 
+                             <p className='mainText'>
+                                { getUser?.email }
+                            </p>
+                           
+                        }
                     </nav>
 
                     <hr className="navbarSeperator" />
@@ -104,8 +107,8 @@ const Navbar = () => {
 
                             <li>
                                 <h2 className="small_heading">
-                                <span>
-                                        { filteredData[ 0 ].fields.Header_Title.split(  )[ 0 ] } -
+                                    <span>
+                                        { filteredData[ 0 ].fields.Header_Title.split()[ 0 ] } -
                                     </span>
                                     <span>{ filteredData[ 0 ].fields.Header_Title.split( '-' )[ 1 ] }</span>
                                 </h2>
@@ -134,6 +137,10 @@ const Navbar = () => {
                             <li>
                                 <NavLink to="/admincontact">{ filteredData[ 0 ].fields.OmOs }</NavLink>
                             </li>
+                            
+                                <li>
+                                  {isLoggedIn ? (<button className="btn__logout" onClick={ logout }  >{ filteredData[ 0 ].fields.Logout }</button>) : (null)}  
+                                </li> 
                         </ul>
                         <div className="hamburger" onClick={ handleClick }>
                             { isMenuOpen ? <FontAwesomeIcon icon={ faXmark } /> : <FontAwesomeIcon icon={ faBars } /> }
@@ -146,4 +153,4 @@ const Navbar = () => {
         </header>
     )
 }
-export default Navbar;
+export default AdminNavbar;

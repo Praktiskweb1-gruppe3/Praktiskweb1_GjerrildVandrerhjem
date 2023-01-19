@@ -15,7 +15,7 @@ import Footer from './component/Footer';
 import Kontakt from './pages/Kontakt';
 
 // Admin
-import Admin from './pages/Admin/Admin';
+import Index from './pages/Admin/Index';
 
 
 function App () {
@@ -61,7 +61,7 @@ function App () {
 
 
           {/* Admin */ }
-          <Route path="/admin" element={ <Admin  /> } />
+          <Route path="/admin" element={ <Index  /> } />
 
 
         </Routes>

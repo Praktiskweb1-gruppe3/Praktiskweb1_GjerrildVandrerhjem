@@ -1,0 +1,36 @@
+@import '../variables';
+
+#root.admin{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: $col_background;
+
+    a{
+        text-decoration: none;
+        color: $col_text;
+
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+}
+
+.header.admin{
+    display: none;
+}
+
+.footer{
+    display: block;
+}
+
+.footer.admin{
+    display: none;
+}
+
+.notAdmin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
