@@ -5,7 +5,7 @@
 
 .aktivSelectContainer {
     width: 100%;
-    min-height: 100vh;
+    height: auto;
     background-color: $ghost-white;
 
     //Headline 
@@ -39,6 +39,7 @@
 
     .MainContent {
         width: 100%;
+        height: auto;
         margin-top: 2rem;
         display: flex;
         justify-content: center;
@@ -49,19 +50,18 @@
         .Thumbnail {
             width: 100%;
             margin-bottom: 3rem;
-            
         }
 
         // Map Container
 
-        .mapContainer {
+        #mapContainer {
             width: 100%;
-            min-height: 610px;
+            min-height: 100px;
+            height: 60%;
             position: relative;
             z-index: 1;
             margin-bottom: 5rem;
             border-radius: .4rem;
-            background-color: $cadet;
         }
 
         //First text
@@ -76,7 +76,6 @@
             color: $col_text;
 
             .ApetizerText {
-                max-height: 600px;
                 padding: 1rem;
                 font-size: 2rem;
             }
@@ -115,7 +114,7 @@
             color: $col_text;
 
             .FactsText {
-                max-height: 400px;
+                height: auto;
                 padding: 1rem;
                 font-size: 2rem;
             }
@@ -129,7 +128,7 @@
 
 @media only screen and (max-width: 399px) {
 
-    .mapContainer {
+    #mapContainer{
         display: none;
     }
 

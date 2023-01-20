@@ -1,4 +1,6 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import 'leaflet/dist/leaflet.css';
+import '../sass/Leaflet.scss';
 
 import UseTranslator from '../hooks/UseTranslator';
 import Container from 'react-bootstrap/Container';
@@ -10,6 +12,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import '../sass/AktivitetSelected.scss';
 
 // import { cleanUpMap, initMapAllActivites } from '../leaflet';
+import { MapContainer, TileLayer, Popup, Marker } from 'react-leaflet'
 
 
 const AktiviteterSelected = () => {
@@ -17,8 +20,11 @@ const AktiviteterSelected = () => {
     const navigate = useNavigate()
     const location = useLocation()
 
-    // Coordinates for Map
-    // const coordinates = useRef([])
+    // Navigate the user back to Overview of Activities
+    const returnOverV = () => navigate('/activities')
+
+    // Navigate user to current selected activity homepage
+    const GoToPage = () => navigate('/')
 
     const { filteredData, error, loading } = UseTranslator('ActivitySelect', true)
 
@@ -26,12 +32,24 @@ const AktiviteterSelected = () => {
     const mediumImgPath = "./assets/images/tablet/";
     const smallImgPath = "./assets/images/mobile/";
 
-    // Navigate the user back to Overview of Activities
-    const returnOverV = () => navigate('/activities')
+    const [coordinates, setCoordinates] = useState([])
 
-    // Navigate user to current selected activity homepage
-    const GoToPage = () => navigate('/')
+    useEffect(() => {
+        if (coordinates.length <= 0 && filteredData) {
 
+            filteredData.forEach(coordinate => {
+
+                if (coordinate.fields.hasOwnProperty('Latitude') && coordinate.fields.hasOwnProperty('Longitude')) {
+
+                    setCoordinates(prev => [...prev, { lat: coordinate.fields.Latitude, long: coordinate.fields.Longitude, name: coordinate.fields.Name }])
+
+                }
+
+            });
+
+        }
+
+    }, [filteredData, coordinates])
 
     useEffect(() => {
         if (location.state.data) {
@@ -42,12 +60,11 @@ const AktiviteterSelected = () => {
 
     return (
 
-        <Container fluid='lg' className='aktivSelectContainer xss'>
+        <Container fluid='lg' className='aktivSelectContainer'>
 
             {/* {error && } */}
 
             {/* {loading && } */}
-
 
             {
                 location.state.data && filteredData &&
@@ -81,10 +98,29 @@ const AktiviteterSelected = () => {
                             <Col lg={{ span: 12 }}
                                 md={{ span: 6 }}
                                 sm={{ span: 4 }}>
-                                <div className='mapContainer'></div>
+                                {
+                                    <MapContainer center={[location.state.data.fields.Latitude, location.state.data.fields.Longitude]} zoom={10} id="mapContainer">
+                                        <TileLayer
+                                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                            url='https://tile.openstreetmap.org/{z}/{x}/{y}.png' />
+
+                                        {
+                                            <Marker position={[location.state.data.fields.Latitude, location.state.data.fields.Longitude]}>
+
+                                                <Popup>
+                                                    {location.state.data.fields.Name}
+                                                </Popup>
+                                            </Marker>
+
+                                        }
+
+                                    </MapContainer>
+
+                                }
+
                                 <section className='Facts'>
                                     <h2>{filteredData[0].fields.Facts}</h2>
-                                    <p className='FactsText'>{location.state.data.fields.Description.slice(0, 900)}</p>
+                                    <p className='FactsText'>{location.state.data.fields.Description.slice(0, 600)}</p>
                                 </section>
                             </Col>
                         </Row>
