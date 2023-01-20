@@ -76,7 +76,7 @@ const AdminActivities = () => {
                                 {
                                     dataLanguage.records.map( lang => (
 
-                                        <option key={ lang.id } value={ lang.fields.ISO } >{ lang.fields.Name }</option>
+                                        <option key={ lang.id } value={ lang.id } >{ lang.fields.Name }</option>
                                     ) )
                                 }
                             </select>
