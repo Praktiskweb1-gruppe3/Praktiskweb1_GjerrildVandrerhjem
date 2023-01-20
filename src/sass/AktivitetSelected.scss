@@ -1,0 +1,156 @@
+@import "variables";
+
+
+// Main Container //
+
+.aktivSelectContainer {
+    width: 100%;
+    min-height: 100vh;
+    background-color: $ghost-white;
+
+    //Headline 
+
+    .HeadlineSelected {
+        color: $col_text;
+        font-family: $font_text;
+        font-size: 6rem;
+    }
+
+    //Button to Overview
+
+    .BackToOverviewBtn {
+        color: $ghost-white;
+        background-color: $bright-yellow-crayola;
+        padding: 1rem;
+        border-radius: 4px;
+        border: none;
+        font-family: $font_text;
+        color: $col_image_text;
+        font-size: 2rem;
+
+        &:hover {
+            background-color: $caribbean-green;
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+    }
+
+    // Body of Activity Selected
+
+    .MainContent {
+        width: 100%;
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+
+        // Thumbnail picture
+
+        .Thumbnail {
+            width: 100%;
+            margin-bottom: 3rem;
+            
+        }
+
+        // Map Container
+
+        .mapContainer {
+            width: 100%;
+            min-height: 610px;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 5rem;
+            border-radius: .4rem;
+            background-color: $cadet;
+        }
+
+        //First text
+
+        .Apetizer {
+            position: relative;
+            width: 100%;
+            height: auto;
+            margin-bottom: 3rem;
+            background-color: $cultured;
+            font-family: $font_text;
+            color: $col_text;
+
+            .ApetizerText {
+                max-height: 600px;
+                padding: 1rem;
+                font-size: 2rem;
+            }
+
+            // Button to Activities Homepage
+
+            .hostWebpageBtn {
+                width: 80%;
+                margin-left: 10%;
+                margin-bottom: 3rem;
+                color: $col_image_text;
+                background-color: $bright-yellow-crayola;
+                font-family: $font_text;
+                font-size: 3rem;
+                padding: 1rem;
+                border-radius: 4px;
+                border: none;
+
+                &:hover {
+                    background-color: $caribbean-green;
+                    transform: scale(1.05);
+                    cursor: pointer;
+                }
+            }
+
+        }
+
+        // Second Text
+
+        .Facts {
+            width: 100%;
+            height: auto;
+            margin-bottom: 3rem;
+            background-color: $cultured;
+            font-family: $font_text;
+            color: $col_text;
+
+            .FactsText {
+                max-height: 400px;
+                padding: 1rem;
+                font-size: 2rem;
+            }
+
+        }
+
+
+    }
+
+}
+
+@media only screen and (max-width: 399px) {
+
+    .mapContainer {
+        display: none;
+    }
+
+    .aktivSelectContainer, 
+        .MainContent {
+        flex-direction: column;
+    }
+
+    .Apetizer{
+        width: 100%;
+    }
+
+    .BackToOverviewBtn {
+        margin-top: 1rem;
+        margin-left: 32%;
+
+    }
+
+    .mapMessage,
+    .mapText {
+        display: block;
+    }
+
+}

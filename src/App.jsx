@@ -9,6 +9,7 @@ import Navbar from './component/Navbar';
 import { Context } from './Context/Context';
 import Services from './pages/Services';
 import Aktiviteter from './pages/Aktiviteter';
+import AktiviteterSelected from './pages/AktiviteterSelected';
 
 import Footer from './component/Footer';
 
@@ -39,6 +40,8 @@ function App() {
 
         {/* Aktiviteter */} 
         <Route path="/activities" element={<Aktiviteter />} />
+        <Route path="/activitySelected" element={<AktiviteterSelected />} />
+
 
         {/* Vi tilbyder */} 
         <Route path="/services" element={<Services />} />

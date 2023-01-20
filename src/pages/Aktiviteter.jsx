@@ -8,10 +8,14 @@ import Col from 'react-bootstrap/Col'
 import '../sass/Aktiviteter.scss';
 
 import { cleanUpMap, initMapAllActivites } from '../leaflet';
+import { useNavigate } from "react-router-dom";
 
 const Aktiviteter = () => {
-
+  
+  const navigate = useNavigate()
   const { filteredData, error, loading } = UseTranslator('Activities', true)
+
+  const headToSelected = (selectedData) => navigate('/activitySelected', { state: { data:selectedData } } )
 
   const largeImgPath = './assets/images/desktop/';
   const mediumImgPath = './assets/images/tablet/';
@@ -68,7 +72,7 @@ const Aktiviteter = () => {
 
           <Row>
             {
-              filteredData.slice(2).map(a => (
+              filteredData.slice(2,filteredData.length - 1).map(a => (
 
                 <Col key={ a.id } md={ 4 }>
                   <figure className='aktiviteter_image'>
@@ -79,7 +83,7 @@ const Aktiviteter = () => {
 
                       <source media="(min-width: 992px)" srcSet={ largeImgPath + a.fields.Image_Name[0] } />
 
-                      <img src={ mediumImgPath + a.fields.Image_Name[0] } alt={ a.fields.Image_Description } className='image_activity' />
+                      <img onClick={()=> headToSelected(a)} src={ mediumImgPath + a.fields.Image_Name[0] } alt={ a.fields.Image_Description } className='image_activity' />
                     </picture>
                     <figcaption>{ a.fields.Image_Text[0] }</figcaption>
                   </figure>
@@ -90,7 +94,7 @@ const Aktiviteter = () => {
           </Row>
           <Row>
             <Col>
-              <h1 className='kort-title'>Kort over Aktiviteter</h1>
+              <h1 className='kort-title'>{filteredData[filteredData.length - 1 ].fields.Name}</h1>
             </Col>
           </Row>
 
