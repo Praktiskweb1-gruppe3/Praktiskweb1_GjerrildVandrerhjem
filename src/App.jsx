@@ -9,6 +9,7 @@ import Navbar from './component/Navbar';
 import { Context } from './Context/Context';
 import Services from './pages/Services';
 import Aktiviteter from './pages/Aktiviteter';
+import AktiviteterSelected from './pages/AktiviteterSelected';
 import About from './pages/About';
 
 import Footer from './component/Footer';
@@ -49,8 +50,10 @@ function App () {
           <Route path="/services" element={ <Services /> } />
 
 
-          {/* Nyheder */ }
-          {/* <Route path="/news" element={} /> */ }
+        {/* Aktiviteter */} 
+        <Route path="/activities" element={<Aktiviteter />} />
+        <Route path="/activitySelected" element={<AktiviteterSelected />} />
+
 
           {/* Kontakt */ }
           <Route path="/contact" element={ <Kontakt /> } />
