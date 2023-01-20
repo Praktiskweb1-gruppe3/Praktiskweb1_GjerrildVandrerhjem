@@ -53,12 +53,6 @@ const AdminNavbar = () => {
 
     useEffect( () => {
 
-        if ( location.pathname === '/admin' ) {
-
-            // is being removed in Admin
-            document.querySelector( '.header' ).classList.add('admin');
-        }
-
         window.addEventListener( "scroll", handleStylingOnScroll );
 
         return () => {
@@ -115,27 +109,27 @@ const AdminNavbar = () => {
                             </li>
 
                             <li>
-                                <NavLink to="/adminrooms">{ filteredData[ 0 ].fields.Rooms }</NavLink>
+                                <NavLink to="rooms">{ filteredData[ 0 ].fields.Rooms }</NavLink>
                             </li>
 
                             <li>
-                                <NavLink to="/adminevents">{ filteredData[ 0 ].fields.Events }</NavLink>
+                                <NavLink to="events">{ filteredData[ 0 ].fields.Events }</NavLink>
                             </li>
 
                             <li>
-                                <NavLink to="/adminactivities">{ filteredData[ 0 ].fields.Activities }</NavLink>
+                                <NavLink to="activities">{ filteredData[ 0 ].fields.Activities }</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/adminservices">{ filteredData[ 0 ].fields.Services }</NavLink>
+                                <NavLink to="services">{ filteredData[ 0 ].fields.Services }</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/adminnews">{ filteredData[ 0 ].fields.News }</NavLink>
+                                <NavLink to="news">{ filteredData[ 0 ].fields.News }</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/admincontact">{ filteredData[ 0 ].fields.Contact }</NavLink>
+                                <NavLink to="contact">{ filteredData[ 0 ].fields.Contact }</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/admincontact">{ filteredData[ 0 ].fields.OmOs }</NavLink>
+                                <NavLink to="about">{ filteredData[ 0 ].fields.OmOs }</NavLink>
                             </li>
                             
                                 <li>

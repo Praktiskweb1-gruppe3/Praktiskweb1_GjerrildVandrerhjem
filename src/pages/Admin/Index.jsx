@@ -1,5 +1,8 @@
 import { initThinBackend } from 'thin-backend';
 import { ThinBackend } from 'thin-backend-react';
+
+import { Outlet } from 'react-router-dom';
+
 import 'thin-backend-react/auth.css';
 import '../../sass/Admin/Admin.scss'
 
@@ -24,7 +27,10 @@ const Index = () => {
     return (
 
         <ThinBackend requireLogin>
+
             <AdminContent />
+
+            <Outlet />
 
         </ThinBackend>
 
