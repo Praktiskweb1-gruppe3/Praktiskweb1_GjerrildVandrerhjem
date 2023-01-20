@@ -106,3 +106,24 @@
     margin-bottom: 1.5rem;
     display: inline-block;
 }
+
+.submit_message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+    height: 50px;
+    color: $col_background;
+    font-size: clamp(1.4rem, calc(1rem + 1vw), 2rem);
+    margin-inline: auto;
+    text-align: center;
+    border-radius: .4rem;
+
+    &.success {
+        background-color: $col_success;
+    }
+
+    &.failed {
+        background-color: $col_error;
+    }
+}

@@ -26,18 +26,16 @@ import 'react-phone-number-input/style.css';
 
 const Kontakt = () => {
 
-    const [value, setValue] = useState()
+    const [phoneNumber, setPhoneNumber] = useState()
+
+    const [isVisible, setVisible] = useState(false)
+    const [message, setMessage] = useState()
 
     const { filteredData, error, loading } = UseTranslator("Kontakt");
 
-    useEffect(() => {
+    const phoneValidation = yup.object().shape({
 
-        document.querySelector('#root').style.backgroundColor = '#FAFAFF';
-    }, [])
-
-    // const phoneSchema = yup.string().phone("IN").required();
-
-    // phoneSchema.isValid("+4521152526").then(console.log);
+    })
 
     const validation = yup.object().shape({
         name: yup
@@ -60,27 +58,89 @@ const Kontakt = () => {
 
     });
 
-    const { register, handleSubmit, control, formState: { errors }, } = useForm({
+    const { register, handleSubmit, control, formState: { errors }, reset } = useForm({
         resolver: yupResolver(validation),
         defaultValues: {
             name: '',
+            phoneNumber: '',
             mail: '',
             title: ''
         }
     })
 
+
+    useEffect(() => {
+
+        document.querySelector('#root').style.backgroundColor = '#FAFAFF';
+    }, [])
+
+    useEffect(() => {
+
+        let timeOut;
+
+        if (message) {
+            timeOut = setTimeout(() => {
+                setVisible(false)
+            }, 1000)
+        }
+
+    }, [message])
+
+
+
     const onSubmit = (data) => {
 
-        console.log(data);
+        validation.isValid(phoneNumber).then(console.log)
 
+        // try {
+
+        //     console.log(isValid)
+
+        //     if (isValid) {
+        //         console.log('SUBMITTED!', phoneNumber)
+
+        //         setMessage({
+        //             msg: 'Tak for din besked - din info er nu i systemet',
+        //             class: 'success'
+        //         });
+        //         resetForm();
+        //         // setVisible(true);
+        //     } else {
+        //         console.log('VALIDATION FAILED')
+        //     }
+
+
+        // } catch (error) {
+        //     console.log(error)
+
+        //     setMessage({
+        //         msg: error.message,
+        //         class: 'failed'
+        //     })
+        //     // setVisible(true);
+        // }
+
+        console.log(data);
     };
 
+    const resetForm = () => {
+        reset({ name: '', mail: '', emne: '' });
+    }
+
+    const onValid = (errors) => {
+        console.log(errors)
+        setMessage({
+            msg: 'Der skete en fejl. Tjek om alle felterne er udfyldt og prøv igen',
+            class: 'failed'
+        })
+
+    }
 
     return (
         <Container fluid className='kontakt'>
             {
                 filteredData &&
-                <form onSubmit={ handleSubmit(onSubmit) }>
+                <form onSubmit={ handleSubmit(onSubmit, onValid) }>
                     <Row>
                         <Col>
                             <h1>{ filteredData[0].fields.Kontakt_Title }</h1>
@@ -103,10 +163,11 @@ const Kontakt = () => {
 
                                     {/* <input type="text" placeholder={ filteredData[0].fields.Telefon_Description } className='inputs' id='phoneNumber' {...register('phoneNumber')} /> */ }
                                     <PhoneInput
-                                        placeholder={filteredData[0].fields.Telefon_Description}
-                                        value={ value }
-                                        onChange={ (e) => setValue(e.target.value) }
-                                        {...register('phoneNumber')} />
+                                        placeholder={ filteredData[0].fields.Telefon_Description }
+                                        value={ phoneNumber }
+                                        onChange={ setPhoneNumber }
+                                    // { ...register('phoneNumber') }
+                                    />
                                     <FormText className='formText'>{ errors.phoneNumber?.message }</FormText>
                                 </Col>
 
@@ -130,6 +191,17 @@ const Kontakt = () => {
                                     <Col lg={ { span: 6, offset: 3 } }>
                                         <button type="submit" className='send_submit-input mainText'>{ filteredData[0].fields.Send }</button>
                                     </Col>
+
+                                    {
+                                        message ? (
+                                            <Col lg={ { span: 8, offset: 2 } }>
+                                                <div className={ `submit_message  ${message.class}` }>
+
+                                                    { message.msg }
+                                                </div>
+                                            </Col>
+                                        ) : (null)
+                                    }
 
                                 </Col>
                             </Row>
