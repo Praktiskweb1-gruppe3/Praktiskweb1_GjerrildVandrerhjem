@@ -16,9 +16,9 @@ const Services = () => {
 
     const { filteredData: filteredDataResturant, error: errorResturant, loading: loadingResturant } = UseTranslator( 'Restutant' );
 
-    const largeImgPath = "./assets/images/big/";
-    const mediumImgPath = "./assets/images/medium/";
-    const smallImgPath = "./assets/images/small/";
+    const largeImgPath = "./assets/images/desktop/";
+    const mediumImgPath = "./assets/images/tablet/";
+    const smallImgPath = "./assets/images/mobile/";
 
     useEffect( () => {
 

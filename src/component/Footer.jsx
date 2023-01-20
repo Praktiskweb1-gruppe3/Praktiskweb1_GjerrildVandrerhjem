@@ -20,8 +20,10 @@ const Footer = () => {
     const imgPathTablet = './assets/images/tablet/';
     const imgPathMobile = './assets/images/mobile/';
 
+    
+
     return (
-        <Container fluid >
+        <Container fluid className='footer'>
             {
                 filteredData && <>
                     <Row className='footer_container'>
@@ -52,7 +54,7 @@ const Footer = () => {
                             xs={ 12 }
                             sm={ 6 }
                             md={ 2 }
-                            lg={3}
+                            lg={ 3 }
                             className='divider order-2 order-sm-1 order-md-2'>
 
                             <h2>{ filteredData[ 0 ].fields.Nyttige_Links }</h2>
@@ -67,7 +69,7 @@ const Footer = () => {
                         <Col
                             xs={ 12 }
                             sm={ 6 }
-                            md={4}
+                            md={ 4 }
                             lg={ 3 }
                             className="order-1 order-sm-2 order-md-3"
                         >
