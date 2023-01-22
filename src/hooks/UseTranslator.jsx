@@ -21,14 +21,14 @@ const UseTranslator = ( airtableName, sort = false, sortby = "Order" ) => {
     useEffect( () => {
         if(sort){
            getData( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/' + airtableName, {
-                'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLEKEY
+                'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLE_API_KEY
             }, {
                 "sort[0][field]": sortby
             }); 
         }
         else{
             getData( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/' + airtableName, {
-                'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLEKEY
+                'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLE_API_KEY
             })
         }
             

@@ -14,7 +14,7 @@ const ChangeLanguage = ({currentLanguageData} ) => {
 
   useEffect( () => {
     getData( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/Language', {
-      'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLEKEY
+      'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLE_API_KEY
     }, {
       "sort[0][field]": "ISO"
 
