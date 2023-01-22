@@ -32,6 +32,11 @@
     }
 }
 
+.adminHeader .navbar {
+    height: calc(100% - 64px);
+
+}
+
 .topnav {
     padding-block: .5rem;
     display: flex;
@@ -80,6 +85,8 @@
     align-items: center;
 
 }
+
+
 
 .navbar__menu {
 

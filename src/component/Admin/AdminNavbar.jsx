@@ -1,5 +1,5 @@
 import '../../sass/Navigation.scss';
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { useState, useRef, useEffect } from "react";
 
@@ -22,7 +22,6 @@ const AdminNavbar = () => {
 
     const headerRef = useRef();
 
-    const location = useLocation();
 
     const getUser = useCurrentUser();
 
@@ -72,7 +71,7 @@ const AdminNavbar = () => {
         }
 
 
-    }, [ ] );
+    }, [] );
 
     return (
 
@@ -84,17 +83,24 @@ const AdminNavbar = () => {
                 <>
                     <nav className=" container-xl topnav">
                         <h1 className="big_heading">{ filteredData[ 0 ].fields.Header_Title }</h1>
-                        { 
-                             <p className='mainText'>
-                                { getUser?.email }
-                            </p>
-                           
+                        {
+
+                            <div className='logoutSection'>
+                                <p className='mainText'>
+                                    { getUser?.email }
+                                </p>
+
+                                { isLoggedIn ? ( <button className="btn__logout" onClick={ logout }  >{ filteredData[ 0 ].fields.Logout }</button> ) : ( null ) }
+                            </div>
+
+
+
                         }
                     </nav>
 
                     <hr className="navbarSeperator" />
 
-                    <nav className="container-xl navbar px-4 px-lg-0">
+                    <nav className="container-xl navbar px-lg-0">
 
 
                         <ul className={ isMenuOpen ? "navbar__menu active" : "navbar__menu" }>
@@ -106,6 +112,10 @@ const AdminNavbar = () => {
                                     </span>
                                     <span>{ filteredData[ 0 ].fields.Header_Title.split( '-' )[ 1 ] }</span>
                                 </h2>
+                            </li>
+
+                            <li>
+                                <NavLink to="/admin" end>{ filteredData[ 0 ].fields.Frontpage }</NavLink>
                             </li>
 
                             <li>
@@ -131,10 +141,6 @@ const AdminNavbar = () => {
                             <li>
                                 <NavLink to="about">{ filteredData[ 0 ].fields.OmOs }</NavLink>
                             </li>
-                            
-                                <li>
-                                  {isLoggedIn ? (<button className="btn__logout" onClick={ logout }  >{ filteredData[ 0 ].fields.Logout }</button>) : (null)}  
-                                </li> 
                         </ul>
                         <div className="hamburger" onClick={ handleClick }>
                             { isMenuOpen ? <FontAwesomeIcon icon={ faXmark } /> : <FontAwesomeIcon icon={ faBars } /> }
