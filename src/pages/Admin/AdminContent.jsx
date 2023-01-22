@@ -6,6 +6,8 @@ import { logout } from 'thin-backend';
 
 import AdminNavbar from '../../component/Admin/AdminNavbar';
 
+
+
 const AdminContent = () => {
 
     const user = useCurrentUser();
@@ -15,6 +17,7 @@ const AdminContent = () => {
 
         document.querySelector( '#root' ).classList.add( 'admin' );
         document.querySelector( '.footer' ).classList.add( 'admin' );
+        document.querySelector( '.header' ).classList.add( 'admin' );
 
         return () => {
             document.querySelector( '.footer' ).classList.remove( 'admin' );
@@ -40,7 +43,9 @@ const AdminContent = () => {
 
 
     return (
-        <AdminNavbar />
+        <>
+            <AdminNavbar />
+        </>
 
     )
 

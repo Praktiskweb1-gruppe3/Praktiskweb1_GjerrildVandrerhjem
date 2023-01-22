@@ -17,6 +17,7 @@ import Kontakt from './pages/Kontakt';
 
 // Admin
 import Index from './pages/Admin/Index';
+import AdminActivities from './pages/Admin/Activities/AdminActivities';
 
 
 function App () {
@@ -64,7 +65,13 @@ function App () {
 
 
           {/* Admin */ }
-          <Route path="/admin" element={ <Index  /> } />
+          <Route path="admin" element={ <Index  /> }> 
+
+            {/* <Route index element={} /> */}
+            <Route path="activities" element={<AdminActivities />} />
+          
+          
+          </Route>
 
 
         </Routes>

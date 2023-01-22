@@ -13,8 +13,6 @@ import Col from 'react-bootstrap/Col'
 // import { cleanUpMap, initMapAllActivites } from '../leaflet';
 import { MapContainer, TileLayer, Popup, Marker } from 'react-leaflet'
 
-import GetLatLng from '../component/GetLatLng';
-
 
 import { useNavigate } from "react-router-dom";
 

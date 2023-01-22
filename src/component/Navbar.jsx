@@ -23,9 +23,9 @@ const Navbar = () => {
 
     const { filteredData, error, loading } = UseTranslator( "Navigation" );
 
-    const imgPathMobile = './assets/images/mobile/';
-    const imgPathTablet = './assets/images/tablet/';
-    const imgPathDesktop = './assets/images/desktop/';
+    const imgPathMobile = '/assets/images/mobile/';
+    const imgPathTablet = '/assets/images/tablet/';
+    const imgPathDesktop = '/assets/images/desktop/';
 
 
     const handleClick = () => setIsMenuOpen( !isMenuOpen );

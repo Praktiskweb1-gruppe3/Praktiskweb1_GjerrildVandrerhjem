@@ -1,36 +1,97 @@
 @import '../variables';
 
-#root.admin{
+#root.admin {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     background-color: $col_background;
-
-    a{
-        text-decoration: none;
-        color: $col_text;
-
-        &:hover{
-            text-decoration: underline;
-        }
-    }
 }
 
-.header.admin{
+.header.admin {
     display: none;
 }
 
-.footer{
+.footer {
     display: block;
 }
 
-.footer.admin{
+.footer.admin {
     display: none;
 }
 
-.notAdmin{
+.notAdmin {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.labels {
+    font-size: clamp(1.3rem, calc(.8rem + .8vw), 1.6rem);
+    display: block;
+    margin-bottom: .5rem;
+}
+
+.select {
+    display: block;
+    width: 100%;
+}
+
+.admin__message {
+    width: 100%;
+    min-height: 40px;
+    padding: 1rem;
+    color: $col_background;
+    font-size: clamp(1.3rem, calc(.8rem + .8vw), 1.6rem);
+    border-radius: .4rem;
+    text-align: center;
+
+    &.succes {
+        background-color: $col_success;
+    }
+
+    &.failed {
+        background-color: $col_error;
+    }
+}
+
+.adminActivities {
+    padding-top: 5rem;
+
+    h1 {
+        margin-bottom: 3rem;
+        text-align: left;
+    }
+}
+
+#mapContainer__adminactivities {
+    width: 100%;
+    height: 400px;
+    max-height: 400px;
+    position: relative;
+    z-index: 1;
+    border-radius: .4rem;
+    background-color: aqua;
+}
+
+.btn_post {
+    display: block;
+    width: 150px;
+    height: 35px;
+    background-color: $col_nav_highlighted;
+    color: $col_nav_overlay;
+    font-size: 1.5rem;
+    border-radius: .4rem;
+    border: $col_topnav_border 1px solid;
+    appearance: none;
+    cursor: pointer;
+    transition: scale 1s ease-in-out;
+    margin-block: 2rem;
+    font-weight: 600;
+    margin-inline: auto;
+
+    &:hover {
+        background-color: $caribbean-green;
+        transform: scale(1.1);
+    }
 }
