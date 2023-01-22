@@ -70,7 +70,11 @@ const PostActivities = ( { language } ) => {
                     ]
                 }
             }
-            console.log( e.target.Image.files[ 0 ])
+
+            postData('https://api.airtable.com/v0/app0qMLpB7LbMjc7l/Activities', newActivity, {
+                'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLEKEY,
+                'Content-Type': 'application/json'
+            });
 
 
             setMessage( {
@@ -89,11 +93,6 @@ const PostActivities = ( { language } ) => {
     }
 
     useEffect( () => {
-
-
-        getData( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/Test', {
-                'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLEKEY
-            })
 
         let timeOut;
 
