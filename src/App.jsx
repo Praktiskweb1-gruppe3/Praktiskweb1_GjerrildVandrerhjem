@@ -11,6 +11,7 @@ import Services from './pages/Services';
 import Aktiviteter from './pages/Aktiviteter';
 import AktiviteterSelected from './pages/AktiviteterSelected';
 import About from './pages/About';
+import NoMatch from './pages/NoMatch';
 
 import Footer from './component/Footer';
 import Kontakt from './pages/Kontakt';
@@ -66,6 +67,8 @@ function App () {
           {/* Admin */ }
           <Route path="/admin" element={ <Index  /> } />
 
+          {/* No Match */}
+          <Route path="*" element={<NoMatch/>}/> 
 
         </Routes>
 
