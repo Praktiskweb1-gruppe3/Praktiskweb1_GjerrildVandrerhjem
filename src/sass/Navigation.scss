@@ -32,8 +32,13 @@
     }
 }
 
+.adminHeader.onScroll{
+    transform: translateY(-76px);
+
+}
+
 .adminHeader .navbar {
-    height: calc(100% - 64px);
+    height: calc(100% - 76px);
 
 }
 

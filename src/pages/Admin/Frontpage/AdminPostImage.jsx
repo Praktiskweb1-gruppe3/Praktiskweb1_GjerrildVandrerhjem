@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import axios from 'axios';
 
 const AdminPostImage = ( { language } ) => {
 
@@ -18,6 +18,8 @@ const AdminPostImage = ( { language } ) => {
 
     const handleChangeImage = ( e, setImageUrl ) => {
         const file = e.target.files[ 0 ];
+
+        console.log(file);
 
         const reader = new FileReader();
         reader.readAsDataURL( file );
@@ -35,21 +37,19 @@ const AdminPostImage = ( { language } ) => {
         e.preventDefault();
 
         try {
-            const res = await fetch( '/.netlify/functions/uploadImages', {
-                method: 'POST',
-                body: JSON.stringify( {
-                    desktop_file: desktopImageUrl,
-                    tablet_file: tabletImageUrl,
-                    mobile_file: mobileImageUrl,
-                    description: imageAlt,
-                    imageText: imageText,
-                    language: language
 
-                } )
-            } )
+            const payload = {
 
+                desktop_file: desktopImageUrl,
+                tablet_file: tabletImageUrl,
+                mobile_file: mobileImageUrl,
+                description: imageAlt,
+                imageText: imageText,
+                language: language.value
+            }
 
-            const data = await res.json();
+            axios.post( '/.netlify/functions/uploadImages', payload )
+                .then( response => response.data );
 
             setDesktopImageUrl( '' );
             setTabletImageUrl( '' );
@@ -89,14 +89,24 @@ const AdminPostImage = ( { language } ) => {
 
         }
 
+        return () => {
+            clearTimeout(timeOut);
+        }
+
     }, [ message ] )
+
+    useEffect( () => {
+        return () => {
+            document.querySelector( '.languageSelect' ).selectedIndex = 0;
+        }
+    }, [] )
 
 
     return (
         <form onSubmit={ submitHandler }>
             <Row>
 
-                <Col lg={ { span: 6, offset: 1 } }>
+                <Col lg={ { span: 6 } }>
 
                     <Row>
 
@@ -189,7 +199,7 @@ const AdminPostImage = ( { language } ) => {
                                     type="text"
                                     onChange={ ( e ) => setImageAlt( e.target.value ) }
                                     className='inputs'
-                                    placeholder='Beskriv billedet kort'
+                                    placeholder='Kort beskrivelse af billedet'
                                 />
                             </Col>
                         </Row>

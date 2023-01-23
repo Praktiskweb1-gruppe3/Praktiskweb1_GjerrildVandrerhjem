@@ -15,9 +15,7 @@ Cloudinary.v2.config( {
 
 export const handler = async ( event ) => {
 
-    const { desktop_file, tablet_file, mobile_file, description, imageText, language } = JSON.parse( event.body );
-
-    console.log("body: " + event.body);
+    const { desktop_file, tablet_file, mobile_file, description, imageText, language } = JSON.parse( event.body );    
 
     try {
 
@@ -38,6 +36,8 @@ export const handler = async ( event ) => {
             upload_preset: "gjerrildvandrerhjem",
             folder: 'GjerrildVandrerHjem/mobile'
         } );
+
+        console.log(desktop_public_id);
 
         const record = await table.create( {
             ImgId_Desktop: desktop_public_id,

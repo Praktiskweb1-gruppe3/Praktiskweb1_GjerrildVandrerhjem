@@ -40,7 +40,7 @@ const AdminActivities = () => {
             { error && <div>Der skete en fejl.</div> }
 
             <Row>
-                <Col lg={ { span: 6, offset: 1 } } className="px-5">
+                <Col lg={ { span: 6 } } className="px-5">
                     <AdminTitle pageName="aktiviteter" />
                 </Col>
             </Row>
@@ -52,6 +52,7 @@ const AdminActivities = () => {
                 setSelectedOperation={ setSelectedOperation }
                 setPostLanguage={ setPostLanguage }
                 dataLanguage={ dataLanguage }
+                selectedOperation={selectedOperation}
             />
 
 

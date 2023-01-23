@@ -2,9 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import { Context } from '../../../Context/Context';
 
-
-import { Image, Transformation } from 'cloudinary-react';
-
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -15,24 +12,22 @@ import AdminTitle from '../../../component/Admin/AdminTitle';
 
 import Select from '../../../component/Admin/Select';
 
-import UseTranslator from '../../../hooks/UseTranslator';
 import AdminPostImage from './AdminPostImage';
+import AdminPatchImage from './AdminPatchImage';
 
 const AdminFrontpage = () => {
-
-    const { language } = useContext( Context );
 
     const [ postLanguage, setPostLanguage ] = useState();
 
     const [ selectedOperation, setSelectedOperation ] = useState();
 
-    const { filteredData, error, loading } = UseTranslator( 'Images' );
+   
 
-    const [ images, setImages ] = useState( [] )
 
     const { error: errorLanguage, loading: loadingLanguage, data: dataLanguage, getData: getDataLanguage } = useGetData();
 
     // Use when ever using
+    // const [ images, setImages ] = useState( [] )
     // const loadImages = async () => {
     //     try {
 
@@ -50,7 +45,7 @@ const AdminFrontpage = () => {
     // }
 
     // call in useEffect loadImages();
-    
+
 
 
     useEffect( () => {
@@ -69,11 +64,11 @@ const AdminFrontpage = () => {
     return (
         <Container fluid="lg" className='adminFrontpage'>
 
-            { loading && <div>Loading..</div> }
-            { error && <div>Error..</div> }
+            { loadingLanguage && <div>Loading..</div> }
+            { errorLanguage && <div>Error..</div> }
 
             <Row>
-                <Col lg={ { span: 6, offset: 1 } } className="px-5" >
+                <Col lg={ { span: 6 } }  >
                     <AdminTitle pageName="billeder" />
                 </Col>
             </Row>
@@ -85,13 +80,21 @@ const AdminFrontpage = () => {
                 setSelectedOperation={ setSelectedOperation }
                 setPostLanguage={ setPostLanguage }
                 dataLanguage={ dataLanguage }
+                selectedOperation={ selectedOperation }
             />
 
             {
-                filteredData && selectedOperation && postLanguage &&
+                selectedOperation && postLanguage &&
                 <>
                     {
-                        selectedOperation === 'POST' && <AdminPostImage language={ postLanguage } />
+                        selectedOperation === 'POST' && <AdminPostImage
+                            language={ postLanguage }
+                        />
+                    }
+                    {
+                        selectedOperation === 'PATCH' && <AdminPatchImage
+                            language={ postLanguage }
+                        />
                     }
 
                 </>
