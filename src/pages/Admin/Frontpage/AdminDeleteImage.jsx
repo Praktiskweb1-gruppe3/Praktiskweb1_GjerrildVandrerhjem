@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-import { Image } from 'cloudinary-react';
-
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios';
@@ -12,9 +10,9 @@ const AdminDeleteImage = ( { language } ) => {
 
     const [ id, setId ] = useState();
 
-    const [ file, setFile ] = useState([]);
+    const [ file, setFile ] = useState( [] );
 
-    const [ imageDir, setImageDir ] = useState('');
+    const [ imageDir, setImageDir ] = useState( '' );
 
     const [ message, setMessage ] = useState( {} );
 
@@ -39,7 +37,7 @@ const AdminDeleteImage = ( { language } ) => {
 
         try {
 
-            await axios.delete('/.netlify/functions/deleteImages', {
+            await axios.delete( '/.netlify/functions/deleteImages', {
                 data: JSON.stringify( {
                     id: id,
                     file: file,
@@ -133,8 +131,8 @@ const AdminDeleteImage = ( { language } ) => {
                 }
 
                 { images && imageDir && <Col lg={ 12 } className="mb-5">
-                    <p className='mainText'>Vælg et billede at slette</p>
-                    <Row>
+                    <Row className='mt-5'>
+                        <p className='mainText'>Vælg et billede slette </p>
                         { images && imageDir.includes( 'desktop' ) && images.map( img => (
                             <Col lg={ 2 } className="mb-3" key={ img.id }>
                                 <figure className='imagesFigure'>
@@ -150,11 +148,11 @@ const AdminDeleteImage = ( { language } ) => {
                                         className='radio'
                                         name='images'
                                         onChange={ () => {
-                                            setFile([
-                                                 img.ImgId_Desktop, 
-                                                 img.ImgId_Tablet,
-                                                 img.ImgId_Mobile]
-                                             )
+                                            setFile( [
+                                                img.ImgId_Desktop,
+                                                img.ImgId_Tablet,
+                                                img.ImgId_Mobile ]
+                                            )
                                             setId( img.id )
                                         }
                                         }
@@ -178,10 +176,10 @@ const AdminDeleteImage = ( { language } ) => {
                                         className='radio'
                                         name='imagesTablet'
                                         onChange={ () => {
-                                            setFile([
-                                                img.ImgId_Desktop, 
+                                            setFile( [
+                                                img.ImgId_Desktop,
                                                 img.ImgId_Tablet,
-                                                img.ImgId_Mobile])
+                                                img.ImgId_Mobile ] )
                                             setId( img.id )
                                         } }
                                     />
@@ -204,10 +202,10 @@ const AdminDeleteImage = ( { language } ) => {
                                         className='radio'
                                         name='imagesMobile'
                                         onChange={ () => {
-                                            setFile([
-                                                img.ImgId_Desktop, 
+                                            setFile( [
+                                                img.ImgId_Desktop,
                                                 img.ImgId_Tablet,
-                                                img.ImgId_Mobile] )
+                                                img.ImgId_Mobile ] )
                                             setId( img.id )
                                         } }
                                     />

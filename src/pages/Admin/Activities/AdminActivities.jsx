@@ -40,7 +40,7 @@ const AdminActivities = () => {
             { error && <div>Der skete en fejl.</div> }
 
             <Row>
-                <Col lg={ { span: 6 } } className="px-5">
+                <Col lg={ {span:6, offset: 1} } >
                     <AdminTitle pageName="aktiviteter" />
                 </Col>
             </Row>
@@ -48,19 +48,24 @@ const AdminActivities = () => {
 
 
             {/* Choose fetch method and language */ }
-            <Select
-                setSelectedOperation={ setSelectedOperation }
-                setPostLanguage={ setPostLanguage }
-                dataLanguage={ dataLanguage }
-                selectedOperation={selectedOperation}
-            />
+
+            <Row>
+                <Col lg={ { span: 12, offset: 1 } }>
+                    <Select
+                        setSelectedOperation={ setSelectedOperation }
+                        setPostLanguage={ setPostLanguage }
+                        dataLanguage={ dataLanguage }
+                        selectedOperation={ selectedOperation }
+                    />
+                </Col>
+            </Row>
+
 
 
             { filteredData && selectedOperation && postLanguage &&
                 <>
 
                     { selectedOperation === 'POST' && <PostActivities language={ postLanguage } /> }
-
 
                 </>
             }

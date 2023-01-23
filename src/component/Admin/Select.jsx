@@ -25,7 +25,7 @@ const Select = ( { setSelectedOperation, setPostLanguage, dataLanguage, selected
                 </select>
             </Col>
 
-            <Col lg={ 3 } >
+            <Col lg={ 3 } className="pe-4" >
                 { dataLanguage &&
                     <>
                         <label htmlFor="language" className='labels'>Vælg for hvilket sprog du vil tilgå dataen</label>

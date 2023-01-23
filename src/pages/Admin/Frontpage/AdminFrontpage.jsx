@@ -45,7 +45,7 @@ const AdminFrontpage = () => {
             { errorLanguage && <div>Error..</div> }
 
             <Row>
-                <Col lg={ { span: 6 } }  >
+                <Col lg={ { span: 6, offset: 1 } }  >
                     <AdminTitle pageName="billeder" />
                 </Col>
             </Row>
@@ -53,12 +53,17 @@ const AdminFrontpage = () => {
 
 
             {/* Choose fetch method and language */ }
-            <Select
-                setSelectedOperation={ setSelectedOperation }
-                setPostLanguage={ setPostLanguage }
-                dataLanguage={ dataLanguage }
-                selectedOperation={ selectedOperation }
-            />
+            <Row>
+                <Col lg={ { span: 12, offset: 1 } }>
+                    <Select
+                        setSelectedOperation={ setSelectedOperation }
+                        setPostLanguage={ setPostLanguage }
+                        dataLanguage={ dataLanguage }
+                        selectedOperation={ selectedOperation }
+                    />
+                </Col>
+            </Row>
+
 
             {
                 selectedOperation && postLanguage &&
