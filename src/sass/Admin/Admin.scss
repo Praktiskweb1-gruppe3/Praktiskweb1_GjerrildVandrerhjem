@@ -94,7 +94,7 @@ input[type="file"]::file-selector-button {
     }
 }
 
-.btn_post {
+.btn_post, .btn_getImages {
     display: block;
     width: 150px;
     height: 35px;
@@ -125,6 +125,11 @@ input[type="file"]::file-selector-button {
             transform: scale(1);
         }
     }
+}
+
+.btn_getImages{
+    margin-inline: 0;
+    margin-block: 1rem;
 }
 
 .logoutSection {

@@ -11,6 +11,7 @@ import PostActivities from './PostActivities';
 
 import { useGetData } from '../../../hooks/useGetData';
 import Select from '../../../component/Admin/Select';
+import AdminPatchActicity from './AdminPatchActicity';
 
 const AdminActivities = () => {
 
@@ -66,6 +67,8 @@ const AdminActivities = () => {
                 <>
 
                     { selectedOperation === 'POST' && <PostActivities language={ postLanguage } /> }
+
+                    { selectedOperation === 'PATCH' && <AdminPatchActicity language={ postLanguage } /> }
 
                 </>
             }
