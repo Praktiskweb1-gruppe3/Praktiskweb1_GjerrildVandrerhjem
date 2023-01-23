@@ -16,8 +16,6 @@ const AdminNavbar = () => {
 
     const [ isMenuOpen, setIsMenuOpen ] = useState( false );
 
-    const [ scrolledYPos, setScrolledYPos ] = useState( 0 );
-
     const { filteredData, error, loading } = UseTranslator( "AdminNavigation" );
 
     const headerRef = useRef();
@@ -26,10 +24,6 @@ const AdminNavbar = () => {
     const getUser = useCurrentUser();
 
     const isLoggedIn = useIsLoggedIn();
-
-    const imgPathMobile = './assets/images/mobile/';
-    const imgPathTablet = './assets/images/tablet/';
-    const imgPathDesktop = './assets/images/desktop/';
 
 
     const handleClick = () => setIsMenuOpen( !isMenuOpen );
@@ -74,8 +68,14 @@ const AdminNavbar = () => {
     }, [] );
 
     return (
+        
 
         <header className="container-fluid px-0 adminHeader " ref={ headerRef }>
+
+            {error && <div>Error</div>}
+            {loading && <div>Loading...</div>}
+
+
 
             {
                 filteredData &&

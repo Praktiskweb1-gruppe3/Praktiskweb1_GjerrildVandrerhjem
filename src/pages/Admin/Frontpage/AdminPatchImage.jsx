@@ -31,21 +31,7 @@ const AdminPatchImage = ( { language } ) => {
 
     const [ message, setMessage ] = useState( {} );
 
-    const loadImages = async () => {
-        try {
-
-            const res = await axios.get( '/.netlify/functions/getImages' );
-
-            const data = await res.data;
-
-            setImages( data.filter( img => img.ISO[ 0 ] === language.ISO ) );
-
-
-        }
-        catch ( error ) {
-            console.error( error );
-        }
-    }
+    
 
     const submitHandler = async ( e ) => {
         e.preventDefault();
