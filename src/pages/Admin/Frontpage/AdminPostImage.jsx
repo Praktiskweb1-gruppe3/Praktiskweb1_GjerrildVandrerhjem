@@ -166,8 +166,6 @@ const AdminPostImage = ( { language } ) => {
                                 desktopImageUrl &&
                                 <Col lg={ 4 }>
                                     <img src={ desktopImageUrl } alt='Chosen image desktop' className='chosenImage' />
-
-
                                 </Col>
                             }
 
@@ -175,8 +173,6 @@ const AdminPostImage = ( { language } ) => {
                                 tabletImageUrl &&
                                 <Col lg={ 4 }>
                                     <img src={ tabletImageUrl } alt='Chosen image tablet' className='chosenImage' />
-
-
                                 </Col>
                             }
 
@@ -184,8 +180,6 @@ const AdminPostImage = ( { language } ) => {
                                 mobileImageUrl &&
                                 <Col lg={ 4 }>
                                     <img src={ mobileImageUrl } alt='Chosen image mobile' className='chosenImage' />
-
-
                                 </Col>
                             }
                         </Row>

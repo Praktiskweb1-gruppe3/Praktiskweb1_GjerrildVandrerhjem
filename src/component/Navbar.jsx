@@ -108,17 +108,17 @@ const Navbar = () => {
 
                         <Link to="/" className='logoContainer'>
                             <picture>
-                                <source media='(max-width: 575px)' srcSet={ cloudinaryImagePath + filteredData[ 0 ].fields.ImgId_Mobile } />
+                                 <source media='(max-width: 575px)' srcSet={ cloudinaryImagePath + filteredData[ 0 ].fields.ImgId_Mobile[0] } />
 
-                                <source media='(max-width: 991px)' srcSet={ cloudinaryImagePath + filteredData[ 0 ].fields.ImgId_Tablet} />
+                                <source media='(max-width: 991px)' srcSet={ cloudinaryImagePath + filteredData[ 0 ].fields.ImgId_Tablet[0]} />
 
-                                <source media='(min-width: 992px)' srcSet={ cloudinaryImagePath + filteredData[ 0 ].fields.ImgId_Desktop } />
+                                <source media='(min-width: 992px)' srcSet={ cloudinaryImagePath + filteredData[ 0 ].fields.ImgId_Desktop[0] } /> 
 
-                                <Image
+                                 <Image
                                     className='navbar__logo'
                                     cloudName={import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}
-                                    public_id={ filteredData[ 0 ].fields.ImgId_Desktop }
-                                    alt={ filteredData[ 0 ].fields.Image_Description } />
+                                    public_id={ filteredData[ 0 ].fields.ImgId_Desktop[0] }
+                                    alt={ filteredData[ 0 ].fields.Image_Description } /> 
                             </picture>
 
                         </Link>

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import 'leaflet/dist/leaflet.css';
 import '../sass/Aktiviteter.scss';
 import '../sass/Leaflet.scss';
@@ -6,29 +6,28 @@ import '../sass/Leaflet.scss';
 import UseTranslator from '../hooks/UseTranslator';
 
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 // import { cleanUpMap, initMapAllActivites } from '../leaflet';
-import { MapContainer, TileLayer, Popup, Marker } from 'react-leaflet'
-
-
+import { MapContainer, TileLayer, Popup, Marker } from 'react-leaflet';
 import { useNavigate } from "react-router-dom";
 
+import { ImagePathContext } from '../Context/ImagePathContext';
+import { Image } from 'cloudinary-react';
+
 const Aktiviteter = () => {
-  
+
   const navigate = useNavigate()
-  const { filteredData, error, loading } = UseTranslator('Activities', true)
+  const { filteredData, error, loading } = UseTranslator( 'Activities', true )
 
-  const headToSelected = (selectedData) => navigate('/activitySelected', { state: { data:selectedData } } )
-
-  const largeImgPath = './assets/images/desktop/';
-  const mediumImgPath = './assets/images/tablet/';
-  const smallImgPath = './assets/images/mobile/';
-
+  
   const [ coordinates, setCoordinates ] = useState( [] )
   
+  const { cloudinaryImagePath } = useContext( ImagePathContext );
+  
+  const headToSelected = ( selectedData ) => navigate( '/activitySelected', { state: { data: selectedData } } )
 
 
   useEffect( () => {
@@ -57,6 +56,9 @@ const Aktiviteter = () => {
   return (
     <Container fluid className='aktiviteter'>
 
+      { error && <div>Error</div> }
+      { loading && <div>Loading</div> }
+
       {
         filteredData && <>
           <Row>
@@ -70,18 +72,24 @@ const Aktiviteter = () => {
 
           <Row>
             {
-              filteredData.slice(2,filteredData.length - 1).map(a => (
+              filteredData.slice( 2, filteredData.length - 1 ).map( a => (
 
                 <Col key={ a.id } md={ 4 }>
                   <figure className='aktiviteter_image'>
                     <picture>
-                      <source media="(max-width: 575px)" srcSet={ smallImgPath + a.fields.Image_Name[ 0 ] } />
+                      <source media="(max-width: 575px)" srcSet={cloudinaryImagePath + a.fields.ImgId_Mobile[ 0 ] } />
 
-                      <source media="(max-width: 991px)" srcSet={ mediumImgPath + a.fields.Image_Name[ 0 ] } />
+                      <source media="(max-width: 991px)" srcSet={cloudinaryImagePath + a.fields.ImgId_Tablet[ 0 ] } />
 
-                      <source media="(min-width: 992px)" srcSet={ largeImgPath + a.fields.Image_Name[ 0 ] } />
+                      <source media="(min-width: 992px)" srcSet={cloudinaryImagePath + a.fields.ImgId_Desktop[ 0 ] } />
 
-                      <img onClick={()=> headToSelected(a)} src={ mediumImgPath + a.fields.Image_Name[0] } alt={ a.fields.Image_Description } className='image_activity' />
+                      <Image
+                        onClick={ () => headToSelected( a ) }
+                        public_id={a.fields.ImgId_Desktop[ 0 ] }
+                        cloudName={import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}
+                        alt={ a.fields.Image_Description } className='image_activity'
+                      />
+
                     </picture>
                     <figcaption>{ a.fields.Image_Text[ 0 ] }</figcaption>
                   </figure>
@@ -92,7 +100,7 @@ const Aktiviteter = () => {
           </Row>
           <Row>
             <Col>
-              <h1 className='kort-title'>{filteredData[filteredData.length - 1 ].fields.Name}</h1>
+              <h1 className='kort-title'>{ filteredData[ filteredData.length - 1 ].fields.Name }</h1>
             </Col>
           </Row>
 
