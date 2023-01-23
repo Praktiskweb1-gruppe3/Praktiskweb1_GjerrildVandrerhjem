@@ -15,7 +15,12 @@ Cloudinary.v2.config( {
 
 export const handler = async ( event ) => {
 
-    const { desktop_file, tablet_file, mobile_file, description, imageText, language } = JSON.parse( event.body );    
+    const { desktop_file, tablet_file, mobile_file, description, imageText, language } = JSON.parse( event.body );
+
+    console.log( 'desktop_file: ' + desktop_file )
+    console.log( 'description: ' + description )
+    console.log( 'imageText: ' + imageText )
+    console.log( 'language: ' + language )
 
     try {
 
@@ -37,14 +42,13 @@ export const handler = async ( event ) => {
             folder: 'GjerrildVandrerHjem/mobile'
         } );
 
-        console.log(desktop_public_id);
 
         const record = await table.create( {
             ImgId_Desktop: desktop_public_id,
-            ImgId_Tablet: tablet_public_id, 
+            ImgId_Tablet: tablet_public_id,
             ImgId_Mobile: mobile_public_id,
             Description: description,
-            Language: [language],
+            Language: [ language ],
             Image_Text: imageText
         } )
 
@@ -52,8 +56,12 @@ export const handler = async ( event ) => {
             statusCode: 200,
             body: JSON.stringify( record ),
         }
-    } catch ( error ) {
+    }
+    catch ( error ) {
+        
+        console.log(error)
         return {
+
             statusCode: 500,
             body: JSON.stringify( { error: 'Failed to upload image' } )
         }

@@ -64,12 +64,12 @@ const AdminPatchImage = ( { language } ) => {
                 "fields": {
                     "Description": updatedImageAlt,
                     "Language": [
-                      language.value
+                        language.value
                     ]
-                  }
                 }
+            }
 
-            
+
 
             patchData( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/Images/' + id, payload, {
                 'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLE_API_KEY,
@@ -111,7 +111,7 @@ const AdminPatchImage = ( { language } ) => {
         }
 
         return () => {
-            clearTimeout(timeOut);
+            clearTimeout( timeOut );
         }
 
     }, [ message ] )
@@ -137,34 +137,39 @@ const AdminPatchImage = ( { language } ) => {
 
             <Row>
                 <Col lg={ 12 } className="mb-5">
-                    <p className='mainText'>Vælg et billede at redigere</p>
                     <Row>
-                        { images && updatedImageDir.includes( 'desktop' ) && images.map( img => (
-                            <Col lg={ 2 } className="mb-3" key={ img.id }>
-                                <figure className='imagesFigure'>
-                                    <Image
-                                        cloudName={ import.meta.env.VITE_CLOUDINARY_CLOUD_NAME }
-                                        public_id={ img.ImgId_Desktop }
-                                        alt={ img.Description }
-                                        data-name={ img.Name }
-                                    />
+                        { images &&
 
-                                    <input
-                                        type="radio"
-                                        className='radio'
-                                        name='images'
-                                        onChange={ ( e ) => {
-                                            setId( img.id );
-                                            setSelectedImage( {
-                                                description: img.Description,
-                                                imageText: img.hasOwnProperty( 'Image_Text' ) ? img.Image_Text : ''
-                                            } )
-                                        } }
-                                    />
-                                </figure>
-                            </Col>
+                            <>
+                                <p className='mainText'>Vælg et billede at redigere</p>
+                                { updatedImageDir.includes( 'desktop' ) && images.map( img => (
+                                    <Col lg={ 2 } className="mb-3" key={ img.id }>
+                                        <figure className='imagesFigure'>
+                                            <Image
+                                                cloudName={ import.meta.env.VITE_CLOUDINARY_CLOUD_NAME }
+                                                public_id={ img.ImgId_Desktop }
+                                                alt={ img.Description }
+                                                data-name={ img.Name }
+                                            />
 
-                        ) ) }
+                                            <input
+                                                type="radio"
+                                                className='radio'
+                                                name='images'
+                                                onChange={ ( e ) => {
+                                                    setId( img.id );
+                                                    setSelectedImage( {
+                                                        description: img.Description,
+                                                        imageText: img.hasOwnProperty( 'Image_Text' ) ? img.Image_Text : ''
+                                                    } )
+                                                } }
+                                            />
+                                        </figure>
+                                    </Col>
+
+                                ) ) }
+                            </>
+                        }
 
                         { images && updatedImageDir.includes( 'tablet' ) && images.map( img => (
                             <Col lg={ 2 } className="mb-3" key={ img.id }>

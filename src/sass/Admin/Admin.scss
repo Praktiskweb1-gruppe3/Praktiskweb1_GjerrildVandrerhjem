@@ -114,6 +114,17 @@ input[type="file"]::file-selector-button {
         background-color: $caribbean-green;
         transform: scale(1.1);
     }
+
+    &:disabled{
+
+        background-color: darken($col_error, 15);
+        cursor: not-allowed;
+
+        &:hover{
+            background-color: $col_error;
+            transform: scale(1);
+        }
+    }
 }
 
 .logoutSection {

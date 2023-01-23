@@ -19,8 +19,6 @@ const AdminPostImage = ( { language } ) => {
     const handleChangeImage = ( e, setImageUrl ) => {
         const file = e.target.files[ 0 ];
 
-        console.log(file);
-
         const reader = new FileReader();
         reader.readAsDataURL( file );
 
@@ -38,18 +36,19 @@ const AdminPostImage = ( { language } ) => {
 
         try {
 
-            const payload = {
+            const res = await fetch( '/.netlify/functions/uploadImages', {
+                method: "POST",
+                body: JSON.stringify( {
+                    desktop_file: desktopImageUrl,
+                    tablet_file: tabletImageUrl,
+                    mobile_file: mobileImageUrl,
+                    description: imageAlt,
+                    imageText: imageText,
+                    language: language.value
+                } )
+            } )
 
-                desktop_file: desktopImageUrl,
-                tablet_file: tabletImageUrl,
-                mobile_file: mobileImageUrl,
-                description: imageAlt,
-                imageText: imageText,
-                language: language.value
-            }
-
-            axios.post( '/.netlify/functions/uploadImages', payload )
-                .then( response => response.data );
+            const data = await res.json();
 
             setDesktopImageUrl( '' );
             setTabletImageUrl( '' );
@@ -90,7 +89,7 @@ const AdminPostImage = ( { language } ) => {
         }
 
         return () => {
-            clearTimeout(timeOut);
+            clearTimeout( timeOut );
         }
 
     }, [ message ] )
@@ -219,7 +218,7 @@ const AdminPostImage = ( { language } ) => {
 
                         <Row>
                             <Col lg={ { span: 4, offset: 4 } }>
-                                <button type="submit" className='btn_post'>Upload billeder</button>
+                                <button type="submit" className='btn_post' disabled={!desktopImageUrl || !tabletImageUrl || !mobileImageUrl}>Upload billeder</button>
                             </Col>
                         </Row>
 

@@ -14,6 +14,7 @@ import Select from '../../../component/Admin/Select';
 
 import AdminPostImage from './AdminPostImage';
 import AdminPatchImage from './AdminPatchImage';
+import AdminDeleteImage from './AdminDeleteImage';
 
 const AdminFrontpage = () => {
 
@@ -21,32 +22,8 @@ const AdminFrontpage = () => {
 
     const [ selectedOperation, setSelectedOperation ] = useState();
 
-   
-
 
     const { error: errorLanguage, loading: loadingLanguage, data: dataLanguage, getData: getDataLanguage } = useGetData();
-
-    // Use when ever using
-    // const [ images, setImages ] = useState( [] )
-    // const loadImages = async () => {
-    //     try {
-
-    //         const res = await fetch( '/.netlify/functions/getImages' )
-
-    //         const data = await res.json();
-    //         setImages( data.filter( img => img.ISO[ 0 ] === language ) );
-
-    //         console.log( images );
-
-    //     }
-    //     catch ( error ) {
-    //         console.error( error );
-    //     }
-    // }
-
-    // call in useEffect loadImages();
-
-
 
     useEffect( () => {
 
@@ -93,6 +70,12 @@ const AdminFrontpage = () => {
                     }
                     {
                         selectedOperation === 'PATCH' && <AdminPatchImage
+                            language={ postLanguage }
+                        />
+                    }
+
+                    {
+                        selectedOperation === 'DELETE' && <AdminDeleteImage
                             language={ postLanguage }
                         />
                     }
