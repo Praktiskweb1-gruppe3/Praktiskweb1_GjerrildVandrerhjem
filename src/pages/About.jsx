@@ -1,5 +1,5 @@
 import '../sass/About.scss';
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -10,13 +10,16 @@ import parse from 'html-react-parser';
 import UseTranslator from '../hooks/UseTranslator';
 
 
+import { ImagePathContext } from '../Context/ImagePathContext';
+import { Image } from 'cloudinary-react';
+
+
 const About = () => {
 
   const { filteredData, error, loading } = UseTranslator( 'About', true );
 
-  const bigImgPath = './assets/images/desktop/';
-  const mediumImgPath = './assets/images/tablet/';
-  const mobileImgPath = './assets/images/mobile/';
+  const { cloudinaryImagePath } = useContext( ImagePathContext );
+
 
   useEffect( () => {
 
@@ -54,20 +57,27 @@ const About = () => {
                     xs={ 12 }
                     md={ { span: 6, order: i === 0 ? 2 : 1 } }
                   >
+
                     <figure className={ `about-card__image ${ 'about-card__image' + ( i + 1 ) }` }>
                       <picture>
-                        <source media='(max-width: 420px)' srcSet={ mobileImgPath + a.fields.Image_Name[ 0 ] } />
-                        <source media='(max-width: 767px)' srcSet={ mediumImgPath + a.fields.Image_Name[ 0 ] } />
-                        <source media='(min-width: 768px)' srcSet={ bigImgPath + a.fields.Image_Name[ 0 ] } />
 
-                        <img src={ bigImgPath + a.fields.Image_Name[ 0 ] } alt={ bigImgPath + a.fields.Image_Description } />
+                        <source media='(max-width: 420px)' srcSet={ cloudinaryImagePath + a.fields.ImgId_Mobile[ 0 ] } />
+
+                        <source media='(max-width: 767px)' srcSet={ cloudinaryImagePath + a.fields.ImgId_Tablet[ 0 ] } />
+
+                        <source media='(min-width: 768px)' srcSet={ cloudinaryImagePath + a.fields.ImgId_Desktop[ 0 ] } />
+
+                        <Image
+                          cloudName={ import.meta.env.VITE_CLOUDINARY_CLOUD_NAME }
+                          public_id={a.fields.ImgId_Desktop[ 0 ]}
+                          alt={ a.fields.Image_Description } />
 
                       </picture>
                     </figure>
                   </Col>
 
                   <Col
-                    xs={12}
+                    xs={ 12 }
                     md={ { span: 6, order: i === 0 ? 1 : 2 } }>
                     <article
                       className={ `about-card__text ${ 'about-card__text' + ( i + 1 ) }` }>

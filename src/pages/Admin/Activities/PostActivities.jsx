@@ -22,8 +22,6 @@ const PostActivities = ( { language } ) => {
 
     const { error, loading, data, postData } = usePostData();
 
-    const {error: errorTest, loading: loadingTest, data: dataTest, getData} = useGetData();
-
     const [ message, setMessage ] = useState( {} );
 
     const GetLatLng = () => {
@@ -46,8 +44,6 @@ const PostActivities = ( { language } ) => {
 
         )
     }
-
-
 
     const handleSubmit = ( e ) => {
 

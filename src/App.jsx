@@ -7,6 +7,8 @@ import { useState } from 'react';
 import Navbar from './component/Navbar';
 
 import { Context } from './Context/Context';
+import { ImagePathContext } from './Context/ImagePathContext';
+
 import Services from './pages/Services';
 import Aktiviteter from './pages/Aktiviteter';
 import AktiviteterSelected from './pages/AktiviteterSelected';
@@ -19,11 +21,14 @@ import Kontakt from './pages/Kontakt';
 // Admin
 import Index from './pages/Admin/Index';
 import AdminActivities from './pages/Admin/Activities/AdminActivities';
+import AdminFrontpage from './pages/Admin/Frontpage/AdminFrontpage';
 
 
 function App () {
 
   const [ language, setLanguage ] = useState( 'da' );
+
+  const [ cloudinaryImagePath ] = useState( 'https://res.cloudinary.com/du8bx3kux/image/upload/v1/' );
 
 
 
@@ -33,53 +38,61 @@ function App () {
 
       <Context.Provider value={ { language, setLanguage } }>
 
-        <Navbar />
-        <Routes>
-
-          {/* Forside */ }
-          <Route index element={ <div>Test</div> } />
-
-          {/* Værelser */ }
-          {/* <Route path="/rooms" element={} /> */ }
-
-          {/* Events */ }
-          {/* <Route path="/events" element={} /> */ }
-
-          {/* Aktiviteter */ }
-          <Route path="/activities" element={ <Aktiviteter /> } />
-
-          {/* Vi tilbyder */ }
-          <Route path="/services" element={ <Services /> } />
+        <ImagePathContext.Provider value={ { cloudinaryImagePath } }>
 
 
-        {/* Aktiviteter */} 
-        <Route path="/activities" element={<Aktiviteter />} />
-        <Route path="/activitySelected" element={<AktiviteterSelected />} />
+          <Navbar />
+          <Routes>
+
+            {/* Forside */ }
+            <Route index element={ <div>Test</div> } />
+
+            {/* Værelser */ }
+            {/* <Route path="/rooms" element={} /> */ }
+
+            {/* Events */ }
+            {/* <Route path="/events" element={} /> */ }
+
+            {/* Aktiviteter */ }
+            <Route path="/activities" element={ <Aktiviteter /> } />
+
+            {/* Vi tilbyder */ }
+            <Route path="/services" element={ <Services /> } />
 
 
-          {/* Kontakt */ }
-          <Route path="/contact" element={ <Kontakt /> } />
+            {/* Aktiviteter */ }
+            <Route path="/activities" element={ <Aktiviteter /> } />
+            <Route path="/activitySelected" element={ <AktiviteterSelected /> } />
 
 
-          {/* Om os */ }
-          <Route path="/about" element={ <About /> } />
+            {/* Kontakt */ }
+            <Route path="/contact" element={ <Kontakt /> } />
 
 
-          {/* Admin */ }
-          <Route path="admin" element={ <Index  /> }> 
-
-            {/* <Route index element={} /> */}
-            <Route path="activities" element={<AdminActivities />} />
-          
-          
-          </Route>
+            {/* Om os */ }
+            <Route path="/about" element={ <About /> } />
 
           {/* No Match */}
           <Route path="*" element={<NoMatch/>}/> 
 
-        </Routes>
+            {/* Admin */ }
+            <Route path="admin" element={ <Index /> }>
 
-        <Footer  />
+              <Route index element={ <AdminFrontpage /> } />
+
+              {/* <Route index element={} /> */ }
+              <Route path="activities" element={ <AdminActivities /> } />
+
+
+            </Route>
+
+
+          </Routes>
+
+          <Footer />
+
+        </ImagePathContext.Provider>
+
 
       </Context.Provider>
     </Router>

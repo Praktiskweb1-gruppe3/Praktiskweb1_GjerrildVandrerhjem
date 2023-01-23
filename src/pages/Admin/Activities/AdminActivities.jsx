@@ -1,16 +1,16 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+
+
 import UseTranslator from '../../../hooks/UseTranslator';
 import AdminTitle from '../../../component/Admin/AdminTitle';
 import PostActivities from './PostActivities';
 
-
 import { useGetData } from '../../../hooks/useGetData';
-
-import { Context } from '../../../Context/Context';
+import Select from '../../../component/Admin/Select';
 
 const AdminActivities = () => {
 
@@ -19,7 +19,7 @@ const AdminActivities = () => {
 
     const [ selectedOperation, setSelectedOperation ] = useState();
 
-    const [ activitiesLanguage, setActivitiesLanguage ] = useState();
+    const [ postLanguage, setPostLanguage ] = useState();
 
     const { error: errorLanguage, loading: loadingLanguage, data: dataLanguage, getData: getDataLanguage } = useGetData();
 
@@ -39,58 +39,27 @@ const AdminActivities = () => {
             { loading && <div>Loading...</div> }
             { error && <div>Der skete en fejl.</div> }
 
-            <Col lg={{span: 6, offset: 1}}>
-                <AdminTitle pageName="aktiviteter" />
-
-            </Col>
-
-
-            <Row className='mb-5'>
-                <Col lg={ { span: 3, offset: 1 } } className="px-5">
-                    <label htmlFor="selectOperation" className='labels'>Vælg om du vil opret, rette eller slette</label>
-                    <select
-                        onChange={ ( e ) => setSelectedOperation( e.target.value ) }
-                        defaultValue="Vælg"
-                        id="selectOperation"
-                        className='select'
-                    >
-
-                        <option disabled>Vælg</option>
-                        <option value="POST">Opret</option>
-                        <option value="PATCH">Ret</option>
-                        <option value="DELETE">Slet</option>
-                    </select>
+            <Row>
+                <Col lg={ { span: 6 } } className="px-5">
+                    <AdminTitle pageName="aktiviteter" />
                 </Col>
-
-                <Col lg={ 3 } className="px-5">
-                    { dataLanguage &&
-                        <>
-                            <label htmlFor="language" className='labels'>Vælg hvilken sprog aktiviteten skal oprettes</label>
-                            <select
-                                id="language"
-                                className="select"
-                                onChange={ e => setActivitiesLanguage( e.target.value ) }
-                                defaultValue="Vælg et sprog"
-                            >
-                                <option disabled>Vælg et sprog</option>
-                                {
-                                    dataLanguage.records.map( lang => (
-
-                                        <option key={ lang.id } value={ lang.id } >{ lang.fields.Name }</option>
-                                    ) )
-                                }
-                            </select>
-
-                        </> }
-
-                </Col>
-
             </Row>
 
-            { filteredData && selectedOperation && activitiesLanguage &&
+
+
+            {/* Choose fetch method and language */ }
+            <Select
+                setSelectedOperation={ setSelectedOperation }
+                setPostLanguage={ setPostLanguage }
+                dataLanguage={ dataLanguage }
+                selectedOperation={selectedOperation}
+            />
+
+
+            { filteredData && selectedOperation && postLanguage &&
                 <>
 
-                    { selectedOperation === 'POST' && <PostActivities filteredData={ filteredData } language={ activitiesLanguage } /> }
+                    { selectedOperation === 'POST' && <PostActivities language={ postLanguage } /> }
 
 
                 </>

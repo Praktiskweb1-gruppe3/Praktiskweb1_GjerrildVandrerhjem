@@ -11,6 +11,10 @@ import ChangeLanguage from './ChangeLanguage';
 
 import UseTranslator from '../hooks/UseTranslator';
 
+import { useContext } from 'react';
+import { ImagePathContext } from '../Context/ImagePathContext';
+import { Image } from 'cloudinary-react';
+
 
 
 const Navbar = () => {
@@ -23,9 +27,7 @@ const Navbar = () => {
 
     const { filteredData, error, loading } = UseTranslator( "Navigation" );
 
-    const imgPathMobile = '/assets/images/mobile/';
-    const imgPathTablet = '/assets/images/tablet/';
-    const imgPathDesktop = '/assets/images/desktop/';
+    const { cloudinaryImagePath } = useContext( ImagePathContext );
 
 
     const handleClick = () => setIsMenuOpen( !isMenuOpen );
@@ -106,16 +108,17 @@ const Navbar = () => {
 
                         <Link to="/" className='logoContainer'>
                             <picture>
-                                <source media='(max-width: 575px)' srcSet={ imgPathMobile + filteredData[ 0 ].fields.Image_Name } />
+                                 <source media='(max-width: 575px)' srcSet={ cloudinaryImagePath + filteredData[ 0 ].fields.ImgId_Mobile[0] } />
 
-                                <source media='(max-width: 991px)' srcSet={ imgPathTablet + filteredData[ 0 ].fields.Image_Name } />
+                                <source media='(max-width: 991px)' srcSet={ cloudinaryImagePath + filteredData[ 0 ].fields.ImgId_Tablet[0]} />
 
-                                <source media='(min-width: 992px)' srcSet={ imgPathDesktop + filteredData[ 0 ].fields.Image_Name } />
+                                <source media='(min-width: 992px)' srcSet={ cloudinaryImagePath + filteredData[ 0 ].fields.ImgId_Desktop[0] } /> 
 
-                                <img
+                                 <Image
                                     className='navbar__logo'
-                                    src={ imgPathDesktop + filteredData[ 0 ].fields.Image_Name }
-                                    alt={ filteredData[ 0 ].fields.Image_Description } />
+                                    cloudName={import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}
+                                    public_id={ filteredData[ 0 ].fields.ImgId_Desktop[0] }
+                                    alt={ filteredData[ 0 ].fields.Image_Description } /> 
                             </picture>
 
                         </Link>

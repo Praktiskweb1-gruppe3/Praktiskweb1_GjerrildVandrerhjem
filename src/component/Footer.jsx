@@ -12,15 +12,19 @@ import { faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 import UseTranslator from '../hooks/UseTranslator';
 
+import { Image } from 'cloudinary-react';
+
+import { useContext } from 'react';
+
+import { ImagePathContext } from '../Context/ImagePathContext';
+
 const Footer = () => {
 
     const { filteredData, error, loading } = UseTranslator( "Footer" );
 
-    const imgPathDesktop = './assets/images/desktop/';
-    const imgPathTablet = './assets/images/tablet/';
-    const imgPathMobile = './assets/images/mobile/';
+    const { cloudinaryImagePath } = useContext( ImagePathContext )
 
-    
+
 
     return (
         <Container fluid className='footer'>
@@ -33,15 +37,16 @@ const Footer = () => {
 
                             <NavLink to="/" className='logoContainer'>
                                 <picture>
-                                    <source media='(max-width: 575px)' srcSet={ imgPathMobile + filteredData[ 0 ].fields.Image_Name } />
+                                    <source media='(max-width: 575px)' srcSet={ cloudinaryImagePath + filteredData[ 0 ].fields.ImgId_Mobile[ 0 ] } />
 
-                                    <source media='(max-width: 991px)' srcSet={ imgPathTablet + filteredData[ 0 ].fields.Image_Name } />
+                                    <source media='(max-width: 991px)' srcSet={ cloudinaryImagePath + filteredData[ 0 ].fields.ImgId_Tablet[ 0 ] } />
 
-                                    <source media='(min-width: 992px)' srcSet={ imgPathDesktop + filteredData[ 0 ].fields.Image_Name } />
+                                    <source media='(min-width: 992px)' srcSet={ cloudinaryImagePath + filteredData[ 0 ].fields.ImgId_Desktop[ 0 ] } />
 
-                                    <img
+                                    <Image
+                                        cloudName={ import.meta.env.VITE_CLOUDINARY_CLOUD_NAME }
+                                        public_id={ filteredData[ 0 ].fields.ImgId_Desktop[ 0 ] }
                                         className='footer_logo'
-                                        src={ imgPathDesktop + filteredData[ 0 ].fields.Image_Name }
                                         alt={ filteredData[ 0 ].fields.Image_Description } />
                                 </picture>
 
