@@ -1,1 +1,114 @@
-@import './variables'
+@import './variables';
+
+.room {
+    padding-top: 5rem;
+    background-color: $col_background;
+}
+
+.room_reservation {
+    width: 100%;
+    height: auto;
+    background-color: $col_background;
+    border: 1px solid $col_border;
+    border-radius: .5rem;
+    margin: 2rem 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+}
+
+.room_deal {
+    background-color: $col_background2;
+    border: 1px solid black;
+    border-radius: .5rem;
+    padding: 2.5rem;
+}
+
+.room_price {
+    text-align: right;
+}
+
+.room_about {
+    padding-top: 2rem;
+    background-color: $col_background2;
+
+    // .hr_about {
+    //     width: auto;
+    //     border: 2px solid grey;
+    //     margin: 2rem;
+    // }
+
+    .room_about-title {
+        text-align: center;
+        font-style: 2.5rem;
+    }
+
+    .room_aboutText {
+        padding-top: 1.5rem;
+    }
+}
+
+.room_aboutIconText{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 1rem;
+}
+
+.room-icon{
+    font-size: 1.5rem;
+}
+
+.room-slider {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    border-radius: .4rem;
+    background-color: cornflowerblue;
+}
+
+.custom-formGroup {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.input_room {
+    display: inline-block;
+    width: 100%;
+    height: 35px;
+    background-color: rgb(235, 235, 235);
+    border: $col_topnav_border 1px solid;
+    border-radius: .4rem;
+    font-family: $font_text;
+    font-size: 1.6rem;
+    padding: 1rem;
+    color: $col_text;
+
+    &::placeholder {
+        font-family: $font_text;
+        font-size: 1.6rem;
+    }
+}
+
+.send_submit-room {
+    display: inline-block;
+    width: 150px;
+    height: 35px;
+    background-color: $col_nav_highlighted;
+    color: $col_nav_overlay;
+    font-size: 1.5rem;
+    border-radius: .4rem;
+    border: $col_topnav_border 1px solid;
+    appearance: none;
+    cursor: pointer;
+    transition: scale 1s ease-in-out;
+    margin-block: 1rem;
+
+    &:hover {
+        background-color: $caribbean-green;
+        transform: scale(1.1);
+    }
+}

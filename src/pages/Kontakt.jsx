@@ -14,7 +14,6 @@ import parse from 'html-react-parser';
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
-
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';

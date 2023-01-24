@@ -10,6 +10,7 @@ import { Context } from './Context/Context';
 import Services from './pages/Services';
 import Aktiviteter from './pages/Aktiviteter';
 import About from './pages/About';
+import Rooms from './pages/Rooms';
 
 import Footer from './component/Footer';
 import Kontakt from './pages/Kontakt';
@@ -37,7 +38,7 @@ function App () {
           <Route index element={ <div>Test</div> } />
 
           {/* Værelser */ }
-          {/* <Route path="/rooms" element={} /> */ }
+           <Route path="/rooms" element={<Rooms/>} /> 
 
           {/* Events */ }
           {/* <Route path="/events" element={} /> */ }
