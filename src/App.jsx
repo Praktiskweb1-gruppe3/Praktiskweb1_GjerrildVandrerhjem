@@ -29,11 +29,12 @@ import Kontakt from './pages/Kontakt';
 import Index from './pages/Admin/Index';
 import AdminActivities from './pages/Admin/Activities/AdminActivities';
 import AdminFrontpage from './pages/Admin/Frontpage/AdminFrontpage';
+import AdminNews from './pages/Admin/News/AdminNews';
 
 
-function App() {
+function App () {
 
-  const [language, setLanguage] = useState('da');
+  const [ language, setLanguage ] = useState( 'da' );
 
   const [ cloudinaryImagePath ] = useState( 'https://res.cloudinary.com/du8bx3kux/image/upload/v1/' );
 
@@ -54,8 +55,8 @@ function App() {
             {/* Forside */ }
             <Route index element={ <div>Test</div> } />
 
-          {/* Værelser */ }
-           <Route path="/rooms" element={<Rooms/>} /> 
+            {/* Værelser */ }
+            <Route path="/rooms" element={ <Rooms /> } />
 
             {/* Events */ }
             {/* <Route path="/events" element={} /> */ }
@@ -65,15 +66,15 @@ function App() {
 
             {/* Vi tilbyder */ }
             <Route path="/services" element={ <Services /> } />
-          
-          {/* Nyheder */}
-          <Route path="/news" element={<News/>}/>
-          <Route path='/newsArchive' element={<NewsArchive/>}/>
+
+            {/* Nyheder */ }
+            <Route path="/news" element={ <News /> } />
+            <Route path='/newsArchive' element={ <NewsArchive /> } />
 
 
-              {/* Aktiviteter */ }
-              <Route path="/activities" element={ <Aktiviteter /> } />
-              <Route path="/activitySelected" element={ <AktiviteterSelected /> } />
+            {/* Aktiviteter */ }
+            <Route path="/activities" element={ <Aktiviteter /> } />
+            <Route path="/activitySelected" element={ <AktiviteterSelected /> } />
 
 
             {/* Kontakt */ }
@@ -83,8 +84,8 @@ function App() {
             {/* Om os */ }
             <Route path="/about" element={ <About /> } />
 
-          {/* No Match */}
-          <Route path="*" element={<NoMatch/>}/> 
+            {/* No Match */ }
+            <Route path="*" element={ <NoMatch /> } />
 
             {/* Admin */ }
             <Route path="admin" element={ <Index /> }>
@@ -93,6 +94,9 @@ function App() {
 
               {/* <Route index element={} /> */ }
               <Route path="activities" element={ <AdminActivities /> } />
+
+              {/* Nyheder */ }
+              <Route path="news" element={ <AdminNews /> } />
 
             </Route>
 

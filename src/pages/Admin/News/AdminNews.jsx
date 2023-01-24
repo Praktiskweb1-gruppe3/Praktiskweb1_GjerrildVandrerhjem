@@ -5,25 +5,23 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 import AdminTitle from '../../../component/Admin/AdminTitle';
-import PostActivities from './PostActivities';
-
 import Select from '../../../component/Admin/Select';
-import AdminPatchActicity from './AdminPatchActicity';
-import AdminDeleteActivity from './AdminDeleteActivity';
+import AdminPostNews from './AdminPostNews';
 
-const AdminActivities = () => {
+const AdminNews = () => {
 
     const [ selectedOperation, setSelectedOperation ] = useState();
 
-    // the language to post the data
-    const [ postLanguage, setPostLanguage ] = useState();  
+     // the language to post the data
+     const [ postLanguage, setPostLanguage ] = useState(); 
 
     return (
+
         <Container fluid="lg" className='adminActivities'>
 
             <Row>
                 <Col lg={ { span: 6, offset: 1 } } >
-                    <AdminTitle pageName="aktiviteter" />
+                    <AdminTitle pageName="nyheder" />
                 </Col>
             </Row>
 
@@ -40,21 +38,20 @@ const AdminActivities = () => {
                 </Col>
             </Row>
 
-            {   selectedOperation && postLanguage &&
+            { selectedOperation && postLanguage &&
                 <>
 
-                    { selectedOperation === 'POST' && <PostActivities postLanguage={ postLanguage } /> }
+                     { selectedOperation === 'POST' && <AdminPostNews postLanguage={ postLanguage } /> } 
 
-                    { selectedOperation === 'PATCH' && <AdminPatchActicity  postLanguage={ postLanguage } /> }
+                   {/* { selectedOperation === 'PATCH' && <AdminPatchActicity postLanguage={ postLanguage } /> }
 
-                    {selectedOperation === 'DELETE' && <AdminDeleteActivity />}
+                    { selectedOperation === 'DELETE' && <AdminDeleteActivity /> } */}
 
                 </>
             }
 
         </Container>
-
     )
 }
 
-export default AdminActivities;
+export default AdminNews

@@ -4,7 +4,6 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import { useGetData } from '../../../hooks/useGetData';
 import AdminTitle from '../../../component/Admin/AdminTitle';
 
 import Select from '../../../component/Admin/Select';
@@ -21,27 +20,8 @@ const AdminFrontpage = () => {
 
     const [ selectedOperation, setSelectedOperation ] = useState();
 
-
-    const { error: errorLanguage, loading: loadingLanguage, data: dataLanguage, getData: getDataLanguage } = useGetData();
-
-    useEffect( () => {
-
-
-        getDataLanguage( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/Language', {
-            'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLE_API_KEY
-        }, {
-            "sort[0][field]": "ISO"
-        } );
-
-
-    }, [] );
-
-
     return (
         <Container fluid="lg" className='adminFrontpage'>
-
-            { loadingLanguage && <div>Loading..</div> }
-            { errorLanguage && <div>Error..</div> }
 
             <Row>
                 <Col lg={ { span: 6, offset: 1 } }  >
@@ -58,7 +38,6 @@ const AdminFrontpage = () => {
                     <Select
                         setSelectedOperation={ setSelectedOperation }
                         setPostLanguage={ setPostLanguage }
-                        dataLanguage={ dataLanguage }
                         selectedOperation={ selectedOperation }
                     />
                 </Col>

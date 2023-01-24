@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from 'react-leaflet';
 
 import { usePatchData } from '../../../hooks/usePatchData';
 import UseTranslator from '../../../hooks/UseTranslator';
@@ -30,6 +30,7 @@ const AdminPatchActicity = ( { postLanguage } ) => {
     const [ message, setMessage ] = useState( {} );
 
     const { error: errorPatch, loading: loadingPatch, data: dataPatch, patchData } = usePatchData();
+
     const { error: errorActivity, loading: loadingActivity, data: dataActivity, getData } = useGetData();
 
     const { error, loading, filteredData } = UseTranslator( 'Activities', true );
@@ -42,14 +43,15 @@ const AdminPatchActicity = ( { postLanguage } ) => {
             }
         } )
 
-        return (
-            <>
-                {
-                    updatedPosition &&
-                    <Marker position={ updatedPosition } />
-                }
-            </>
-        )
+        return <Marker position={ updatedPosition } />
+    }
+
+    const ChangeView = () => {
+        const map = useMap();
+
+        map.setView(updatedPosition, map.getZoom(), {
+            animate: false
+        })
     }
 
     const loadImages = async () => {
@@ -171,6 +173,7 @@ const AdminPatchActicity = ( { postLanguage } ) => {
             setUpdatedFacts( '' )
             setUpdatedName( '' );
             setUpdatedImageId( '' )
+            setUpdatedPublicId('');
 
         }
     }, [filteredData] )
@@ -220,7 +223,7 @@ const AdminPatchActicity = ( { postLanguage } ) => {
                                     </Row>
 
                                     {
-                                        dataActivity && updatedId &&
+                                        dataActivity  &&
                                         <Row>
                                             <Col lg={ { span: 12 } } className="pe-5 mb-5">
                                                 <label className='labels' htmlFor='activities'>Klik for at se alle uploaded billeder</label>
@@ -257,7 +260,7 @@ const AdminPatchActicity = ( { postLanguage } ) => {
                                         <Col lg={ 12 }>
                                             <label className='labels' htmlFor='activitiesDesc'>Kort beskrivelse af aktiviteten</label>
                                             <ReactQuill
-                                                onChange={ setUpdatedDescription }
+                                                onChange={value =>  setUpdatedDescription(value) }
                                                 theme="snow"
                                                 className='quillInput'
                                                 value={ updatedDescription }
@@ -270,7 +273,7 @@ const AdminPatchActicity = ( { postLanguage } ) => {
                                         <Col lg={ 12 }>
                                             <label className='labels' htmlFor='activitiesDesc'>Korte fakta om aktiviteten</label>
                                             <ReactQuill
-                                                onChange={ setUpdatedFacts }
+                                                onChange={value =>  setUpdatedFacts(value) }
                                                 theme="snow"
                                                 className='quillInput'
                                                 value={ updatedFacts }
@@ -326,6 +329,7 @@ const AdminPatchActicity = ( { postLanguage } ) => {
                                             url='https://tile.openstreetmap.org/{z}/{x}/{y}.png' />
 
                                         <GetLatLng />
+                                        <ChangeView />
 
                                     </MapContainer>
                                 </>
@@ -333,7 +337,7 @@ const AdminPatchActicity = ( { postLanguage } ) => {
 
                             <Row className='mt-5'>
                                 {
-                                    dataActivity && filteredData &&
+                                    dataActivity && filteredData && updatedPublicId  && 
                                     <Col lg={ 12 }>
                                         <p className='mainText'>Det aktuelle billede</p>
                                         <Image
@@ -349,11 +353,11 @@ const AdminPatchActicity = ( { postLanguage } ) => {
 
                         {/* Billeder */ }
                         {
-                            images && showImages && filteredData &&
+                            images && showImages && 
                             <Row>
-                                <Col lg={ 12 } className="my-5">
+                                <Col lg={ 12 } className="mb-5">
                                     <Row className='mt-5'>
-                                        <p className='mainText'>Vælg et billede fra databasen (de tilsvarede billede til mobil og tablet bliv valgt automatisk)</p>
+                                        <p className='mainText'>Vælg et billede fra databasen (de tilsvarede billede til mobil og tablet bliver valgt automatisk)</p>
                                         { images.map( img => (
                                             <Col lg={ 2 } className="mb-3" key={ img.id }>
                                                 <figure className='imagesFigure'>

@@ -130,14 +130,28 @@ input[type="file"]::file-selector-button {
 }
 
 .btn_getImages {
-    margin-inline: 0;
-    margin-block: 1rem;   
+    margin-inline: auto;
+    margin-block: 1rem;
+
+    &.news {
+        margin-block: 2rem;
+    }
+}
+
+.btn_post {
+
+    background-color: $caribbean-green;
+
+    &.news {
+        margin-inline: auto;
+
+    }
 }
 
 .btn_delete {
     background-color: $col_error;
 
-    &:hover{
+    &:hover {
         background-color: $col_error;
     }
 }

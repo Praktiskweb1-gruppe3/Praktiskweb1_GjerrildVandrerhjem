@@ -1,16 +1,31 @@
-import React, {useContext} from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Context } from '../../Context/Context';
+import { useGetData } from '../../hooks/useGetData';
 
 
-const Select = ( { setSelectedOperation, setPostLanguage, dataLanguage } ) => {
+const Select = ( { setSelectedOperation, setPostLanguage } ) => {
 
-    const {setLanguage} = useContext(Context);
+    const { setLanguage } = useContext( Context );
+
+    const { error: errorLanguage, loading: loadingLanguage, data: dataLanguage, getData: getDataLanguage } = useGetData();
+
+    useEffect( () => {
+        getDataLanguage( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/Language', {
+            'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLE_API_KEY
+        }, {
+            "sort[0][field]": "ISO"
+
+        } );
+    }, [] );
 
     return (
         <Row className='mb-5'>
+
+            { loadingLanguage && <div>Loading...</div> }
+            { errorLanguage && <div>Der skete en fejl.</div> }
 
             <Col lg={ { span: 3 } }  >
                 <label htmlFor="selectOperation" className='labels'>Vælg om du vil opret, rette eller slette</label>
@@ -44,7 +59,7 @@ const Select = ( { setSelectedOperation, setPostLanguage, dataLanguage } ) => {
                                     value: e.target.value,
                                     ISO: iso
                                 } );
-                                setLanguage(iso);                                
+                                setLanguage( iso );
                             } }
                             defaultValue="Vælg et sprog"
                         >
