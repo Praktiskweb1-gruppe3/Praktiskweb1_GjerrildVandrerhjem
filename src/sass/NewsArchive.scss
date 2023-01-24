@@ -1,0 +1,31 @@
+@import "variables";
+
+
+.NewsArchiveContainer{
+    width: 100%;
+    height: auto;
+    margin-bottom: 3rem;
+}
+
+
+
+.BackBtn{
+    margin-top: .4rem;
+    color: $ghost-white;
+    background-color: $bright-yellow-crayola;
+    padding: 1rem;
+    border-radius: 4px;
+    border: none;
+    font-family: $font_text;
+    color: $col_image_text;
+    font-size: 2rem;
+
+    &:hover {
+        background-color: $caribbean-green;
+        transform: scale(1.1);
+        cursor: pointer;
+    } 
+}
+
+
+
