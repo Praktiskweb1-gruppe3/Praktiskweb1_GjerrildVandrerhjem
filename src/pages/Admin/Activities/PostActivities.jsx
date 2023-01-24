@@ -14,7 +14,7 @@ import { Image } from 'cloudinary-react';
 import axios from 'axios';
 
 
-const PostActivities = ( { language } ) => {
+const PostActivities = ( { postLanguage } ) => {
 
     const [ description, setDescription ] = useState();
     const [ facts, setFacts ] = useState( '' );
@@ -46,7 +46,6 @@ const PostActivities = ( { language } ) => {
                     </Marker>
                 }
             </>
-
         )
     }
 
@@ -57,7 +56,7 @@ const PostActivities = ( { language } ) => {
 
             const data = await res.data;
 
-            setImages( data.filter( img => img.ISO[ 0 ] === language.ISO ) );
+            setImages( data.filter( img => img.ISO[ 0 ] === postLanguage.ISO ) );
 
         }
         catch ( error ) {
@@ -78,7 +77,7 @@ const PostActivities = ( { language } ) => {
                     "Description": description,
                     "Facts": facts,
                     "Language": [
-                        language.value
+                        postLanguage.value
                     ],
                     "Latitude": position[ 0 ],
                     "Longitude": position[ 1 ],
@@ -132,15 +131,7 @@ const PostActivities = ( { language } ) => {
 
         loadImages();
 
-    }, [ language ] )
-
-    useEffect( () => {
-
-        return () => {
-            document.querySelector( '.languageSelect' ).selectedIndex = 0;
-        }
-
-    }, [] )
+    }, [ postLanguage ] )
 
     return (
 
@@ -149,7 +140,7 @@ const PostActivities = ( { language } ) => {
 
             { loading && <div>Loading</div> }
 
-            <form onSubmit={ handleSubmit }>
+            <form onSubmit={ handleSubmit } className="adminDeleteForm">
                 <Row>
 
                     <Col lg={ { span: 6, offset: 1 } }>
@@ -198,7 +189,7 @@ const PostActivities = ( { language } ) => {
 
                     </Col>
 
-                    {/* react leaflet */}
+                    {/* react leaflet */ }
                     <Col lg={ 4 }>
 
                         <p className='mainText'>Sæt en markør ved aktiviteten</p>
@@ -211,12 +202,12 @@ const PostActivities = ( { language } ) => {
                                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                                 url='https://tile.openstreetmap.org/{z}/{x}/{y}.png' />
 
-                            <GetLatLng />
+                             <GetLatLng /> 
 
                         </MapContainer>
                     </Col>
 
-                    {/* Billeder */}
+                    {/* Billeder */ }
                     <Row>
                         { images && <Col lg={ 12 } className="my-5">
                             <Row className='mt-5'>
@@ -244,21 +235,21 @@ const PostActivities = ( { language } ) => {
                             </Row>
                         </Col> }
                     </Row>
-                    
-                    {/* Submit knap */}
+
+                    {/* Submit knap */ }
                     <Row>
                         <Col lg={ { span: 4, offset: 4 } }>
                             <button
                                 type="submit"
                                 className='btn_post'
-                                disabled={ !id || !description || !name || !position || !language.value || !facts }
+                                disabled={ !id || !description || !name || !position || !postLanguage.value || !facts }
                             >
                                 Opret aktivitet
                             </button>
                         </Col>
                     </Row>
 
-                    {/* User message */}
+                    {/* User message */ }
                     { message &&
                         <Row>
                             <Col lg={ { span: 4, offset: 4 } }>

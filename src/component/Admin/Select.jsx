@@ -1,14 +1,17 @@
-import React from 'react';
+import React, {useContext} from 'react';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useEffect } from 'react';
+import { Context } from '../../Context/Context';
 
-const Select = ( { setSelectedOperation, setPostLanguage, dataLanguage, selectedOperation } ) => {
+
+const Select = ( { setSelectedOperation, setPostLanguage, dataLanguage } ) => {
+
+    const {setLanguage} = useContext(Context);
 
     return (
         <Row className='mb-5'>
-            
+
             <Col lg={ { span: 3 } }  >
                 <label htmlFor="selectOperation" className='labels'>Vælg om du vil opret, rette eller slette</label>
                 <select
@@ -33,15 +36,16 @@ const Select = ( { setSelectedOperation, setPostLanguage, dataLanguage, selected
                             id="language"
                             className="select languageSelect"
                             onChange={ e => {
-                                
-                                const option = e.target.querySelectorAll('option')[e.target.selectedIndex];
-                                const iso = option.getAttribute('data-index');
-                                
+
+                                const option = e.target.querySelectorAll( 'option' )[ e.target.selectedIndex ];
+                                const iso = option.getAttribute( 'data-index' );
+
                                 setPostLanguage( {
-                                value: e.target.value,
-                                ISO: iso
-                            } )
-                        } }
+                                    value: e.target.value,
+                                    ISO: iso
+                                } );
+                                setLanguage(iso);                                
+                            } }
                             defaultValue="Vælg et sprog"
                         >
                             <option disabled>Vælg et sprog</option>
@@ -51,7 +55,7 @@ const Select = ( { setSelectedOperation, setPostLanguage, dataLanguage, selected
                                     <option
                                         key={ lang.id }
                                         // value={ selectedOperation === "POST" ? lang.id : lang.fields.ISO }
-                                        data-index={lang.fields.ISO}
+                                        data-index={ lang.fields.ISO }
                                         value={ lang.id }
 
                                     >{ lang.fields.Name }
