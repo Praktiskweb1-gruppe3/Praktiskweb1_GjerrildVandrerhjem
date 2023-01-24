@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 
 import UseTranslator from '../hooks/UseTranslator';
 import Container from 'react-bootstrap/Container';
@@ -9,10 +9,15 @@ import '../sass/News.scss';
 
 import { useNavigate } from "react-router-dom";
 
+import { ImagePathContext } from '../Context/ImagePathContext';
+import { Image } from 'cloudinary-react';
+
+
 const News = () => {
 
     const { filteredData, error, loading } = UseTranslator("News", true)
     const { filteredData: filteredDataNewsUI, error: errorNewsUI, loading: loadingNewsUI } = UseTranslator("NewsUI", true)
+    const { cloudinaryImagePath } = useContext( ImagePathContext );
 
     const navigate = useNavigate();
     const GoToArchive = () => navigate('/newsArchive')
@@ -59,7 +64,7 @@ const News = () => {
 
                     <Container className='HighlightedNews' >
                         <Row className='NewsRow'>
-                            <Col lg={{ span: 6 }}>
+                            <Col lg={{ span: 12 }}>
                                 <h2 className='HL_ArticleHeader'>{filteredData[1].fields.Title}</h2>
                                 <p className='HL_Date'>Dato: {filteredData[1].fields.Date}</p>
                                 <p className='HL_Body_Text'>
@@ -69,9 +74,29 @@ const News = () => {
                             </Col>
                         </Row>
                         <Row>
-                            <Col lg={{ span: 6 }}>
-                                <div className='HL_Image'>TEST</div>
-                                {/* <img src='#' alt='#' className='HL_Image' /> */}
+                            <Col lg={{ span: 12 }}>
+                                <picture>
+                                        <source
+                                            media="(max-width: 575px)"
+                                            srcSet={cloudinaryImagePath + filteredData[0].fields.ImgId_Mobile[0]}
+                                        />
+
+                                        <source
+                                            media="(max-width: 991px)"
+                                            srcSet={cloudinaryImagePath + filteredData[0].fields.ImgId_Tablet[0]}
+                                        />
+
+                                        <source
+                                            media="(min-width: 992px)"
+                                            srcSet={cloudinaryImagePath + filteredData[0].fields.ImgId_Desktop[0]}
+                                        />
+                                        <Image
+                                            cloudName={import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}
+                                            public_id={cloudinaryImagePath + filteredData[0].fields.ImgId_Desktop[0]}
+                                            alt={filteredData[1].fields.Image_Description}
+                                            className='HL_Image'
+                                        />
+                                </picture>
                             </Col>
                         </Row>
                     </Container>
@@ -83,9 +108,13 @@ const News = () => {
                             {
                                 filteredData.slice(2).map(news => (
 
-                                    <Col lg={{ span: 4 }}>
+                                    <Col key={ news.id } lg={{ span: 4 }}>
                                         <div className='CARD'>
-                                            <div className='CARD_Img'></div>
+                                            {/* <Image
+                                                cloudName={import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}
+                                                public_id={cloudinaryImagePath + service.fields.ImgId_Desktop[0]}
+                                                alt={service.fields.Image_Description}
+                                            /> */}
                                             <h3 className='CARD_Headline'>{news.fields.Title}</h3>
                                             <p className='CARD_Date'>Dato: {news.fields.Date}</p>
                                             <p className='CARD_Text'>
