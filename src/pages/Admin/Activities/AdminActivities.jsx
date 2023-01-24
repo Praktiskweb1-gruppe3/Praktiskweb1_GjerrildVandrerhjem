@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
@@ -11,6 +11,10 @@ import PostActivities from './PostActivities';
 
 import { useGetData } from '../../../hooks/useGetData';
 import Select from '../../../component/Admin/Select';
+import AdminPatchActicity from './AdminPatchActicity';
+
+import { Context } from '../../../Context/Context';
+import AdminDeleteActivity from './AdminDeleteActivity';
 
 const AdminActivities = () => {
 
@@ -19,7 +23,10 @@ const AdminActivities = () => {
 
     const [ selectedOperation, setSelectedOperation ] = useState();
 
+    // the language to post the data
     const [ postLanguage, setPostLanguage ] = useState();
+
+    const { language } = useContext( Context );
 
     const { error: errorLanguage, loading: loadingLanguage, data: dataLanguage, getData: getDataLanguage } = useGetData();
 
@@ -40,7 +47,7 @@ const AdminActivities = () => {
             { error && <div>Der skete en fejl.</div> }
 
             <Row>
-                <Col lg={ { span: 6 } } className="px-5">
+                <Col lg={ { span: 6, offset: 1 } } >
                     <AdminTitle pageName="aktiviteter" />
                 </Col>
             </Row>
@@ -48,19 +55,25 @@ const AdminActivities = () => {
 
 
             {/* Choose fetch method and language */ }
-            <Select
-                setSelectedOperation={ setSelectedOperation }
-                setPostLanguage={ setPostLanguage }
-                dataLanguage={ dataLanguage }
-                selectedOperation={selectedOperation}
-            />
-
+            <Row>
+                <Col lg={ { span: 12, offset: 1 } }>
+                    <Select
+                        setSelectedOperation={ setSelectedOperation }
+                        setPostLanguage={ setPostLanguage }
+                        dataLanguage={ dataLanguage }
+                        selectedOperation={ selectedOperation }
+                    />
+                </Col>
+            </Row>
 
             { filteredData && selectedOperation && postLanguage &&
                 <>
 
-                    { selectedOperation === 'POST' && <PostActivities language={ postLanguage } /> }
+                    { selectedOperation === 'POST' && <PostActivities postLanguage={ postLanguage } /> }
 
+                    { selectedOperation === 'PATCH' && <AdminPatchActicity  postLanguage={ postLanguage } /> }
+
+                    {selectedOperation === 'DELETE' && <AdminDeleteActivity />}
 
                 </>
             }

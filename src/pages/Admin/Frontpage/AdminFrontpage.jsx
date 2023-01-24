@@ -1,12 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 
-import { Context } from '../../../Context/Context';
-
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import { usePostData } from '../../../hooks/usePostData';
 import { useGetData } from '../../../hooks/useGetData';
 import AdminTitle from '../../../component/Admin/AdminTitle';
 
@@ -16,8 +13,10 @@ import AdminPostImage from './AdminPostImage';
 import AdminPatchImage from './AdminPatchImage';
 import AdminDeleteImage from './AdminDeleteImage';
 
+
 const AdminFrontpage = () => {
 
+    // the language to post
     const [ postLanguage, setPostLanguage ] = useState();
 
     const [ selectedOperation, setSelectedOperation ] = useState();
@@ -45,7 +44,7 @@ const AdminFrontpage = () => {
             { errorLanguage && <div>Error..</div> }
 
             <Row>
-                <Col lg={ { span: 6 } }  >
+                <Col lg={ { span: 6, offset: 1 } }  >
                     <AdminTitle pageName="billeder" />
                 </Col>
             </Row>
@@ -53,12 +52,18 @@ const AdminFrontpage = () => {
 
 
             {/* Choose fetch method and language */ }
-            <Select
-                setSelectedOperation={ setSelectedOperation }
-                setPostLanguage={ setPostLanguage }
-                dataLanguage={ dataLanguage }
-                selectedOperation={ selectedOperation }
-            />
+           
+                <Row>
+                <Col lg={ { span: 12, offset: 1 } }>
+                    <Select
+                        setSelectedOperation={ setSelectedOperation }
+                        setPostLanguage={ setPostLanguage }
+                        dataLanguage={ dataLanguage }
+                        selectedOperation={ selectedOperation }
+                    />
+                </Col>
+            </Row>
+
 
             {
                 selectedOperation && postLanguage &&
