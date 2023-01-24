@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
@@ -7,6 +7,8 @@ import Row from 'react-bootstrap/Row';
 import AdminTitle from '../../../component/Admin/AdminTitle';
 import Select from '../../../component/Admin/Select';
 import AdminPostNews from './AdminPostNews';
+import AdminPatchNews from './AdminPatchNews';
+import AdminDeleteNews from './AdminDeleteNews';
 
 const AdminNews = () => {
 
@@ -43,9 +45,9 @@ const AdminNews = () => {
 
                      { selectedOperation === 'POST' && <AdminPostNews postLanguage={ postLanguage } /> } 
 
-                   {/* { selectedOperation === 'PATCH' && <AdminPatchActicity postLanguage={ postLanguage } /> }
+                    { selectedOperation === 'PATCH' && <AdminPatchNews postLanguage={ postLanguage } /> }
 
-                    { selectedOperation === 'DELETE' && <AdminDeleteActivity /> } */}
+                    { selectedOperation === 'DELETE' && <AdminDeleteNews /> }
 
                 </>
             }

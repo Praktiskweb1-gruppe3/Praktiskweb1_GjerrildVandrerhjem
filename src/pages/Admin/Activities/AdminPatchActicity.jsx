@@ -12,6 +12,9 @@ import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from 'react-lea
 import { usePatchData } from '../../../hooks/usePatchData';
 import UseTranslator from '../../../hooks/UseTranslator';
 import { useGetData } from '../../../hooks/useGetData';
+import ChosenImage from '../../../component/Admin/ChosenImage';
+import SubjectDropdown from '../../../component/Admin/SubjectDropdown';
+import ShowImages from '../../../component/Admin/ShowImages';
 
 // postLanguage = the language to post the activity
 const AdminPatchActicity = ( { postLanguage } ) => {
@@ -21,7 +24,7 @@ const AdminPatchActicity = ( { postLanguage } ) => {
     const [ updatedName, setUpdatedName ] = useState( '' );
     const [ updatedPosition, setUpdatedPosition ] = useState( null );
     const [ updatedId, setUpdatedId ] = useState( '' );
-    const [ updatedPublicId, setUpdatedPublicId ] = useState( '' );
+    const [ updatedPublicUrl, setUpdatedPublicUrl ] = useState( '' );
     const [ updatedImageId, setUpdatedImageId ] = useState( '' )
     const [ showImages, setShowImages ] = useState( false );
 
@@ -49,9 +52,9 @@ const AdminPatchActicity = ( { postLanguage } ) => {
     const ChangeView = () => {
         const map = useMap();
 
-        map.setView(updatedPosition, map.getZoom(), {
+        map.setView( updatedPosition, map.getZoom(), {
             animate: false
-        })
+        } )
     }
 
     const loadImages = async () => {
@@ -104,6 +107,8 @@ const AdminPatchActicity = ( { postLanguage } ) => {
                 class: 'success'
             } );
 
+            setUpdatedDescription('');
+            setUpdatedFacts('');
             document.querySelector( '.adminPatchForm' ).reset();
 
         }
@@ -158,7 +163,7 @@ const AdminPatchActicity = ( { postLanguage } ) => {
             setUpdatedName( dataActivity.fields.Name );
             setUpdatedPosition( [ dataActivity.fields.Latitude, dataActivity.fields.Longitude ] );
             setUpdatedImageId( dataActivity.fields.Image[ 0 ] )
-            setUpdatedPublicId( dataActivity.fields.ImgId_Desktop[ 0 ] );
+            setUpdatedPublicUrl( dataActivity.fields.ImgId_Desktop[ 0 ] );
 
         }
 
@@ -173,10 +178,10 @@ const AdminPatchActicity = ( { postLanguage } ) => {
             setUpdatedFacts( '' )
             setUpdatedName( '' );
             setUpdatedImageId( '' )
-            setUpdatedPublicId('');
+            setUpdatedPublicUrl( '' );
 
         }
-    }, [filteredData] )
+    }, [ filteredData ] )
 
 
     return (
@@ -197,33 +202,22 @@ const AdminPatchActicity = ( { postLanguage } ) => {
                                 <>
                                     <Row>
                                         <Col lg={ { span: 12 } } className="pe-5 mb-5">
-                                            <label className='labels' htmlFor='activities'>Vælg en aktivitet at rette</label>
-                                            <select
-                                                onChange={ ( e ) => setUpdatedId( e.target.value ) }
-                                                defaultValue="Vælg"
-                                                id="activities"
-                                                className='select activitiesSelect'
-                                            >
-                                                <option disabled>Vælg</option>
-                                                {
-                                                    filteredData.filter( opt => opt.fields.hasOwnProperty( 'Image' ) ).map( option => (
-
-                                                        <option
-                                                            key={ option.id }
-                                                            value={ option.id }
-                                                        >
-                                                            { option.fields.Name }
-                                                        </option>
-
-                                                    ) )
-                                                }
-                                            </select>
+                                            
+                                            <SubjectDropdown
+                                                filteredData={filteredData}
+                                                filterOption="Image"
+                                                selectClass="activitiesSelect"
+                                                htmlFor="activities"
+                                                labelText="Vælg en aktivitet at rette"
+                                                setId={setUpdatedId}
+                                                selectData="Name"
+                                            />
                                         </Col>
 
                                     </Row>
 
                                     {
-                                        dataActivity  &&
+                                        dataActivity &&
                                         <Row>
                                             <Col lg={ { span: 12 } } className="pe-5 mb-5">
                                                 <label className='labels' htmlFor='activities'>Klik for at se alle uploaded billeder</label>
@@ -260,7 +254,7 @@ const AdminPatchActicity = ( { postLanguage } ) => {
                                         <Col lg={ 12 }>
                                             <label className='labels' htmlFor='activitiesDesc'>Kort beskrivelse af aktiviteten</label>
                                             <ReactQuill
-                                                onChange={value =>  setUpdatedDescription(value) }
+                                                onChange={ value => setUpdatedDescription( value ) }
                                                 theme="snow"
                                                 className='quillInput'
                                                 value={ updatedDescription }
@@ -273,7 +267,7 @@ const AdminPatchActicity = ( { postLanguage } ) => {
                                         <Col lg={ 12 }>
                                             <label className='labels' htmlFor='activitiesDesc'>Korte fakta om aktiviteten</label>
                                             <ReactQuill
-                                                onChange={value =>  setUpdatedFacts(value) }
+                                                onChange={ value => setUpdatedFacts( value ) }
                                                 theme="snow"
                                                 className='quillInput'
                                                 value={ updatedFacts }
@@ -318,9 +312,9 @@ const AdminPatchActicity = ( { postLanguage } ) => {
                             { updatedPosition && filteredData &&
                                 <>
                                     <p className='mainText'>Klik på kortet og sæt en markør ved aktiviteten</p>
-                                    {/* 56.50394988823568, 10.816817744557346   */}
+                                    {/* 56.50394988823568, 10.816817744557346   */ }
                                     <MapContainer
-                                        center={ [ updatedPosition[ 0 ], updatedPosition[ 1 ] ]}
+                                        center={ [ updatedPosition[ 0 ], updatedPosition[ 1 ] ] }
                                         zoom={ 12 }
                                         id="mapContainer__adminactivities"
                                     >
@@ -337,13 +331,13 @@ const AdminPatchActicity = ( { postLanguage } ) => {
 
                             <Row className='mt-5'>
                                 {
-                                    dataActivity && filteredData && updatedPublicId  && 
+                                    dataActivity && filteredData &&
                                     <Col lg={ 12 }>
-                                        <p className='mainText'>Det aktuelle billede</p>
-                                        <Image
-                                            cloudName={ import.meta.env.VITE_CLOUDINARY_CLOUD_NAME }
-                                            public_id={ updatedPublicId }
-                                            alt={ dataActivity.fields.Description }
+
+                                        <ChosenImage
+                                            publicImgId={ updatedPublicUrl }
+                                            altTag={ dataActivity.fields.Description }
+                                            labelText="Det aktuelle billede"
                                         />
 
                                     </Col> }
@@ -353,36 +347,13 @@ const AdminPatchActicity = ( { postLanguage } ) => {
 
                         {/* Billeder */ }
                         {
-                            images && showImages && 
+                             showImages &&
                             <Row>
-                                <Col lg={ 12 } className="mb-5">
-                                    <Row className='mt-5'>
-                                        <p className='mainText'>Vælg et billede fra databasen (de tilsvarede billede til mobil og tablet bliver valgt automatisk)</p>
-                                        { images.map( img => (
-                                            <Col lg={ 2 } className="mb-3" key={ img.id }>
-                                                <figure className='imagesFigure'>
-                                                    <Image
-                                                        cloudName={ import.meta.env.VITE_CLOUDINARY_CLOUD_NAME }
-                                                        public_id={ img.ImgId_Desktop }
-                                                        alt={ img.Description }
-                                                        data-name={ img.Name }
-                                                    />
-
-                                                    <input
-                                                        type="radio"
-                                                        className='radio'
-                                                        name='images'
-                                                        onChange={ () => {
-                                                            setUpdatedPublicId( img.ImgId_Desktop );
-                                                            setUpdatedImageId( img.id );
-                                                        } }
-                                                    />
-                                                </figure>
-                                            </Col>
-
-                                        ) ) }
-                                    </Row>
-                                </Col>
+                                <ShowImages
+                                    images={images}
+                                    setId={setUpdatedImageId}
+                                    setChosenImage={setUpdatedPublicUrl}
+                                />                                
                             </Row>
                         }
 

@@ -1,36 +1,44 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-
-import { Image } from 'cloudinary-react';
-
-import { usePostData } from '../../../hooks/usePostData';
+import { usePatchData } from '../../../hooks/usePatchData';
 import axios from 'axios';
 import ChosenImage from '../../../component/Admin/ChosenImage';
 import ShowImages from '../../../component/Admin/ShowImages';
 
+// For all news on selected language
+import UseTranslator from '../../../hooks/UseTranslator';
 
-const AdminPostNews = ( { postLanguage } ) => {
+// for the selected news
+import { useGetData } from '../../../hooks/useGetData';
 
-    const [ title, setTitle ] = useState( '' );
-    const [ date, setDate ] = useState( '' );
-    const [ bodyText, setBodyText ] = useState( '' );
-    const [ readMoreText, setReadMoreText ] = useState( '' )
+
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import SubjectDropdown from '../../../component/Admin/SubjectDropdown';
+
+const AdminPatchNews = ( { postLanguage } ) => {
+
+    const [ updatedTitle, setUpdatedTitle ] = useState( '' );
+    const [ updatedDate, setUpdatedDate ] = useState( '' );
+    const [ updatedBodyText, setUpdatedBodyText ] = useState( '' );
+    const [ updatedReadMoreText, setUpdatedReadMoreText ] = useState( '' )
 
     const [ images, setImages ] = useState( [] );
-    const [ id, setId ] = useState( '' );
-
+    const [ updatedNewsId, setUpdatedNewsId ] = useState( '' );
+    const [ updatedImageId, setUpdatedImageId ] = useState( '' );
     const [ isImagesVisible, setIsImagesVisible ] = useState( false );
     const [ chosenImage, setChosenImage ] = useState( '' );
+
 
     // success/error message
     const [ message, setMessage ] = useState( {} );
 
-    const { error, loading, data, postData } = usePostData();
+    const { error, loading, data, patchData } = usePatchData();
+    const { error: errorSelectNews, loading: loadingSelectNews, data: dataSelectNews, getData } = useGetData();
 
+    const { error: errorAllNews, loading: loadingAllNews, filteredData } = UseTranslator( 'News', true );
 
 
     // load images from airtable, using netlify and cloudinary
@@ -38,9 +46,7 @@ const AdminPostNews = ( { postLanguage } ) => {
         try {
 
             const res = await axios.get( '/.netlify/functions/getImages' );
-
             const data = await res.data;
-
             setImages( data.filter( img => img.ISO[ 0 ] === postLanguage.ISO ) );
 
         }
@@ -56,23 +62,23 @@ const AdminPostNews = ( { postLanguage } ) => {
 
         try {
 
-            const newNews = {
+            const updatedNews = {
 
                 "fields": {
-                    "Title": title,
-                    "Date": date,
-                    "Body_Text": bodyText,
-                    "Btn": readMoreText,
+                    "Title": updatedTitle,
+                    "Date": updatedDate,
+                    "Body_Text": updatedBodyText,
+                    "Btn": updatedReadMoreText,
                     "Language": [
                         postLanguage.value
                     ],
                     "Images": [
-                        id
+                        updatedImageId
                     ]
                 }
             }
 
-            postData( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/News', newNews, {
+            patchData( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/News/' + updatedNewsId, updatedNews, {
                 'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLE_API_KEY,
                 'Content-Type': 'application/json'
             } );
@@ -85,8 +91,10 @@ const AdminPostNews = ( { postLanguage } ) => {
 
             // resetting the inputs
             setChosenImage( '' );
-            setBodyText( '' );
+            setUpdatedBodyText( '' );
             setIsImagesVisible( false );
+            setUpdatedDate('');
+            setUpdatedTitle('');
 
             e.target.reset();
 
@@ -125,28 +133,87 @@ const AdminPostNews = ( { postLanguage } ) => {
 
     }, [ postLanguage ] )
 
+    useEffect( () => {
+
+        if ( updatedNewsId ) {
+            getData( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/News/' + updatedNewsId, {
+                'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLE_API_KEY
+            } )
+        }
+
+    }, [ updatedNewsId ] )
+
+    useEffect( () => {
+
+        if ( dataSelectNews ) {
+
+            setChosenImage(dataSelectNews.fields.ImgId_Desktop[0]);
+            setUpdatedBodyText(dataSelectNews.fields.Body_Text);
+            setUpdatedDate(dataSelectNews.fields.Date);
+            setUpdatedTitle(dataSelectNews.fields.Title);
+            setUpdatedReadMoreText(dataSelectNews.fields.Btn);
+            setUpdatedImageId(dataSelectNews.fields.Images[0]);
+
+        }
+
+    }, [ dataSelectNews ] )
+
+    useEffect( () => {
+        if ( filteredData ) {
+
+            document.querySelector( '.newsSelect' ).selectedIndex = 0;
+
+            setChosenImage('');
+            setUpdatedBodyText('');
+            setUpdatedDate('');
+            setUpdatedTitle('');
+            setUpdatedReadMoreText('');
+
+            setUpdatedImageId('');
+            setUpdatedNewsId('');
+
+        }
+    }, [ filteredData ] )
 
     return (
-
         <>
-            { error && <div>Error</div> }
+            { error && errorAllNews && errorSelectNews && <div>Error</div> }
 
-            { loading && <div>Loading</div> }
+            { loading && loadingAllNews && loadingSelectNews && <div>Loading</div> }
 
-            <form onSubmit={ handleSubmit } className="adminPostForm">
+            <form onSubmit={ handleSubmit } className="adminPatchForm">
                 <Row>
 
                     <Col lg={ { span: 6, offset: 1 } }>
 
-                        <Row>
+                        { filteredData &&
+                            <Row>
+                                <Col lg={ { span: 12 } } className="pe-5 mb-5">
+
+                                    <SubjectDropdown
+                                        filterOption="Images"
+                                        filteredData={filteredData}
+                                        htmlFor="news"
+                                        labelText='Vælg en nyhed at rette'
+                                        selectClass="newsSelect"
+                                        selectData="Title"
+                                        setId={setUpdatedNewsId}                                        
+                                    />
+                                </Col>
+
+                            </Row>
+                        }
+
+                        { dataSelectNews && <Row>
                             <Row className='mb-5'>
                                 <Col lg={ 12 }>
                                     <label className='labels' htmlFor='newsTitle'>Titel</label>
                                     <input
-                                        onChange={ ( e ) => setTitle( e.target.value ) }
+                                        onChange={ ( e ) => setUpdatedTitle( e.target.value ) }
                                         className='inputs'
                                         type="text"
-                                        placeholder='Giv nyheden en titel'
+                                        defaultValue={updatedTitle}
+                                        placeholder="Nyhedens titel"
                                         id="newsTitle"
                                     />
                                 </Col>
@@ -156,9 +223,10 @@ const AdminPostNews = ( { postLanguage } ) => {
                                 <Col lg={ 4 }>
                                     <label className='labels' htmlFor='newsDato'>Dato for nyheden</label>
                                     <input
-                                        onChange={ ( e ) => setDate( e.target.value ) }
+                                        onChange={ ( e ) => setUpdatedDate( e.target.value ) }
                                         className='inputs'
                                         type="date"
+                                        value={updatedDate}
                                         id="newsDato"
                                     />
                                 </Col>
@@ -166,10 +234,11 @@ const AdminPostNews = ( { postLanguage } ) => {
                                 <Col lg={ 8 }>
                                     <label className='labels' htmlFor='newsDato'>Tekst til læs mere knap</label>
                                     <input
-                                        onChange={ ( e ) => setReadMoreText( e.target.value ) }
+                                        onChange={ ( e ) => setUpdatedReadMoreText( e.target.value ) }
                                         className='inputs'
                                         type="text"
-                                        placeholder='F.eks. Læs mere'
+                                        defaultValue={updatedReadMoreText}
+                                        placeholder="F.eks. Læs mere"
                                         id="newsDato"
                                     />
                                 </Col>
@@ -179,10 +248,10 @@ const AdminPostNews = ( { postLanguage } ) => {
                                 <Col lg={ 12 }>
                                     <label className='labels' htmlFor='newsContent'>Nyheden</label>
                                     <ReactQuill
-                                        onChange={ ( value ) => setBodyText( value ) }
+                                        onChange={ ( value ) => setUpdatedBodyText( value ) }
                                         theme="snow"
                                         className='quillInput'
-                                        value={ bodyText }
+                                        value={ updatedBodyText }
                                         placeholder='Hvad er nyheden'
                                         name="newsContent"
                                         id="newsContent"
@@ -205,7 +274,7 @@ const AdminPostNews = ( { postLanguage } ) => {
                                     <button
                                         type="submit"
                                         className='btn_post news'
-                                        disabled={ !id || !bodyText || !title || !postLanguage.value || !date || !readMoreText }
+                                        disabled={ !updatedImageId || !updatedBodyText || !updatedTitle || !postLanguage.value || !updatedDate }
                                     >
                                         Opret nyhed
                                     </button>
@@ -226,35 +295,37 @@ const AdminPostNews = ( { postLanguage } ) => {
                                 </Row>
                             }
 
-                        </Row>
+                        </Row> }
 
                     </Col>
 
                     {/* Det valgte billede */ }
                     <Col lg={ 4 }>
+
                         <ChosenImage
-                            publicImgId={ chosenImage }
                             altTag="Chosen image"
                             labelText="Det valgte billede"
+                            publicImgId={ chosenImage }
                         />
+
                     </Col>
+
 
                     {/* Billeder */ }
                     <Row>
-                        { isImagesVisible &&
-
+                        {
+                            isImagesVisible &&
                             <ShowImages
-                                images={images}
-                                setId={setId}
-                                setChosenImage={setChosenImage}
-                            /> }
+                                images={ images }
+                                setId={ setUpdatedImageId }
+                                setChosenImage={ setChosenImage }
+                            />
+                        }
                     </Row>
                 </Row>
             </form>
         </>
-
-
     )
 }
 
-export default AdminPostNews
+export default AdminPatchNews

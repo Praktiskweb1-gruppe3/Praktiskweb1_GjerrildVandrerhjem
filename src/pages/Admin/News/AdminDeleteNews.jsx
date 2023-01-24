@@ -7,30 +7,36 @@ import { useGetData } from '../../../hooks/useGetData';
 import { useDeleteData } from '../../../hooks/useDeleteData';
 import SubjectDropdown from '../../../component/Admin/SubjectDropdown';
 
-
-const AdminDeleteActivity = () => {
+const AdminDeleteNews = () => {
 
     const [ id, setId ] = useState();
-    const { error, loading, filteredData } = UseTranslator( 'Activities', true );
-    const { error: errorActivity, loading: loadingActivity, data: dataActivity, getData } = useGetData();
+
+    const { error, loading, filteredData } = UseTranslator( 'News', true );
+
+    const { error: errorNews, loading: loadingNews, data: dataNews, getData } = useGetData();
+
     const { error: errorDelete, loading: loadingDelete, data: dataDelete, deleteData } = useDeleteData();
-    const [ message, setMessage ] = useState( {} );
+
+    const [ message, setMessage ] = useState( {  } );
 
 
     const handleDelete = () => {
 
-        if ( window.confirm( `Er du sikker på at du vil slette aktiviteten: ${ dataActivity.fields.Name }` ) ) {
+        if ( window.confirm( `Er du sikker på at du vil slette nyheden: ${ dataNews.fields.Title }` ) ) {
 
             try {
-                deleteData( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/Activities/' + id, {
+                deleteData( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/News/' + id, {
                     'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLE_API_KEY
                 } );
 
                 setMessage( {
-                    msg: 'Aktiviteten er nu blevet slettet',
+                    msg: 'Nyheden er nu blevet slettet',
                     class: 'success'
                 } );
 
+                setId('');
+
+                
             } catch ( error ) {
                 setMessage( {
                     msg: error.name + ': ' + error.message,
@@ -41,24 +47,23 @@ const AdminDeleteActivity = () => {
         }
     }
 
+    useEffect( () => {
+        if ( dataDelete ) {
+
+            document.querySelector( '.newsSelect' ).selectedIndex = 0;
+
+        }
+    }, [ dataDelete ] )
 
     useEffect( () => {
 
         if ( id ) {
-            getData( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/Activities/' + id, {
+            getData( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/News/' + id, {
                 'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLE_API_KEY
             } )
         }
 
     }, [ id ] )
-
-    useEffect( () => {
-        if ( dataDelete ) {
-
-            document.querySelector( '.activitiesSelect' ).selectedIndex = 0;
-
-        }
-    }, [ dataDelete ] )
 
     useEffect( () => {
 
@@ -78,57 +83,56 @@ const AdminDeleteActivity = () => {
     }, [ message ] )
 
     return (
-
         <>
-            { error && errorActivity && errorDelete && <div>Error</div> }
-            { loading && loadingActivity && loadingDelete && <div>Loading..</div> }
+            { error && errorNews && errorDelete && <div>Error</div> }
+            { loading && loadingNews && loadingDelete && <div>Loading..</div> }
 
             { filteredData &&
                 <Row>
                     <Row>
                         <Col lg={ { span: 6, offset: 1 } } className="pe-5 mb-5">
-                            
+                           
                             <SubjectDropdown
-                                filterOption="Image"
+                                filterOption="Images"
                                 filteredData={filteredData}
-                                selectClass="activitiesSelect"
-                                htmlFor="activities"
-                                labelText="Vælg en aktivitet at slette"
+                                selectClass="newsSelect"
+                                htmlFor="news"
+                                labelText="Vælg en nyhed at slette"
                                 setId={setId}
-                                selectData='Name'
+                                selectData='Title'
                             />
                         </Col>
 
                     </Row>
 
-                    { dataActivity &&
+                    { dataNews &&
                         <Row>
                             <Col lg={ { span: 6, offset: 1 } }>
 
                                 <button
                                     onClick={ () => handleDelete() }
-                                    disabled={ !dataActivity }
+                                    disabled={ !dataNews }
                                     className="btn_delete"
                                 >
                                     Slet
                                 </button>
-
                             </Col>
+
                         </Row>
                     }
 
                     {/* User message */ }
                     { message &&
-                                <Row>
-                                    <Col lg={ { span: 4, offset: 2 } }>
-                                        <div
-                                            className={ `admin__message ${ message.class }` }
-                                        >
-                                            { message.msg }
-                                        </div>
-                                    </Col>
-                                </Row>
-                            }
+                        <Row>
+                            <Col lg={ { span: 4, offset: 2 } }>
+                                <div
+                                    className={ `admin__message ${ message.class }` }
+                                >
+                                    { message.msg }
+                                </div>
+                            </Col>
+                        </Row>
+                    }
                 </Row>
             }
 
@@ -137,4 +141,4 @@ const AdminDeleteActivity = () => {
     )
 }
 
-export default AdminDeleteActivity
+export default AdminDeleteNews

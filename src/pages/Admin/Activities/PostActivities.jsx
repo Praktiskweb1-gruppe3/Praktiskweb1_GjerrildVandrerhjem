@@ -12,6 +12,7 @@ import { usePostData } from '../../../hooks/usePostData';
 import { Image } from 'cloudinary-react';
 
 import axios from 'axios';
+import ShowImages from '../../../component/Admin/ShowImages';
 
 
 const PostActivities = ( { postLanguage } ) => {
@@ -209,31 +210,10 @@ const PostActivities = ( { postLanguage } ) => {
 
                     {/* Billeder */ }
                     <Row>
-                        { images && <Col lg={ 12 } className="my-5">
-                            <Row className='mt-5'>
-                                <p className='mainText'>Vælg et billede fra databasen (de tilsvarede billede til mobil og tablet bliv valgt automatisk)</p>
-                                { images && images.map( img => (
-                                    <Col lg={ 2 } className="mb-3" key={ img.id }>
-                                        <figure className='imagesFigure'>
-                                            <Image
-                                                cloudName={ import.meta.env.VITE_CLOUDINARY_CLOUD_NAME }
-                                                public_id={ img.ImgId_Desktop }
-                                                alt={ img.Description }
-                                                data-name={ img.Name }
-                                            />
-
-                                            <input
-                                                type="radio"
-                                                className='radio'
-                                                name='images'
-                                                onChange={ () => setId( img.id ) }
-                                            />
-                                        </figure>
-                                    </Col>
-
-                                ) ) }
-                            </Row>
-                        </Col> }
+                        <ShowImages
+                            images={images}
+                            setId={setId}
+                        /> 
                     </Row>
 
                     {/* Submit knap */ }

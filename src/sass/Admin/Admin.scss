@@ -130,7 +130,7 @@ input[type="file"]::file-selector-button {
 }
 
 .btn_getImages {
-    margin-inline: auto;
+    margin-inline: 0;
     margin-block: 1rem;
 
     &.news {
