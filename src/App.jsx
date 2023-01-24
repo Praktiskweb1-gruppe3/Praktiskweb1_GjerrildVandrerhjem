@@ -11,6 +11,12 @@ import Services from './pages/Services';
 import Aktiviteter from './pages/Aktiviteter';
 import AktiviteterSelected from './pages/AktiviteterSelected';
 import About from './pages/About';
+
+//News
+import News from './pages/News';
+import NewsArchive from './pages/NewsArchive';
+
+//No Match
 import NoMatch from './pages/NoMatch';
 
 import Footer from './component/Footer';
@@ -50,11 +56,15 @@ function App () {
 
           {/* Vi tilbyder */ }
           <Route path="/services" element={ <Services /> } />
+          
+          {/* Nyheder */}
+          <Route path="/news" element={<News/>}/>
+          <Route path='/newsArchive' element={<NewsArchive/>}/>
 
 
-        {/* Aktiviteter */} 
-        <Route path="/activities" element={<Aktiviteter />} />
-        <Route path="/activitySelected" element={<AktiviteterSelected />} />
+          {/* Aktiviteter */} 
+          <Route path="/activities" element={<Aktiviteter />} />
+          <Route path="/activitySelected" element={<AktiviteterSelected />} />
 
 
           {/* Kontakt */ }
