@@ -5,7 +5,6 @@ import React, { useEffect } from 'react'
 import UseTranslator from '../hooks/UseTranslator';
 
 import Container from 'react-bootstrap/Container';
-<<<<<<< Updated upstream
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -15,15 +14,7 @@ import 'react-slideshow-image/dist/styles.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShower, faToilet, faWifi, faWheelchairMove, faWindowClose, faChair } from "@fortawesome/free-solid-svg-icons";
 
-import parse from 'html-react-parser'
-
-=======
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-
-import 'react-slideshow-image/dist/styles.css';
-import { Slide } from 'react-slideshow-image';
->>>>>>> Stashed changes
+import parse from 'html-react-parser';
 
 const Rooms = () => {
 
@@ -33,7 +24,6 @@ const Rooms = () => {
     const mediumImgPath = './assets/images/tablet/';
     const smallImgPath = './assets/images/mobile/';
 
-<<<<<<< Updated upstream
     // const slideImages = [
     //     {
     //         url: 'images/slide_2.jpg',
@@ -49,14 +39,11 @@ const Rooms = () => {
     //     },
     // ];
 
-=======
->>>>>>> Stashed changes
     useEffect(() => {
 
         document.querySelector('#root').style.backgroundColor = '#FAFAFF';
     }, [])
 
-<<<<<<< Updated upstream
 
     return (
         <Container fluid className='room'>
@@ -119,25 +106,10 @@ const Rooms = () => {
                             {/* SLIDER */ }
                             <div className='room_slider'>
 
-=======
-    return (
-        <Container fluid className='rooms'>
-            {
-                filteredData && <>
-                    <Row>
-                        <Col>
-                        <div>
-                            <h1>{ filteredData[0].fields.Room_Title }</h1>
-                            <form className='search_bar'>
-                                <label className='mainText'>{ filteredData[0].fields.Room_Date }</label>
-                                <input type="text" placeholder={ filteredData[0].fields.Room_Description } className='' />
-                            </form>
->>>>>>> Stashed changes
                             </div>
                         </Col>
                     </Row>
 
-<<<<<<< Updated upstream
                     {/* <Row>
                         <Col>
                             <div className="slide-container">
@@ -176,11 +148,6 @@ const Rooms = () => {
                         </Col>
                     </Row>
                 </> }
-=======
-                </>
-            }
-
->>>>>>> Stashed changes
         </Container>
     )
 }

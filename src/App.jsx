@@ -14,10 +14,7 @@ import Aktiviteter from './pages/Aktiviteter';
 import AktiviteterSelected from './pages/AktiviteterSelected';
 import About from './pages/About';
 import Rooms from './pages/Rooms';
-<<<<<<< Updated upstream
 import NoMatch from './pages/NoMatch';
-=======
->>>>>>> Stashed changes
 
 import Footer from './component/Footer';
 import Kontakt from './pages/Kontakt';
@@ -45,7 +42,6 @@ function App() {
         <ImagePathContext.Provider value={ { cloudinaryImagePath } }>
 
 
-<<<<<<< Updated upstream
           <Navbar />
           <Routes>
 
@@ -72,66 +68,30 @@ function App() {
 
             {/* Kontakt */ }
             <Route path="/contact" element={ <Kontakt /> } />
-=======
-          {/* Forside */ }
-          <Route index element={ <div>Forsiden</div> } />
 
 
-          {/* Værelser */ }
-          <Route path="/rooms" element={ <Rooms /> } />
-
->>>>>>> Stashed changes
-
-
-<<<<<<< Updated upstream
             {/* Om os */ }
             <Route path="/about" element={ <About /> } />
 
           {/* No Match */}
           <Route path="*" element={<NoMatch/>}/> 
-=======
-
-          {/* Aktiviteter */ }
-          <Route path="/activities" element={ <Aktiviteter /> } />
-
-
-          {/* Vi tilbyder */ }
-          <Route path="/services" element={ <Services /> } />
->>>>>>> Stashed changes
 
             {/* Admin */ }
             <Route path="admin" element={ <Index /> }>
 
               <Route index element={ <AdminFrontpage /> } />
 
-<<<<<<< Updated upstream
               {/* <Route index element={} /> */ }
               <Route path="activities" element={ <AdminActivities /> } />
-=======
-
-          {/* Kontakt */ }
-          <Route path="/contact" element={ <Kontakt /> } />
->>>>>>> Stashed changes
-
 
             </Route>
 
-
-<<<<<<< Updated upstream
           </Routes>
 
           <Footer />
-=======
-          {/* Admin */ }
-          <Route path="/admin" element={ <Index /> } />
->>>>>>> Stashed changes
 
         </ImagePathContext.Provider>
 
-<<<<<<< Updated upstream
-=======
-        <Footer />
->>>>>>> Stashed changes
 
       </Context.Provider>
     </Router>
