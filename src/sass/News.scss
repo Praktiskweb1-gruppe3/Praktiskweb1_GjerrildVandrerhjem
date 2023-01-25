@@ -7,7 +7,7 @@
     background-color: $ghost-white;
 }
 
-.News_Headline{
+.News_Headline {
     color: $col_text;
     font-family: $font_text;
     font-size: 6rem;
@@ -21,18 +21,19 @@
     padding: 2rem;
 }
 
-.NewsRow{
+.NewsRow {
     margin: 0;
 }
 
-.UIForm div{
+.UIForm div {
     display: inline-block;
     font-size: 3rem;
     margin-left: 200px;
     text-align: center;
 }
 
-.SeachInp, .CategoryInp{
+.SeachInp,
+.CategoryInp {
     padding: 10px;
     border: solid 1px $cadet;
     font-family: $font_text;
@@ -40,7 +41,14 @@
     border-radius: .2rem;
 }
 
-.ArchiveBtn{
+.SearchIcon {
+    margin-left: 1rem;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.ArchiveBtn {
     margin-top: .4rem;
     color: $ghost-white;
     background-color: $bright-yellow-crayola;
@@ -55,7 +63,7 @@
         background-color: $caribbean-green;
         transform: scale(1.1);
         cursor: pointer;
-    } 
+    }
 }
 
 
@@ -81,18 +89,18 @@
         font-size: 2rem;
     }
 
-    .HL_Body_Text{
+    .HL_Body_Text {
         color: $col_text;
         font-size: 2rem;
     }
 
     .HL_Image {
-        width: 600px;
-        height: 500px;
-        
+        min-width: 600px;
+        height: 700px;
+        border-radius: .2rem;
     }
 
-    .HL_Btn{
+    .HL_Btn {
         color: $ghost-white;
         background-color: $bright-yellow-crayola;
         padding: 1rem;
@@ -101,15 +109,15 @@
         font-family: $font_text;
         color: $col_image_text;
         font-size: 2rem;
-        margin-left: 270px;
+        margin-left: 470px;
         margin-bottom: 10px;
-        
+
 
         &:hover {
             background-color: $caribbean-green;
             transform: scale(1.1);
             cursor: pointer;
-        }  
+        }
     }
 
 }
@@ -133,51 +141,102 @@
     height: auto;
     border-radius: .4rem;
     padding: 1rem;
+}
+
+.CARD_Img {
+    width: 100%;
+    height: 300px;
+    border-radius: .2rem;
+}
+
+.CARD_Headline {
+    color: $col_text;
+    font-family: $font_text;
+    font-size: 3rem;
+    text-align: center;
+}
+
+.CARD_Date {
+    color: $col_text;
+    font-family: $font_text;
+    font-size: 1.9rem;
+}
+
+.CARD_Text {
+    color: $col_text;
+    font-family: $font_text;
+    font-size: 2rem;
+    height: auto;
+}
+
+.CARD_Btn {
+    color: $ghost-white;
+    background-color: $bright-yellow-crayola;
+    padding: 1rem;
+    border-radius: 4px;
+    border: none;
+    font-family: $font_text;
+    color: $col_image_text;
+    font-size: 2rem;
+    margin-left: 270px;
+    margin-bottom: 10px;
 
 
-    .CARD_Img {
+    &:hover {
+        background-color: $caribbean-green;
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+}
+
+
+
+
+@media only screen and (max-width: 399px) {
+
+    .Userinterface {
         width: 100%;
-        height: 200px;
-        background-color: aqua;
+        height: auto;
+        padding: 2rem;
     }
 
-    .CARD_Headline {
-        color: $col_text;
-        font-family: $font_text;
+    .UIForm {
+        display: flex;
+        flex-direction: column;
         font-size: 3rem;
         text-align: center;
     }
 
-    .CARD_Date{
-        color: $col_text;
-        font-family: $font_text;
-        font-size: 1.9rem;
+    .UIForm div {
+        margin: 0;
+        flex-direction: column;
+        justify-content: center;
     }
 
-    .CARD_Text{
-        color: $col_text;
-        font-family: $font_text;
-        font-size: 2rem;
-        height: auto; 
+    .HighlightedNews .HL_Image {
+        max-width: 398px;
+        height: auto;
+        justify-content: center;
     }
+
+    .HighlightedNews {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+    .HL_Image {
+        max-width: 398px;
+        height: auto;
+        margin: 0;
+    }
+
+
 
     .CARD_Btn {
-        color: $ghost-white;
-        background-color: $bright-yellow-crayola;
-        padding: 1rem;
-        border-radius: 4px;
-        border: none;
-        font-family: $font_text;
-        color: $col_image_text;
-        font-size: 2rem;
-        margin-left: 270px;
-        margin-bottom: 10px;
-        
+        margin-left: 180px;
 
-        &:hover {
-            background-color: $caribbean-green;
-            transform: scale(1.1);
-            cursor: pointer;
-        }
     }
+
+
 }
