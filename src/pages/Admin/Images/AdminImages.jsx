@@ -23,7 +23,7 @@ const AdminImages = () => {
     const [ selectedOperation, setSelectedOperation ] = useState();
 
     return (
-        <Container fluid className='adminFrontpage'>
+        <Container fluid className='adminImages'>
 
             <Row>
                 <Col md={ { span: 4, offset: 1 } }>
@@ -55,18 +55,18 @@ const AdminImages = () => {
                     <>
                         {
                             selectedOperation === 'POST' && <AdminPostImage
-                                language={ postLanguage }
+                            postLanguage={ postLanguage }
                             />
                         }
                         {
                             selectedOperation === 'PATCH' && <AdminPatchImage
-                                language={ postLanguage }
+                            postLanguage={ postLanguage }
                             />
                         }
 
                         {
                             selectedOperation === 'DELETE' && <AdminDeleteImage
-                                language={ postLanguage }
+                            postLanguage={ postLanguage }
                             />
                         }
 

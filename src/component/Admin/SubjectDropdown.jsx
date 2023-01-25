@@ -1,14 +1,14 @@
 import React from 'react'
 
-const SubjectDropdown = ({filteredData, filterOption, selectClass, htmlFor, labelText, setId, selectData}) => {
+const SubjectDropdown = ( { filteredData, filterOption, selectClass, htmlFor, labelText, setId, selectData } ) => {
     return (
         <>
-            <label className='labels' htmlFor={htmlFor}>{labelText}</label>
+            <label className='labels' htmlFor={ htmlFor }>{ labelText }</label>
             <select
                 onChange={ ( e ) => setId( e.target.value ) }
                 defaultValue="Vælg"
-                id={htmlFor}
-                className={`select ${selectClass}`} 
+                id={ htmlFor }
+                className={ `select ${ selectClass }` }
             >
                 <option disabled>Vælg</option>
                 {
@@ -18,8 +18,11 @@ const SubjectDropdown = ({filteredData, filterOption, selectClass, htmlFor, labe
                             key={ option.id }
                             value={ option.id }
                         >
-                            { selectData === 'Title' && option.fields.Title}
-                            { selectData === 'Name' && option.fields.Name}
+                            { selectData === 'Price' && option.fields.Price }
+                            { selectData === 'Category' && option.fields.Category }
+                            { selectData === 'Title' && option.fields.Title }
+                            { selectData === 'Titel' && option.fields.Titel }
+                            { selectData === 'Name' && option.fields.Name }
                         </option>
 
                     ) )
