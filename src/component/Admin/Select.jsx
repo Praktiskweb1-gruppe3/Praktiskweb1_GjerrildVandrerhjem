@@ -1,14 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, {  useEffect } from 'react';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Context } from '../../Context/Context';
 import { useGetData } from '../../hooks/useGetData';
 
 
 const Select = ( { setSelectedOperation, setPostLanguage } ) => {
-
-    const { setLanguage } = useContext( Context );
 
     const { error: errorLanguage, loading: loadingLanguage, data: dataLanguage, getData: getDataLanguage } = useGetData();
 
@@ -59,7 +56,6 @@ const Select = ( { setSelectedOperation, setPostLanguage } ) => {
                                     value: e.target.value,
                                     ISO: iso
                                 } );
-                                setLanguage( iso );
                             } }
                             defaultValue="Vælg et sprog"
                         >

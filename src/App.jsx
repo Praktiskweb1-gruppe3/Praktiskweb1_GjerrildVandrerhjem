@@ -31,6 +31,8 @@ import AdminActivities from './pages/Admin/Activities/AdminActivities';
 import AdminNews from './pages/Admin/News/AdminNews';
 import AdminImages from './pages/Admin/Images/AdminImages';
 import AdminFrontpage from './pages/Admin/Frontpage/AdminFrontpage';
+import AdminAbout from './pages/Admin/About/AdminAbout';
+import AdminEvents from './pages/Admin/Events/AdminEvents';
 
 
 function App () {
@@ -92,13 +94,16 @@ function App () {
 
               <Route index element={ <AdminFrontpage /> } />
 
-              <Route path='images' element={<AdminImages />} />
+              <Route path='images' element={ <AdminImages /> } />
 
-              {/* <Route index element={} /> */ }
+              <Route path="events" element={ <AdminEvents /> } />
+
               <Route path="activities" element={ <AdminActivities /> } />
 
               {/* Nyheder */ }
               <Route path="news" element={ <AdminNews /> } />
+
+              <Route path="about" element={ <AdminAbout /> } />
 
             </Route>
 

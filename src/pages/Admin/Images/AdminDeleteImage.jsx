@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios';
 
-const AdminDeleteImage = ( { language } ) => {
+const AdminDeleteImage = ( { postLanguage } ) => {
 
     const [ images, setImages ] = useState( [] )
 
@@ -23,7 +23,7 @@ const AdminDeleteImage = ( { language } ) => {
 
             const data = await res.data;
 
-            setImages( data.filter( img => img.ISO[ 0 ] === language.ISO ) );
+            setImages( data.filter( img => img.ISO[ 0 ] === postLanguage.ISO ) );
 
 
         }
@@ -87,15 +87,7 @@ const AdminDeleteImage = ( { language } ) => {
 
         loadImages();
 
-    }, [ language ] )
-
-    useEffect( () => {
-
-        return () => {
-            document.querySelector( '.languageSelect' ).selectedIndex = 0;
-        }
-
-    }, [] )
+    }, [ postLanguage ] )
 
 
     return (
@@ -103,10 +95,9 @@ const AdminDeleteImage = ( { language } ) => {
 
             <Row>
 
-
                 {
 
-                    <Col lg={ 6 }>
+                    <Col lg={ {span: 6, offset:1} }>
 
                         <Row className='mb-3'>
                             <Col lg={ 12 } >

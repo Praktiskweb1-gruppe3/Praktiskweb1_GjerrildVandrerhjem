@@ -114,7 +114,7 @@ const AdminNavbar = () => {
                             </li>
 
                             <li>
-                                <NavLink to="images" end>{ data.records[ 0 ].fields.Images }</NavLink>
+                                <NavLink to="images">{ data.records[ 0 ].fields.Images }</NavLink>
                             </li>
 
                             <li>
@@ -138,7 +138,7 @@ const AdminNavbar = () => {
                                 <NavLink to="contact">{ data.records[ 0 ].fields.Contact }</NavLink>
                             </li>
                             <li>
-                                <NavLink to="about">{ data.records[ 0 ].fields.OmOs }</NavLink>
+                                <NavLink to="about">{ data.records[ 0 ].fields.About }</NavLink>
                             </li>
                         </ul>
                         <div className="hamburger" onClick={ handleClick }>

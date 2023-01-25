@@ -5,8 +5,6 @@ import Col from 'react-bootstrap/Col';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-import { Image } from 'cloudinary-react';
-
 import { usePostData } from '../../../hooks/usePostData';
 import axios from 'axios';
 import ChosenImage from '../../../component/Admin/ChosenImage';

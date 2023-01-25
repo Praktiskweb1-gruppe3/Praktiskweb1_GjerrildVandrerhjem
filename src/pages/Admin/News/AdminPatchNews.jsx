@@ -204,7 +204,8 @@ const AdminPatchNews = ( { postLanguage } ) => {
                             </Row>
                         }
 
-                        { dataSelectNews && <Row>
+                        { dataSelectNews && 
+                        <Row>
                             <Row className='mb-5'>
                                 <Col lg={ 12 }>
                                     <label className='labels' htmlFor='newsTitle'>Titel</label>

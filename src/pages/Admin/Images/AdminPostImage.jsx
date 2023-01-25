@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import axios from 'axios';
 
-const AdminPostImage = ( { language } ) => {
+const AdminPostImage = ( { postLanguage } ) => {
 
     const [ desktopImageUrl, setDesktopImageUrl ] = useState( '' );
     const [ tabletImageUrl, setTabletImageUrl ] = useState( '' );
@@ -44,7 +43,7 @@ const AdminPostImage = ( { language } ) => {
                     mobile_file: mobileImageUrl,
                     description: imageAlt,
                     imageText: imageText,
-                    language: language.value
+                    language: postLanguage.value
                 } )
             } )
 
@@ -93,20 +92,14 @@ const AdminPostImage = ( { language } ) => {
         }
 
     }, [ message ] )
-
-    useEffect( () => {
-        
-        return () => {
-            document.querySelector( '.languageSelect' ).selectedIndex = 0;
-        }
-    }, [] )
+   
 
 
     return (
         <form onSubmit={ submitHandler }>
             <Row>
 
-                <Col lg={ { span: 6 } }>
+                <Col lg={ { span: 6, offset: 1 } }>
 
                     <Row>
 

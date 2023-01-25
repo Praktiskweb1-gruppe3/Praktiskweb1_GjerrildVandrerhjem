@@ -10,7 +10,7 @@ import { usePatchData } from '../../../hooks/usePatchData';
 
 
 
-const AdminPatchImage = ( { language } ) => {
+const AdminPatchImage = ( { postLanguage } ) => {
 
     const [ images, setImages ] = useState( [] )
 
@@ -31,6 +31,21 @@ const AdminPatchImage = ( { language } ) => {
 
     const [ message, setMessage ] = useState( {} );
 
+
+    const loadImages = async () => {
+        try {
+
+            const res = await axios.get( '/.netlify/functions/getImages' );
+            const data = await res.data;
+
+            const filterImg = await data.filter( img => img.ISO[ 0 ] === postLanguage.ISO )
+            setImages( filterImg );
+
+        }
+        catch ( error ) {
+            console.error( error );
+        }
+    }
     
 
     const submitHandler = async ( e ) => {
@@ -50,7 +65,7 @@ const AdminPatchImage = ( { language } ) => {
                 "fields": {
                     "Description": updatedImageAlt,
                     "Language": [
-                        language.value
+                        postLanguage.value
                     ]
                 }
             }
@@ -107,22 +122,14 @@ const AdminPatchImage = ( { language } ) => {
 
         loadImages();
 
-    }, [ language ] )
-
-    useEffect( () => {
-
-        return () => {
-            document.querySelector( '.languageSelect' ).selectedIndex = 0;
-        }
-
-    }, [] )
+    }, [ postLanguage ] )
 
 
     return (
         <form onSubmit={ submitHandler }>
 
             <Row>
-                <Col lg={ 12 } className="mb-5">
+                <Col lg={ {span: 10, offset: 1} } className="mb-5">
                     <Row>
                         { images &&
 
@@ -213,7 +220,7 @@ const AdminPatchImage = ( { language } ) => {
 
                 {
 
-                    <Col lg={ 6 }>
+                    <Col lg={ {span:6, offset: 1} }>
 
                         <Row className='mb-3'>
                             <Col lg={ 12 } >
