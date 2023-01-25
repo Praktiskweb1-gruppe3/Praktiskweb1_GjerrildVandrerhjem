@@ -1,0 +1,29 @@
+@import '../variables';
+
+.events {
+    background: $col_background2;
+}
+
+.title_forside {
+    margin-top: 5rem;
+}
+
+.event-card {
+    display: flex;
+    width: 100%;
+    border: 1px solid black;
+}
+
+.event-image {
+    
+    margin: 1.5rem;
+    
+}
+
+.event-description {
+    background: $col_background;
+}
+
+.event-info {
+    margin: 1.5rem;
+}

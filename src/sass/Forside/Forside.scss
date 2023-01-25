@@ -1,0 +1,10 @@
+@import '../variables';
+
+.forside_images img {
+    height: 100%;
+    object-fit: fill;
+}
+
+.images-wrap{
+    overflow: hidden;
+}

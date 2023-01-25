@@ -14,6 +14,7 @@ import Aktiviteter from './pages/Aktiviteter';
 import AktiviteterSelected from './pages/AktiviteterSelected';
 import About from './pages/About';
 import Rooms from './pages/Rooms';
+import Forside from './pages/Forside/Forside';
 
 //News
 import News from './pages/News';
@@ -54,7 +55,7 @@ function App () {
           <Routes>
 
             {/* Forside */ }
-            <Route index element={ <div>Test</div> } />
+            <Route index element={ <Forside/> } />
 
             {/* Værelser */ }
             <Route path="/rooms" element={ <Rooms /> } />
