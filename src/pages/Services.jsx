@@ -20,10 +20,6 @@ const Services = () => {
 
     const { cloudinaryImagePath } = useContext( ImagePathContext );
 
-    const largeImgPath = "./assets/images/desktop/";
-    const mediumImgPath = "./assets/images/tablet/";
-    const smallImgPath = "./assets/images/mobile/";
-
     useEffect( () => {
 
         document.querySelector( '#root' ).style.backgroundColor = '#FAFAFF';
@@ -70,7 +66,7 @@ const Services = () => {
 
                                             <Image
                                                 cloudName={ import.meta.env.VITE_CLOUDINARY_CLOUD_NAME }
-                                                public_id={ cloudinaryImagePath + service.fields.ImgId_Desktop[ 0 ] }
+                                                public_id={ service.fields.ImgId_Desktop[ 0 ] }
                                                 alt={ service.fields.Image_Description }
                                             />
 
@@ -143,7 +139,7 @@ const Services = () => {
 
                                                 <Image
                                                     cloudName={ import.meta.env.VITE_CLOUDINARY_CLOUD_NAME }
-                                                    src={ largeImgPath + filteredDataResturant[ 0 ].fields.ImgId_Desktop[ i ] }
+                                                    public_id={  filteredDataResturant[ 0 ].fields.ImgId_Desktop[ i ] }
                                                     alt={ filteredDataResturant[ 0 ].fields.Image_Description[ i ] }
                                                 />
 
@@ -195,9 +191,8 @@ const Services = () => {
                                         />
 
                                         <Image
-                                            style={ { width: '100%', height: 'auto', display: 'block' } }
                                             cloudName={ import.meta.env.VITE_CLOUDINARY_CLOUD_NAME }
-                                            public_id={ largeImgPath + filteredDataResturant[ 0 ].fields.ImgId_Desktop_Galleri[ i ] }
+                                            public_id={ filteredDataResturant[ 0 ].fields.ImgId_Desktop_Galleri[ i ] }
                                             alt={ filteredDataResturant[ 0 ].fields.Image_Description_Galleri[ i ] }
                                             className="gallery__image"
                                         />
@@ -216,10 +211,6 @@ const Services = () => {
             </Container>
 
         </Container>
-
-
-
-
     )
 }
 

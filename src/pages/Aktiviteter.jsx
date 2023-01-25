@@ -20,37 +20,37 @@ import { Image } from 'cloudinary-react';
 const Aktiviteter = () => {
 
   const navigate = useNavigate()
-  const { filteredData, error, loading } = UseTranslator( 'Activities', true )
-
-  
-  const [ coordinates, setCoordinates ] = useState( [] )
-  
-  const { cloudinaryImagePath } = useContext( ImagePathContext );
-  
-  const headToSelected = ( selectedData ) => navigate( '/activitySelected', { state: { data: selectedData } } )
+  const { filteredData, error, loading } = UseTranslator('Activities', true)
 
 
-  useEffect( () => {
-    if ( coordinates.length <= 0 && filteredData ) {
+  const [coordinates, setCoordinates] = useState([])
 
-      filteredData.forEach( coordinate => {
+  const { cloudinaryImagePath } = useContext(ImagePathContext);
 
-        if ( coordinate.fields.hasOwnProperty( 'Latitude' ) && coordinate.fields.hasOwnProperty( 'Longitude' ) ) {
+  const headToSelected = (selectedData) => navigate('/activitySelected', { state: { data: selectedData } })
 
-          setCoordinates( prev => [ ...prev, { lat: coordinate.fields.Latitude, long: coordinate.fields.Longitude, name: coordinate.fields.Name } ] )
+
+  useEffect(() => {
+    if (coordinates.length <= 0 && filteredData) {
+
+      filteredData.forEach(coordinate => {
+
+        if (coordinate.fields.hasOwnProperty('Latitude') && coordinate.fields.hasOwnProperty('Longitude')) {
+
+          setCoordinates(prev => [...prev, { lat: coordinate.fields.Latitude, long: coordinate.fields.Longitude, name: coordinate.fields.Name }])
 
         }
 
-      } );
+      });
 
     }
 
-  }, [ filteredData, coordinates ] )
+  }, [filteredData, coordinates])
 
-  useEffect( () => {
+  useEffect(() => {
 
-    document.querySelector( '#root' ).style.backgroundColor = '#FAFAFF';
-  }, [] )
+    document.querySelector('#root').style.backgroundColor = '#FAFAFF';
+  }, [])
 
 
   return (
@@ -63,16 +63,16 @@ const Aktiviteter = () => {
         filteredData && <>
           <Row>
             <Col>
-              <h1>{ filteredData[ 0 ].fields.Name }</h1>
-              <h2>{ filteredData[ 1 ].fields.Name }</h2>
+              <h1>{ filteredData[0].fields.Name }</h1>
+              <h2>{ filteredData[1].fields.Name }</h2>
 
-              <p className='mainText text'>{ filteredData[ 1 ].fields.Description }</p>
+              <p className='mainText text'>{ filteredData[1].fields.Description }</p>
             </Col>
           </Row>
 
           <Row>
             {
-              filteredData.slice( 2, filteredData.length - 1 ).map( a => (
+              filteredData.filter(img => img.fields.hasOwnProperty('Image')).map(a => (
 
                 <Col key={ a.id } md={ 4 }>
                   <figure className='aktiviteter_image'>
@@ -84,23 +84,24 @@ const Aktiviteter = () => {
                       <source media="(min-width: 992px)" srcSet={cloudinaryImagePath + a.fields.ImgId_Desktop[ 0 ] } />
 
                       <Image
-                        onClick={ () => headToSelected( a ) }
-                        public_id={a.fields.ImgId_Desktop[ 0 ] }
-                        cloudName={import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}
+                        onClick={ () => headToSelected(a) }
+                        public_id={ a.fields.ImgId_Desktop[0] }
+                        cloudName={ import.meta.env.VITE_CLOUDINARY_CLOUD_NAME }
                         alt={ a.fields.Image_Description } className='image_activity'
                       />
 
                     </picture>
-                    <figcaption>{ a.fields.Image_Text[ 0 ] }</figcaption>
+                    <figcaption>{ a.fields.hasOwnProperty('Image_Text') ? a.fields.Image_Text[0] : '' }</figcaption>
                   </figure>
 
                 </Col>
-              ) )
+              ))
             }
           </Row>
           <Row>
             <Col>
-              <h1 className='kort-title'>{ filteredData[ filteredData.length - 1 ].fields.Name }</h1>
+            {/* lav mere dynamisk */}
+              <h1 className='kort-title'>{ filteredData[filteredData.length - 1].fields.Name }</h1>
             </Col>
           </Row>
 
@@ -113,23 +114,23 @@ const Aktiviteter = () => {
               {
                 coordinates?.length >= 1 ? (
 
-                  <MapContainer center={ [ coordinates[ 0 ].lat, coordinates[ 0 ].long ] } zoom={ 10 } id="mapContainer">
+                  <MapContainer center={ [coordinates[0].lat, coordinates[0].long] } zoom={ 10 } id="mapContainer">
                     <TileLayer
                       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                       url='https://tile.openstreetmap.org/{z}/{x}/{y}.png' />
 
                     {
-                      coordinates.map( ( coord, i ) => (
-                        <Marker position={ [ coord.lat, coord.long ] } key={ 'coord' + i }>
+                      coordinates.map((coord, i) => (
+                        <Marker position={ [coord.lat, coord.long] } key={ 'coord' + i }>
 
                           <Popup>
                             { coord.name }
                           </Popup>
                         </Marker>
-                      ) )
+                      ))
                     }
 
-                  </MapContainer> ) : ( null )
+                  </MapContainer>) : (null)
 
 
               }

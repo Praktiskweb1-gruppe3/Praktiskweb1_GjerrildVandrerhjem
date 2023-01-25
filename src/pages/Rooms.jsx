@@ -1,6 +1,7 @@
+import 'react-slideshow-image/dist/styles.css';
 import '../sass/Rooms.scss'
 
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import UseTranslator from '../hooks/UseTranslator';
 
@@ -9,35 +10,37 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import { Slide } from 'react-slideshow-image';
-import 'react-slideshow-image/dist/styles.css';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShower, faToilet, faWifi, faWheelchairMove, faWindowClose, faChair } from "@fortawesome/free-solid-svg-icons";
 
 import parse from 'html-react-parser';
 
+import { ImagePathContext } from '../Context/ImagePathContext';
+import { Image } from 'cloudinary-react';
+
+
+
 const Rooms = () => {
 
     const { filteredData, error, loading } = UseTranslator('Rooms', true)
 
-    const largeImgPath = './assets/images/desktop/';
-    const mediumImgPath = './assets/images/tablet/';
-    const smallImgPath = './assets/images/mobile/';
+    const { cloudinaryImagePath } = useContext(ImagePathContext);
 
-    // const slideImages = [
-    //     {
-    //         url: 'images/slide_2.jpg',
-    //         caption: 'Slide 1'
-    //     },
-    //     {
-    //         url: 'images/slide_3.jpg',
-    //         caption: 'Slide 2'
-    //     },
-    //     {
-    //         url: 'images/slide_4.jpg',
-    //         caption: 'Slide 3'
-    //     },
-    // ];
+    const [dateFrom, setDateFrom] = useState()
+    const [dateTo, setDateTo] = useState()
+    const [numOfGuests, setNumOfGuests] = useState(1);
+
+    const returnPrices = (oGPrice) => {
+
+        if (numOfGuests > 1) {
+            return oGPrice + (100 * numOfGuests) - 100;
+        }
+
+        return oGPrice;
+
+    }
+
 
     useEffect(() => {
 
@@ -47,6 +50,10 @@ const Rooms = () => {
 
     return (
         <Container fluid className='room'>
+
+            { error && <div>Error</div> }
+            { loading && <div>Loading</div> }
+
             {
                 filteredData && <>
                     <Row >
@@ -57,24 +64,45 @@ const Rooms = () => {
                             <form className='room_reservation'>
 
                                 <div className='custom-formGroup'>
-                                    <label>{ filteredData[0].fields.Room_Date }</label>
-                                    <input type="datetime-local"
-                                        defaultValue="2023-01-23"
-                                        min="2023-01-23"
-                                        max="2023-12-31"
-                                        placeholder={ filteredData[0].fields.Room_Check }
-                                        className='input_room' />
+                                    <label className='labels'>{ filteredData[0].fields.Room_Date }</label>
+
+                                    <div className='custom-formGroup-row'>
+
+                                        <Row>
+                                            
+                                        </Row>
+                                        <input type="date"
+                                            defaultValue="dd-mm-y"
+                                            min="2023-01-23"
+                                            max="2023-12-31"
+                                            placeholder={ filteredData[0].fields.Room_Check }
+                                            onChange={ (e) => setDateFrom(e.target.value) }
+                                            className='input_room' />
+
+                                        <input type="date"
+                                            defaultValue="dd-mm-y"
+                                            min="2023-01-23"
+                                            max="2023-12-31"
+                                            placeholder={ filteredData[0].fields.Room_Check }
+                                            onChange={ (e) => setDateTo(e.target.value) }
+                                            className='input_room' />
+                                    </div>
+
+
+
                                 </div>
 
                                 <div className='custom-formGroup'>
-                                    <label>{ filteredData[0].fields.Room_Guest }</label>
+                                    <label className='labels'>{ filteredData[0].fields.Room_Guest }</label>
                                     <input type="number"
+                                        defaultValue={ 1 }
                                         min="1"
-                                        max="100"
+                                        max="5"
+                                        onChange={ (e) => setNumOfGuests(e.target.value) }
                                         className='input_room' />
                                 </div>
 
-                                <button type="submit" className='send_submit-room mainText'>{ filteredData[0].fields.Room_Available }</button>
+                                <button type="submit" className='send_submit-room'>{ filteredData[0].fields.Room_Available }</button>
 
                             </form>
                         </Col>
@@ -92,7 +120,9 @@ const Rooms = () => {
                                 <Col lg={ 4 }>
 
                                     <div className='room_price'>
-                                        <h2 className='room_price'>{ 'DKK kr.-' + filteredData[0].fields.Prices }</h2>
+                                        <h2 className='room_price'>
+                                            { 'DKK' + returnPrices(filteredData[0].fields.Prices[0]) }
+                                        </h2>
                                         <p className='mainText'>Pr. nat</p>
                                     </div>
                                 </Col>
@@ -110,21 +140,39 @@ const Rooms = () => {
                         </Col>
                     </Row>
 
-                    {/* <Row>
-                        <Col>
+                    <Row>
+                        <Col lg={ { span: 8, offset: 2 } } className="d-none d-md-block">
                             <div className="slide-container">
                                 <Slide>
-                                    { slideImages.map((slideImage, index) => (
+                                    { filteredData[0].fields.Images.map((slideImage, index) => (
                                         <div className="each-slide" key={ index }>
-                                            <div style={ { 'backgroundImage': `url(${slideImage.url})` } }>
-                                                <span>{ slideImage.caption }</span>
-                                            </div>
+                                            <figure className='room_images'>
+                                                <picture>
+                                                    <source media="(max-width: 991px)" srcSet={ cloudinaryImagePath + filteredData[0].fields.ImgId_Tablet[index] } />
+                                                    <source media="(min-width: 992px)" srcSet={ cloudinaryImagePath + filteredData[0].fields.ImgId_Desktop[index] } />
+
+                                                    <Image
+                                                        cloudName={ import.meta.env.VITE_CLOUDINARY_CLOUD_NAME }
+                                                        public_id={ filteredData[0].fields.ImgId_Desktop[index] }
+                                                    //   alt={filteredData[0].fields.Description[index]}
+                                                    />
+                                                    <figcaption>{ slideImage.caption }</figcaption>
+                                                </picture>
+                                            </figure>
                                         </div>
                                     )) }
                                 </Slide>
                             </div>
                         </Col>
-                    </Row> */}
+
+                        <Col className='d-block d-md-none'>
+                            <Image
+                                cloudName={ import.meta.env.VITE_CLOUDINARY_CLOUD_NAME }
+                                public_id={ filteredData[0].fields.ImgId_Mobile[0] }
+                            //   alt={filteredData[0].fields.Description[index]}
+                            />
+                        </Col>
+                    </Row>
 
                     <Row className='room_about'>
                         {/* <hr className='hr_about' /> */ }
