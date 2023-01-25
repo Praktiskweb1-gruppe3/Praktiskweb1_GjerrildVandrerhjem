@@ -34,7 +34,7 @@ const News = () => {
     const searchItems = (searchValue) => {
         setSearch(searchValue)
         if(search !== '') {
-            const filterData = filteredDataNewsUI[0].fields.Searchwords.filter((item => {
+            const filterData = filteredDataNewsUI[0].fields.Word.filter((item => {
                 return Object.values(item).join('').toLowerCase().includes(search.toLowerCase())
             }))
             setFilterResult(filterData)
