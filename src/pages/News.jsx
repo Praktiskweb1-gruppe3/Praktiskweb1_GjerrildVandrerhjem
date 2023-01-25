@@ -29,22 +29,41 @@ const News = () => {
     const { error: errorGet, loading: loadingGet, data: dataGet, getData } = useGetData()
 
     const [filterResult, setFilterResult] = useState("");
-    const [search, setSearch] = useState(""); 
-    
-    const searchItems = (searchValue) => {
-        setSearch(searchValue)
-        if(search !== '') {
-            const filterData = filteredDataNewsUI[0].fields.Word.filter((item => {
-                return Object.values(item).join('').toLowerCase().includes(search.toLowerCase())
-            }))
-            setFilterResult(filterData)
-        }
-        else(
-            setFilterResult(dataGet)
-        )
+    const [search, setSearch] = useState("");
+
+    // const searchItems = (searchValue) => {
+    //     setSearch(searchValue)
+    //     if(search !== '') {
+    //         const filterData = filteredDataNewsUI[0].fields.Word.filter((item => {
+    //             return Object.values(item).join('').toLowerCase().includes(search.toLowerCase())
+    //         }))
+    //         setFilterResult(filterData)
+    //     }
+    //     else(
+    //         setFilterResult(dataGet)
+    //     )
+    // }
+
+    // Filter?
+    const FilterWords = Sterm => {
+        console.log(Sterm);
+
+        // Hide
+        Array.from(filteredDataNewsUI[0].fields.Word)
+            .filter(item => !item.textContext.toLowerCase().includes(Sterm))
+            .forEach(item => item.add('filtered'));
+
+        // Show
+        Array.from(filteredDataNewsUI[0].fields.Word)
+            .filter(item => item.textContext.toLowerCase().includes(Sterm))
+            .forEach(item => item.remove('filtered'))
+
     }
 
-    const RunSearch = () => console.log(filterResult)
+    const Sterm = search.trim().toLowerCase();
+
+
+    const RunSearch = () => console.log(Sterm)
 
     useEffect(() => {
 
@@ -73,8 +92,8 @@ const News = () => {
                                 <form className='UIForm' onSubmit={RunSearch}>
                                     <div>
                                         <label htmlFor='SearchWord'>Søg</label> <br></br>
-                                        <input type="search" defaultValue={search} onChange={(e)=>searchItems(e.target.value)} placeholder='&#128269; Indtast søgeord' className='SeachInp' id='SearchWord'></input>
-                                        <FontAwesomeIcon icon={ faMagnifyingGlass } onClick={RunSearch} className='SearchIcon'/>
+                                        <input type="search" defaultValue={search} onChange={(e) => FilterWords(e.target.value)} placeholder='&#128269; Indtast søgeord' className='SeachInp' id='SearchWord'></input>
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} onClick={RunSearch} className='SearchIcon' />
                                     </div>
                                     <div>
                                         <label htmlFor='SelectCategory'>Kategorier</label> <br></br>
@@ -105,7 +124,7 @@ const News = () => {
                     <Container className='HighlightedNews' >
                         <Row className='NewsRow'>
                             <Col lg={{ span: 12 }}
-                            xs={{span: 12}}>
+                                xs={{ span: 12 }}>
                                 <h2 className='HL_ArticleHeader'>{filteredData[1].fields.Title}</h2>
                                 <p className='HL_Date'>Dato: {filteredData[1].fields.Date}</p>
                                 <p className='HL_Body_Text'>
@@ -116,7 +135,7 @@ const News = () => {
                         </Row>
                         <Row>
                             <Col lg={{ span: 12 }}
-                            xs={{span: 12}}>
+                                xs={{ span: 12 }}>
                                 <picture>
                                     <source
                                         media="(max-width: 575px)"
