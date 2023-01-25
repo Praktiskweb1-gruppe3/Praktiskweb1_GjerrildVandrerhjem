@@ -1,16 +1,16 @@
 import React from 'react'
 
-const SubjectDropdown = ( { filteredData, filterOption, selectClass, htmlFor, labelText, setId, selectData } ) => {
+const SubjectDropdown = ( { filteredData, filterOption, selectClass, htmlFor, labelText, setId, selectData, value } ) => {
     return (
         <>
             <label className='labels' htmlFor={ htmlFor }>{ labelText }</label>
             <select
                 onChange={ ( e ) => setId( e.target.value ) }
-                defaultValue="Vælg"
+                defaultValue={ value ? value : "Vælg" }
                 id={ htmlFor }
                 className={ `select ${ selectClass }` }
             >
-                <option disabled>Vælg</option>
+                { !value ? <option disabled>Vælg</option> : null }
                 {
                     filteredData.filter( opt => opt.fields.hasOwnProperty( filterOption ) ).map( option => (
 
