@@ -95,6 +95,7 @@ const AdminPostImage = ( { language } ) => {
     }, [ message ] )
 
     useEffect( () => {
+        
         return () => {
             document.querySelector( '.languageSelect' ).selectedIndex = 0;
         }

@@ -14,6 +14,12 @@ import Aktiviteter from './pages/Aktiviteter';
 import AktiviteterSelected from './pages/AktiviteterSelected';
 import About from './pages/About';
 import Rooms from './pages/Rooms';
+
+//News
+import News from './pages/News';
+import NewsArchive from './pages/NewsArchive';
+
+//No Match
 import NoMatch from './pages/NoMatch';
 
 import Footer from './component/Footer';
@@ -22,12 +28,14 @@ import Kontakt from './pages/Kontakt';
 // Admin
 import Index from './pages/Admin/Index';
 import AdminActivities from './pages/Admin/Activities/AdminActivities';
+import AdminNews from './pages/Admin/News/AdminNews';
+import AdminImages from './pages/Admin/Images/AdminImages';
 import AdminFrontpage from './pages/Admin/Frontpage/AdminFrontpage';
 
 
-function App() {
+function App () {
 
-  const [language, setLanguage] = useState('da');
+  const [ language, setLanguage ] = useState( 'da' );
 
   const [ cloudinaryImagePath ] = useState( 'https://res.cloudinary.com/du8bx3kux/image/upload/v1/' );
 
@@ -48,8 +56,8 @@ function App() {
             {/* Forside */ }
             <Route index element={ <div>Test</div> } />
 
-          {/* Værelser */ }
-           <Route path="/rooms" element={<Rooms/>} /> 
+            {/* Værelser */ }
+            <Route path="/rooms" element={ <Rooms /> } />
 
             {/* Events */ }
             {/* <Route path="/events" element={} /> */ }
@@ -59,6 +67,10 @@ function App() {
 
             {/* Vi tilbyder */ }
             <Route path="/services" element={ <Services /> } />
+
+            {/* Nyheder */ }
+            <Route path="/news" element={ <News /> } />
+            <Route path='/newsArchive' element={ <NewsArchive /> } />
 
 
             {/* Aktiviteter */ }
@@ -73,18 +85,24 @@ function App() {
             {/* Om os */ }
             <Route path="/about" element={ <About /> } />
 
-          {/* No Match */}
-          <Route path="*" element={<NoMatch/>}/> 
+            {/* No Match */ }
 
             {/* Admin */ }
             <Route path="admin" element={ <Index /> }>
 
               <Route index element={ <AdminFrontpage /> } />
 
+              <Route path='images' element={<AdminImages />} />
+
               {/* <Route index element={} /> */ }
               <Route path="activities" element={ <AdminActivities /> } />
 
+              {/* Nyheder */ }
+              <Route path="news" element={ <AdminNews /> } />
+
             </Route>
+
+            <Route path="*" element={ <NoMatch /> } />
 
           </Routes>
 

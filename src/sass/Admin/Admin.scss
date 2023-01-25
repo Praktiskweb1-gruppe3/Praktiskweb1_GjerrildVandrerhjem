@@ -20,6 +20,10 @@
     display: none;
 }
 
+.mainText.admin {
+    text-align: center;
+}
+
 .notAdmin {
     display: flex;
     flex-direction: column;
@@ -53,7 +57,7 @@ input[type="file"]::file-selector-button {
     cursor: pointer;
 }
 
-.inputs.imageInput{
+.inputs.imageInput {
     color: $col_nav_overlay;
     font-size: 1.5rem;
     border-radius: .4rem;
@@ -62,7 +66,7 @@ input[type="file"]::file-selector-button {
     transition: scale 1s ease-in-out;
     margin-block: 2rem;
     font-weight: 600;
-    margin:0;
+    margin: 0;
     padding: 0;
     color: $col_text;
 }
@@ -71,9 +75,9 @@ input[type="file"]::file-selector-button {
 
 
 /* #region //* Generel admin styles  */
-.adminHeading{
-        margin-bottom: 1rem;
-        text-align: left;
+.adminHeading {
+    margin-bottom: 1rem;
+    text-align: left;
 }
 
 .admin__message {
@@ -94,7 +98,10 @@ input[type="file"]::file-selector-button {
     }
 }
 
-.btn_post {
+.btn_post,
+.btn_getImages,
+.btn_delete,
+.btn_backToAdmin {
     display: block;
     width: 150px;
     height: 35px;
@@ -115,16 +122,48 @@ input[type="file"]::file-selector-button {
         transform: scale(1.1);
     }
 
-    &:disabled{
+    &:disabled {
 
         background-color: darken($col_error, 15);
         cursor: not-allowed;
 
-        &:hover{
+        &:hover {
             background-color: $col_error;
             transform: scale(1);
         }
     }
+}
+
+.btn_getImages {
+    margin-inline: 0;
+    margin-block: 1rem;
+
+    &.news {
+        margin-block: 2rem;
+    }
+}
+
+.btn_post {
+
+    background-color: $caribbean-green;
+
+    &.news {
+        margin-inline: auto;
+
+    }
+}
+
+.btn_delete {
+    background-color: $col_error;
+
+    &:hover {
+        background-color: $col_error;
+    }
+}
+
+.btn_backToAdmin {
+    width: 200px;
+    margin-inline: 0;
 }
 
 .logoutSection {
@@ -137,15 +176,20 @@ input[type="file"]::file-selector-button {
 
 
 /* #region  //* Frontpage */
-.chosenImage{
+
+.adminFrontpage {
+    padding-top: 5rem;
+}
+
+.chosenImage {
     border-radius: .4rem;
 }
 
-.imagesFigure{
+.imagesFigure {
     position: relative;
 }
 
-.radio{
+.radio {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -170,5 +214,13 @@ input[type="file"]::file-selector-button {
     border-radius: .4rem;
     background-color: aqua;
 }
+
+/* #endregion */
+
+/* #region  //* News */
+.adminNews{
+    padding-top: 5rem;
+}
+
 
 /* #endregion */

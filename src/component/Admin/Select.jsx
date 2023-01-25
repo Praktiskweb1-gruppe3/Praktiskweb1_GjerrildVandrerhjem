@@ -1,14 +1,32 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useEffect } from 'react';
+import { Context } from '../../Context/Context';
+import { useGetData } from '../../hooks/useGetData';
 
-const Select = ( { setSelectedOperation, setPostLanguage, dataLanguage, selectedOperation } ) => {
+
+const Select = ( { setSelectedOperation, setPostLanguage } ) => {
+
+    const { setLanguage } = useContext( Context );
+
+    const { error: errorLanguage, loading: loadingLanguage, data: dataLanguage, getData: getDataLanguage } = useGetData();
+
+    useEffect( () => {
+        getDataLanguage( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/Language', {
+            'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLE_API_KEY
+        }, {
+            "sort[0][field]": "ISO"
+
+        } );
+    }, [] );
 
     return (
         <Row className='mb-5'>
-            
+
+            { loadingLanguage && <div>Loading...</div> }
+            { errorLanguage && <div>Der skete en fejl.</div> }
+
             <Col lg={ { span: 3 } }  >
                 <label htmlFor="selectOperation" className='labels'>Vælg om du vil opret, rette eller slette</label>
                 <select
@@ -25,7 +43,7 @@ const Select = ( { setSelectedOperation, setPostLanguage, dataLanguage, selected
                 </select>
             </Col>
 
-            <Col lg={ 3 } >
+            <Col lg={ 3 } className="pe-5" >
                 { dataLanguage &&
                     <>
                         <label htmlFor="language" className='labels'>Vælg for hvilket sprog du vil tilgå dataen</label>
@@ -33,15 +51,16 @@ const Select = ( { setSelectedOperation, setPostLanguage, dataLanguage, selected
                             id="language"
                             className="select languageSelect"
                             onChange={ e => {
-                                
-                                const option = e.target.querySelectorAll('option')[e.target.selectedIndex];
-                                const iso = option.getAttribute('data-index');
-                                
+
+                                const option = e.target.querySelectorAll( 'option' )[ e.target.selectedIndex ];
+                                const iso = option.getAttribute( 'data-index' );
+
                                 setPostLanguage( {
-                                value: e.target.value,
-                                ISO: iso
-                            } )
-                        } }
+                                    value: e.target.value,
+                                    ISO: iso
+                                } );
+                                setLanguage( iso );
+                            } }
                             defaultValue="Vælg et sprog"
                         >
                             <option disabled>Vælg et sprog</option>
@@ -51,7 +70,7 @@ const Select = ( { setSelectedOperation, setPostLanguage, dataLanguage, selected
                                     <option
                                         key={ lang.id }
                                         // value={ selectedOperation === "POST" ? lang.id : lang.fields.ISO }
-                                        data-index={lang.fields.ISO}
+                                        data-index={ lang.fields.ISO }
                                         value={ lang.id }
 
                                     >{ lang.fields.Name }

@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 import AdminTitle from '../../../component/Admin/AdminTitle';
-import PostActivities from './PostActivities';
-
 import Select from '../../../component/Admin/Select';
-import AdminPatchActicity from './AdminPatchActicity';
-import AdminDeleteActivity from './AdminDeleteActivity';
+import AdminPostNews from './AdminPostNews';
+import AdminPatchNews from './AdminPatchNews';
+import AdminDeleteNews from './AdminDeleteNews';
 
 import BackToAdmin from '../../../component/Admin/BackToAdmin';
 
-const AdminActivities = () => {
+const AdminNews = () => {
 
     const [ selectedOperation, setSelectedOperation ] = useState();
 
@@ -21,19 +20,20 @@ const AdminActivities = () => {
     const [ postLanguage, setPostLanguage ] = useState();
 
     return (
-        <Container fluid className='adminActivities'>
+
+        <Container fluid className='adminNews'>
 
             <Row>
-                <Col md={ { span: 4, offset: 1 } }>
+                <Col md={{span: 4, offset: 1}}>
                     <BackToAdmin />
                 </Col>
             </Row>
 
-            <Container fluid="lg">
+            <Container fluid="lg" >
 
                 <Row>
                     <Col lg={ { span: 6, offset: 1 } } >
-                        <AdminTitle pageName="aktiviteter" />
+                        <AdminTitle pageName="nyheder" />
                     </Col>
                 </Row>
 
@@ -51,21 +51,19 @@ const AdminActivities = () => {
                 { selectedOperation && postLanguage &&
                     <>
 
-                        { selectedOperation === 'POST' && <PostActivities postLanguage={ postLanguage } /> }
+                        { selectedOperation === 'POST' && <AdminPostNews postLanguage={ postLanguage } /> }
 
-                        { selectedOperation === 'PATCH' && <AdminPatchActicity postLanguage={ postLanguage } /> }
+                        { selectedOperation === 'PATCH' && <AdminPatchNews postLanguage={ postLanguage } /> }
 
-                        { selectedOperation === 'DELETE' && <AdminDeleteActivity /> }
+                        { selectedOperation === 'DELETE' && <AdminDeleteNews /> }
 
                     </>
                 }
+
             </Container>
 
-
-
         </Container>
-
     )
 }
 
-export default AdminActivities;
+export default AdminNews
