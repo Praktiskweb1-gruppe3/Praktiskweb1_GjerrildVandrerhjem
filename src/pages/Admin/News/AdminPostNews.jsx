@@ -18,7 +18,7 @@ const AdminPostNews = ( { postLanguage } ) => {
     const [ readMoreText, setReadMoreText ] = useState( '' )
 
     const [ images, setImages ] = useState( [] );
-    const [ id, setId ] = useState( '' );
+    const [ imageId, setImageId ] = useState( '' );
 
     const [ isImagesVisible, setIsImagesVisible ] = useState( false );
     const [ chosenImage, setChosenImage ] = useState( '' );
@@ -64,7 +64,7 @@ const AdminPostNews = ( { postLanguage } ) => {
                         postLanguage.value
                     ],
                     "Images": [
-                        id
+                        imageId
                     ]
                 }
             }
@@ -202,7 +202,7 @@ const AdminPostNews = ( { postLanguage } ) => {
                                     <button
                                         type="submit"
                                         className='btn_post news'
-                                        disabled={ !id || !bodyText || !title || !postLanguage.value || !date || !readMoreText }
+                                        disabled={ !imageId || !bodyText || !title || !postLanguage.value || !date || !readMoreText }
                                     >
                                         Opret nyhed
                                     </button>
@@ -242,7 +242,7 @@ const AdminPostNews = ( { postLanguage } ) => {
 
                             <ShowImages
                                 images={ images }
-                                setId={ setId }
+                                setId={ setImageId }
                                 setChosenImage={ setChosenImage }
                             /> }
                     </Row>

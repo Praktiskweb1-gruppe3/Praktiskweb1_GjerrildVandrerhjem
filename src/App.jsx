@@ -33,6 +33,7 @@ import AdminImages from './pages/Admin/Images/AdminImages';
 import AdminFrontpage from './pages/Admin/Frontpage/AdminFrontpage';
 import AdminAbout from './pages/Admin/About/AdminAbout';
 import AdminEvents from './pages/Admin/Events/AdminEvents';
+import AdminNavigation from './pages/Admin/AdminNav/AdminNavigation';
 
 
 function App () {
@@ -104,6 +105,8 @@ function App () {
               <Route path="news" element={ <AdminNews /> } />
 
               <Route path="about" element={ <AdminAbout /> } />
+
+              <Route path="navigation" element={ <AdminNavigation /> } />
 
             </Route>
 

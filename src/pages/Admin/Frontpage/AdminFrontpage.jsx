@@ -135,7 +135,7 @@ const AdminFrontpage = () => {
                                 className='btn_post'
                                 disabled={ !languageName || !languageISO }
                             >
-                                Opret aktivitet
+                                Opret sprog
                             </button>
                         </Col>
                     </Row>

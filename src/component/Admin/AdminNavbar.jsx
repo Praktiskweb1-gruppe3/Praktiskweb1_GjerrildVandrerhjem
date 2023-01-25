@@ -114,6 +114,10 @@ const AdminNavbar = () => {
                             </li>
 
                             <li>
+                                <NavLink to="navigation">{ data.records[ 0 ].fields.Navigation }</NavLink>
+                            </li>
+
+                            <li>
                                 <NavLink to="images">{ data.records[ 0 ].fields.Images }</NavLink>
                             </li>
 

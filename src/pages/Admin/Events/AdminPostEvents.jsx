@@ -36,6 +36,7 @@ const AdminPostEvents = ( { postLanguage,setSelectedOperation  } ) => {
     const [ message, setMessage ] = useState( {} );
 
     const { error, loading, data, postData } = usePostData();
+
     const { error: errorPrice, loading: loadingPrice, filteredData: filteredDataPrice } = UseTranslator( 'TicketPrice', true );
     const { error: errorOrganizer, loading: loadingOrganizer, filteredData: filteredDataOrganizer } = UseTranslator( 'Organizer' );
     const { error: errorCategory, loading: loadingCategory, filteredData: filteredDataCategory } = UseTranslator( 'Categories' );
@@ -95,7 +96,7 @@ const AdminPostEvents = ( { postLanguage,setSelectedOperation  } ) => {
 
 
             setMessage( {
-                msg: 'Aktiviteten er nu blevet gemt',
+                msg: 'Eventet er nu blevet gemt',
                 class: 'success'
             } );
 
@@ -144,9 +145,9 @@ const AdminPostEvents = ( { postLanguage,setSelectedOperation  } ) => {
     return (
 
         <>
-            { error && errorPrice && <div>Error</div> }
+            { error && errorPrice && errorCategory && errorOrganizer && <div>Error</div> }
 
-            { loading && loadingPrice && <div>Loading</div> }
+            { loading && loadingPrice && loadingCategory && loadingOrganizer && <div>Loading</div> }
 
             <form onSubmit={ handleSubmit } className="adminPostForm">
                 <Row>

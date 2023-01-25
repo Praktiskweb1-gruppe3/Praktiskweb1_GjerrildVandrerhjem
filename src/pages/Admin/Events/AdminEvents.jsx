@@ -8,6 +8,8 @@ import AdminTitle from '../../../component/Admin/AdminTitle';
 import Select from '../../../component/Admin/Select';
 import BackToAdmin from '../../../component/Admin/BackToAdmin';
 import AdminPostEvents from './AdminPostEvents';
+import AdminPatchEvents from './AdminPatchEvents';
+import AdminDeleteEvents from './AdminDeleteEvents';
 
 
 
@@ -50,11 +52,11 @@ const AdminEvents = () => {
                 { selectedOperation && postLanguage &&
                     <>
 
-                         { selectedOperation === 'POST' && <AdminPostEvents postLanguage={ postLanguage } setSelectedOperation={setSelectedOperation} /> }
+                        { selectedOperation === 'POST' && <AdminPostEvents postLanguage={ postLanguage } setSelectedOperation={ setSelectedOperation } /> }
 
-                       {/* { selectedOperation === 'PATCH' && <AdminPatchNews postLanguage={ postLanguage } /> }
+                        { selectedOperation === 'PATCH' && <AdminPatchEvents postLanguage={ postLanguage } setSelectedOperation={ setSelectedOperation } /> }
 
-                        { selectedOperation === 'DELETE' && <AdminDeleteNews /> } */}
+                        { selectedOperation === 'DELETE' && <AdminDeleteEvents setSelectedOperation={ setSelectedOperation } /> }
 
                     </>
                 }
