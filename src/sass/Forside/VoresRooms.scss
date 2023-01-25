@@ -1,0 +1,31 @@
+@import '../variables';
+
+.room-container {
+    background: $col_background2;
+    padding: 2rem;
+}
+
+.room-icon{
+    font-size: 2.5rem;
+    margin: 1rem 1rem 1rem 0;
+}
+
+.vores-room-reservation {
+    width: 50%;
+    height: auto;
+    background: $col_background;
+    border-radius: .5rem;
+    box-shadow: 0 15px 75px 0 rgb(0 0 0 / 7%);;
+    margin: 2rem 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 2.5rem 1rem;
+    position: absolute;
+    top: 90%;
+    left: 25%;
+}
+
+.send_submit-room {
+    border: none;
+}

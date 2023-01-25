@@ -78,14 +78,15 @@
     height: 35px;
     background-color: $col_nav_highlighted;
     color: $col_nav_overlay;
-    font-size: 1.5rem;
+    font-size: 2rem;
     border-radius: .4rem;
-    border: $col_topnav_border 1px solid;
+    border: none;
     margin-inline: auto;
     appearance: none;
     cursor: pointer;
     transition: scale 1s ease-in-out;
     margin-block: 2rem;
+    font-family: $font_text;
 
     &:hover {
         background-color: $caribbean-green;
