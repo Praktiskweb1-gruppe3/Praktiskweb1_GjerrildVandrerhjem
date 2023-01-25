@@ -8,10 +8,11 @@ const ShowImages = ( { images, setId, setChosenImage } ) => {
     return (
 
         <>
+
+            { images.length <= 0 ? <p className='mainText'>Der kunne ikke findes nogle billeder til det valgte sprog.</p> : <p className='mainText'>Vælg et billede fra databasen (de tilsvarede billede til mobil og tablet bliv valgt automatisk)</p> }
             {
                 images && <Col lg={ 12 } className="my-5">
                     <Row className='mt-5'>
-                        <p className='mainText'>Vælg et billede fra databasen (de tilsvarede billede til mobil og tablet bliv valgt automatisk)</p>
                         { images.map( img => (
                             <Col lg={ 2 } className="mb-3" key={ img.id }>
                                 <figure className='imagesFigure'>
@@ -27,7 +28,7 @@ const ShowImages = ( { images, setId, setChosenImage } ) => {
                                         name='images'
                                         onChange={ () => {
                                             setId( img.id )
-                                          setChosenImage ? setChosenImage(img.ImgId_Desktop) : null;
+                                            setChosenImage ? setChosenImage( img.ImgId_Desktop ) : null;
                                         }
 
                                         }
