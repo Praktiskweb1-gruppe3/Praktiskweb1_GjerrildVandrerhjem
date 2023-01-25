@@ -51,11 +51,17 @@ const AdminActivities = () => {
                 { selectedOperation && postLanguage &&
                     <>
 
-                        { selectedOperation === 'POST' && <PostActivities postLanguage={ postLanguage } /> }
+                        { selectedOperation === 'POST' && <PostActivities 
+                        postLanguage={ postLanguage }
+                        setSelectedOperation={setSelectedOperation}
+                         /> }
 
-                        { selectedOperation === 'PATCH' && <AdminPatchActicity postLanguage={ postLanguage } /> }
+                        { selectedOperation === 'PATCH' && <AdminPatchActicity 
+                        postLanguage={ postLanguage }
+                        setSelectedOperation={setSelectedOperation}
+                        /> }
 
-                        { selectedOperation === 'DELETE' && <AdminDeleteActivity /> }
+                        { selectedOperation === 'DELETE' && <AdminDeleteActivity setSelectedOperation={setSelectedOperation}  /> }
 
                     </>
                 }

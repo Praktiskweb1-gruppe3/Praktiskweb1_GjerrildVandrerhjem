@@ -10,11 +10,19 @@ const UseTranslator = ( airtableName, sort = false, sortby = "Order" ) => {
     const { language } = useContext( Context );
     const [ filteredData, setFilteredData ] = useState();
 
-    useEffect( () => {
-
+    const checkFilterLength = async() => {
         if ( data ) {
             setFilteredData( data.records.filter( d => d.fields.ISO[ 0 ] === language ) );
+
+            // const isFiltered = await filteredData;
+
+            // console.log(isFiltered);
         }
+    }
+
+    useEffect( () => {
+
+        checkFilterLength();
 
     }, [ data ] )
 

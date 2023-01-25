@@ -8,6 +8,7 @@ import Navbar from './component/Navbar';
 
 import { Context } from './Context/Context';
 import { ImagePathContext } from './Context/ImagePathContext';
+import { AdminLanguageContext } from './Context/AdminLanguageContext';
 
 import Services from './pages/Services';
 import Aktiviteter from './pages/Aktiviteter';
@@ -40,6 +41,8 @@ function App () {
 
   const [ language, setLanguage ] = useState( 'da' );
 
+  const [adminLanguage, setAdminLanguage] = useState('da');
+
   const [ cloudinaryImagePath ] = useState( 'https://res.cloudinary.com/du8bx3kux/image/upload/v1/' );
 
 
@@ -49,8 +52,8 @@ function App () {
 
 
       <Context.Provider value={ { language, setLanguage } }>
-
         <ImagePathContext.Provider value={ { cloudinaryImagePath } }>
+          <AdminLanguageContext.Provider value={{adminLanguage, setAdminLanguage}} >        
 
 
           <Navbar />
@@ -116,9 +119,8 @@ function App () {
 
           <Footer />
 
+          </AdminLanguageContext.Provider>
         </ImagePathContext.Provider>
-
-
       </Context.Provider>
     </Router>
   )

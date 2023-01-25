@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import UseTranslator from '../../../hooks/UseTranslator';
+import UseAdminTranslator from '../../../hooks/UseAdminTranslator';
 import { useGetData } from '../../../hooks/useGetData';
 
 import { useDeleteData } from '../../../hooks/useDeleteData';
 import SubjectDropdown from '../../../component/Admin/SubjectDropdown';
 
 
-const AdminDeleteActivity = () => {
+const AdminDeleteActivity = ({setSelectedOperation}) => {
 
     const [ id, setId ] = useState();
-    const { error, loading, filteredData } = UseTranslator( 'Activities', true );
+    const { error, loading, filteredData } = UseAdminTranslator( 'Activities', true );
     const { error: errorActivity, loading: loadingActivity, data: dataActivity, getData } = useGetData();
     const { error: errorDelete, loading: loadingDelete, data: dataDelete, deleteData } = useDeleteData();
     const [ message, setMessage ] = useState( {} );
@@ -68,6 +68,7 @@ const AdminDeleteActivity = () => {
 
             timeOut = setTimeout( () => {
                 setMessage( {} )
+                setSelectedOperation('');
             }, 5000 )
         }
 

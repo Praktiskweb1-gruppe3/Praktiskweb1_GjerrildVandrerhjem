@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import UseTranslator from '../../../hooks/UseTranslator';
+import UseAdminTranslator from '../../../hooks/UseAdminTranslator';
 import { useGetData } from '../../../hooks/useGetData';
 
 import { useDeleteData } from '../../../hooks/useDeleteData';
@@ -9,9 +9,9 @@ import SubjectDropdown from '../../../component/Admin/SubjectDropdown';
 
 const AdminDeleteNews = () => {
 
-    const [ id, setId ] = useState();
+    const [ newsId, setNewsId ] = useState();
 
-    const { error, loading, filteredData } = UseTranslator( 'News', true );
+    const { error, loading, filteredData } = UseAdminTranslator( 'News', true );
 
     const { error: errorNews, loading: loadingNews, data: dataNews, getData } = useGetData();
 
@@ -25,7 +25,7 @@ const AdminDeleteNews = () => {
         if ( window.confirm( `Er du sikker på at du vil slette nyheden: ${ dataNews.fields.Title }` ) ) {
 
             try {
-                deleteData( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/News/' + id, {
+                deleteData( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/News/' + newsId, {
                     'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLE_API_KEY
                 } );
 
@@ -34,7 +34,7 @@ const AdminDeleteNews = () => {
                     class: 'success'
                 } );
 
-                setId('');
+                setNewsId('');
 
                 
             } catch ( error ) {
@@ -57,13 +57,13 @@ const AdminDeleteNews = () => {
 
     useEffect( () => {
 
-        if ( id ) {
-            getData( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/News/' + id, {
+        if ( newsId ) {
+            getData( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/News/' + newsId, {
                 'Authorization': 'Bearer ' + import.meta.env.VITE_AIRTABLE_API_KEY
             } )
         }
 
-    }, [ id ] )
+    }, [ newsId ] )
 
     useEffect( () => {
 
@@ -98,7 +98,7 @@ const AdminDeleteNews = () => {
                                 selectClass="newsSelect"
                                 htmlFor="news"
                                 labelText="Vælg en nyhed at slette"
-                                setId={setId}
+                                setId={setNewsId}
                                 selectData='Title'
                             />
                         </Col>

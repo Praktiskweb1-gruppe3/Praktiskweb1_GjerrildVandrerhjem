@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { Image } from 'cloudinary-react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -10,14 +9,15 @@ import 'react-quill/dist/quill.snow.css';
 import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from 'react-leaflet';
 
 import { usePatchData } from '../../../hooks/usePatchData';
-import UseTranslator from '../../../hooks/UseTranslator';
 import { useGetData } from '../../../hooks/useGetData';
 import ChosenImage from '../../../component/Admin/ChosenImage';
 import SubjectDropdown from '../../../component/Admin/SubjectDropdown';
 import ShowImages from '../../../component/Admin/ShowImages';
 
+import UseAdminTranslator from '../../../hooks/UseAdminTranslator';
+
 // postLanguage = the language to post the activity
-const AdminPatchActicity = ( { postLanguage } ) => {
+const AdminPatchActicity = ( { postLanguage, setSelectedOperation } ) => {
 
     const [ updatedDescription, setUpdatedDescription ] = useState( '' );
     const [ updatedFacts, setUpdatedFacts ] = useState( '' );
@@ -36,7 +36,7 @@ const AdminPatchActicity = ( { postLanguage } ) => {
 
     const { error: errorActivity, loading: loadingActivity, data: dataActivity, getData } = useGetData();
 
-    const { error, loading, filteredData } = UseTranslator( 'Activities', true );
+    const { error, loading, filteredData } = UseAdminTranslator( 'Activities', true );
 
     const GetLatLng = () => {
 
@@ -107,8 +107,12 @@ const AdminPatchActicity = ( { postLanguage } ) => {
                 class: 'success'
             } );
 
-            setUpdatedDescription('');
-            setUpdatedFacts('');
+            setUpdatedDescription( '' );
+            setUpdatedFacts( '' );
+            setUpdatedName( '' );
+            setUpdatedImageId( '' )
+            setUpdatedPublicUrl( '' );
+            document.querySelector( '.activitiesSelect' ).selectedIndex = '0';
             document.querySelector( '.adminPatchForm' ).reset();
 
         }
@@ -129,6 +133,7 @@ const AdminPatchActicity = ( { postLanguage } ) => {
 
             timeOut = setTimeout( () => {
                 setMessage( {} )
+                setSelectedOperation( '' )
             }, 5000 )
         }
 
@@ -141,8 +146,15 @@ const AdminPatchActicity = ( { postLanguage } ) => {
     useEffect( () => {
 
         loadImages();
+        document.querySelector( '.activitiesSelect' ).selectedIndex = '0';
+        setUpdatedDescription( '' );
+        setUpdatedFacts( '' );
+        setUpdatedName( '' );
+        setUpdatedImageId( '' )
+        setUpdatedPublicUrl( '' );
 
-    }, [ postLanguage, ] )
+
+    }, [ postLanguage ] )
 
     useEffect( () => {
 
@@ -169,20 +181,6 @@ const AdminPatchActicity = ( { postLanguage } ) => {
 
     }, [ dataActivity ] )
 
-    useEffect( () => {
-        if ( filteredData ) {
-
-            document.querySelector( '.activitiesSelect' ).selectedIndex = 0;
-
-            setUpdatedDescription( '' )
-            setUpdatedFacts( '' )
-            setUpdatedName( '' );
-            setUpdatedImageId( '' )
-            setUpdatedPublicUrl( '' );
-
-        }
-    }, [ filteredData ] )
-
 
     return (
         <>
@@ -191,6 +189,7 @@ const AdminPatchActicity = ( { postLanguage } ) => {
             { loading && loadingPatch && loadingActivity && <div>Loading</div> }
 
             {
+                filteredData && filteredData.length >= 1 &&
                 <form className='adminPatchForm' >
 
                     <Row>
@@ -202,14 +201,14 @@ const AdminPatchActicity = ( { postLanguage } ) => {
                                 <>
                                     <Row>
                                         <Col lg={ { span: 12 } } className="pe-5 mb-5">
-                                            
+
                                             <SubjectDropdown
-                                                filteredData={filteredData}
+                                                filteredData={ filteredData }
                                                 filterOption="Image"
                                                 selectClass="activitiesSelect"
                                                 htmlFor="activities"
                                                 labelText="Vælg en aktivitet at rette"
-                                                setId={setUpdatedId}
+                                                setId={ setUpdatedId }
                                                 selectData="Name"
                                             />
                                         </Col>
@@ -244,6 +243,7 @@ const AdminPatchActicity = ( { postLanguage } ) => {
                                                 className='inputs'
                                                 type="text"
                                                 defaultValue={ updatedName }
+                                                placeholder={"Aktivitetens navn"}
                                                 id="activitiesName"
                                                 required
                                             />
@@ -257,6 +257,7 @@ const AdminPatchActicity = ( { postLanguage } ) => {
                                                 onChange={ value => setUpdatedDescription( value ) }
                                                 theme="snow"
                                                 className='quillInput'
+                                                placeholder='Bekrivelse'
                                                 value={ updatedDescription }
                                                 name="Description"
                                             />
@@ -271,6 +272,7 @@ const AdminPatchActicity = ( { postLanguage } ) => {
                                                 theme="snow"
                                                 className='quillInput'
                                                 value={ updatedFacts }
+                                                placeholder='Fakta om aktiviteten'
                                                 name="Description"
                                             />
                                         </Col>
@@ -347,18 +349,24 @@ const AdminPatchActicity = ( { postLanguage } ) => {
 
                         {/* Billeder */ }
                         {
-                             showImages &&
+                            showImages &&
                             <Row>
                                 <ShowImages
-                                    images={images}
-                                    setId={setUpdatedImageId}
-                                    setChosenImage={setUpdatedPublicUrl}
-                                />                                
+                                    images={ images }
+                                    setId={ setUpdatedImageId }
+                                    setChosenImage={ setUpdatedPublicUrl }
+                                />
                             </Row>
                         }
 
                     </Row>
                 </form> }
+
+            { filteredData && filteredData.length <= 0 && <Row>
+                <Col lg={ { span: 6, offset: 1 } }>
+                    <h2>Der kunne desværre ikke findes nogle data.</h2>
+                </Col>
+            </Row> }
         </>
 
     )

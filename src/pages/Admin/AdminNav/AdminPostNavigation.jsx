@@ -135,6 +135,13 @@ const AdminPostNavigation = ( { postLanguage, setSelectedOperation } ) => {
             <form onSubmit={ handleSubmit } className="adminPostForm">
                 <Row>
 
+                <Row className='mb-5'>
+                    <Col lg={{span: 11, offset: 1}}>
+                        <h2>Kun opret navigation for de sporg der ikke her en i forvejen!</h2>
+                    </Col>
+
+                </Row>
+
                     <Col lg={ { span: 6, offset: 1 } }>
 
                         <Row>

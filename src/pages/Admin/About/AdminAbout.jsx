@@ -3,11 +3,11 @@ import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-
-import UseTranslator from '../../../hooks/UseTranslator';
 import BackToAdmin from '../../../component/Admin/BackToAdmin';
 import AdminPatchAbout from './AdminPatchAbout';
 import { useGetData } from '../../../hooks/useGetData';
+
+import UseAdminTranslator from '../../../hooks/UseAdminTranslator';
 
 
 
@@ -20,7 +20,7 @@ const AdminAbout = () => {
     const [ selectedOperation, setSelectedOperation ] = useState( {} );
     const [aboutId, setAboutId] = useState('');
 
-    const { error, loading, filteredData } = UseTranslator( 'About', true );
+    const { error, loading, filteredData } = UseAdminTranslator( 'About', true );
 
 
     const { error: errorLanguage, loading: loadingLanguage, data: dataLanguage, getData: getDataLanguage } = useGetData();

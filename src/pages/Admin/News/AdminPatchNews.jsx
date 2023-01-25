@@ -8,7 +8,7 @@ import ChosenImage from '../../../component/Admin/ChosenImage';
 import ShowImages from '../../../component/Admin/ShowImages';
 
 // For all news on selected language
-import UseTranslator from '../../../hooks/UseTranslator';
+import UseAdminTranslator from '../../../hooks/UseAdminTranslator';
 
 // for the selected news
 import { useGetData } from '../../../hooks/useGetData';
@@ -38,7 +38,7 @@ const AdminPatchNews = ( { postLanguage } ) => {
     const { error, loading, data, patchData } = usePatchData();
     const { error: errorSelectNews, loading: loadingSelectNews, data: dataSelectNews, getData } = useGetData();
 
-    const { error: errorAllNews, loading: loadingAllNews, filteredData } = UseTranslator( 'News', true );
+    const { error: errorAllNews, loading: loadingAllNews, filteredData } = UseAdminTranslator( 'News', true );
 
 
     // load images from airtable, using netlify and cloudinary

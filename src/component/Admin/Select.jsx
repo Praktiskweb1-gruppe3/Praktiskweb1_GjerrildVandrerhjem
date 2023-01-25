@@ -1,13 +1,18 @@
-import React, {  useEffect } from 'react';
+import React, {  useEffect, useContext } from 'react';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useGetData } from '../../hooks/useGetData';
 
+import { Context } from '../../Context/Context';
+import { AdminLanguageContext } from '../../Context/AdminLanguageContext';
+
 
 const Select = ( { setSelectedOperation, setPostLanguage } ) => {
 
     const { error: errorLanguage, loading: loadingLanguage, data: dataLanguage, getData: getDataLanguage } = useGetData();
+
+    const {setAdminLanguage} = useContext(AdminLanguageContext);
 
     useEffect( () => {
         getDataLanguage( 'https://api.airtable.com/v0/app0qMLpB7LbMjc7l/Language', {
@@ -56,6 +61,7 @@ const Select = ( { setSelectedOperation, setPostLanguage } ) => {
                                     value: e.target.value,
                                     ISO: iso
                                 } );
+                                setAdminLanguage(iso);
                             } }
                             defaultValue="Vælg et sprog"
                         >

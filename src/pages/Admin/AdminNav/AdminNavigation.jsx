@@ -9,7 +9,7 @@ import Select from '../../../component/Admin/Select';
 
 import BackToAdmin from '../../../component/Admin/BackToAdmin';
 import AdminPostNavigation from './AdminPostNavigation';
-import AdminPatchNavigation from './AdminPatchNavigation';
+import AdminEditNavigation from './AdminEditNavigation';
 
 const AdminNavigation = () => {
 
@@ -47,22 +47,13 @@ const AdminNavigation = () => {
                     </Col>
                 </Row>
 
-                <Row>
-                    <Col lg={{span: 11, offset: 1}}>
-                        <p className='mainText'>Kun opret navigation for de sporg der ikke her en i forvejen!</p>
-                    </Col>
-
-                </Row>
-
                 { selectedOperation && postLanguage &&
                     <>
 
                         { selectedOperation === 'POST' && <AdminPostNavigation setSelectedOperation={ setSelectedOperation } postLanguage={ postLanguage } /> }
 
-                        { selectedOperation === 'PATCH' && <AdminPatchNavigation postLanguage={ postLanguage }
+                        { (selectedOperation === 'PATCH' || selectedOperation === 'DELETE') && <AdminEditNavigation postLanguage={ postLanguage }
                             setSelectedOperation={ setSelectedOperation } /> }
-
-                        {/* { selectedOperation === 'DELETE' && <AdminDeleteNews /> } */ }
 
                     </>
                 }

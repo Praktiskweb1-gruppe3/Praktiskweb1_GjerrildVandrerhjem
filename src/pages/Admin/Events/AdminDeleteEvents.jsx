@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import UseTranslator from '../../../hooks/UseTranslator';
+import UseAdminTranslator from '../../../hooks/UseAdminTranslator';
 import { useGetData } from '../../../hooks/useGetData';
 
 import { useDeleteData } from '../../../hooks/useDeleteData';
@@ -11,7 +11,7 @@ const AdminDeleteEvents = ( { setSelectedOperation } ) => {
 
     const [ id, setId ] = useState();
 
-    const { error, loading, filteredData } = UseTranslator( 'Events', true, 'Dato' );
+    const { error, loading, filteredData } = UseAdminTranslator( 'Events', true, 'Dato' );
 
     const { error: errorEvents, loading: loadingEvents, data: dataEvents, getData } = useGetData();
 

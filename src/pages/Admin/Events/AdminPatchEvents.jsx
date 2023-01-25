@@ -12,7 +12,7 @@ import ChosenImage from '../../../component/Admin/ChosenImage';
 import ShowImages from '../../../component/Admin/ShowImages';
 import SubjectDropdown from '../../../component/Admin/SubjectDropdown';
 
-import UseTranslator from '../../../hooks/UseTranslator';
+import UseAdminTranslator from '../../../hooks/UseAdminTranslator';
 
 const AdminPatchEvents = ( { postLanguage, setSelectedOperation } ) => {
 
@@ -37,13 +37,13 @@ const AdminPatchEvents = ( { postLanguage, setSelectedOperation } ) => {
     const { error, loading, data, patchData } = usePatchData();
     const { error: errorSelectEvent, loading: loadingSelectEvent, data: dataSelectEvent, getData } = useGetData();
 
-    const { error: errorAllEvents, loading: loadingAllEvents, filteredData } = UseTranslator( 'Events', true, 'Dato' );
+    const { error: errorAllEvents, loading: loadingAllEvents, filteredData } = UseAdminTranslator( 'Events', true, 'Dato' );
 
-    const { error: errorPrice, loading: loadingPrice, filteredData: filteredDataPrice } = UseTranslator( 'TicketPrice', true );
+    const { error: errorPrice, loading: loadingPrice, filteredData: filteredDataPrice } = UseAdminTranslator( 'TicketPrice', true );
 
-    const { error: errorOrganizer, loading: loadingOrganizer, filteredData: filteredDataOrganizer } = UseTranslator( 'Organizer' );
+    const { error: errorOrganizer, loading: loadingOrganizer, filteredData: filteredDataOrganizer } = UseAdminTranslator( 'Organizer' );
 
-    const { error: errorCategory, loading: loadingCategory, filteredData: filteredDataCategory } = UseTranslator( 'Categories' );
+    const { error: errorCategory, loading: loadingCategory, filteredData: filteredDataCategory } = UseAdminTranslator( 'Categories' );
 
     // load images from airtable, using netlify and cloudinary
     const loadImages = async () => {

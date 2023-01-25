@@ -9,13 +9,11 @@ import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 
 import { usePostData } from '../../../hooks/usePostData';
 
-import { Image } from 'cloudinary-react';
-
 import axios from 'axios';
 import ShowImages from '../../../component/Admin/ShowImages';
 
 
-const PostActivities = ( { postLanguage } ) => {
+const PostActivities = ( { postLanguage, setSelectedOperation } ) => {
 
     const [ description, setDescription ] = useState();
     const [ facts, setFacts ] = useState( '' );
@@ -119,6 +117,7 @@ const PostActivities = ( { postLanguage } ) => {
 
             timeOut = setTimeout( () => {
                 setMessage( {} )
+                setSelectedOperation('');
             }, 5000 )
         }
 
