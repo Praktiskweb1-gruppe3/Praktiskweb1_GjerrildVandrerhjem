@@ -1,75 +1,23 @@
-import React, { useState, useEffect, useContext } from 'react';
-
-import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col';
+import React from 'react';
 import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
-import AdminTitle from '../../../component/Admin/AdminTitle';
-
-import Select from '../../../component/Admin/Select';
-
-import AdminPostImage from './AdminPostImage';
-import AdminPatchImage from './AdminPatchImage';
-import AdminDeleteImage from './AdminDeleteImage';
 
 
 const AdminFrontpage = () => {
-
-    // the language to post
-    const [ postLanguage, setPostLanguage ] = useState();
-
-    const [ selectedOperation, setSelectedOperation ] = useState();
-
     return (
-        <Container fluid="lg" className='adminFrontpage'>
+        <Row>
 
-            <Row>
-                <Col lg={ { span: 6, offset: 1 } }  >
-                    <AdminTitle pageName="billeder" />
-                </Col>
-            </Row>
-
-
-
-            {/* Choose fetch method and language */ }
-           
-                <Row>
-                <Col lg={ { span: 12, offset: 1 } }>
-                    <Select
-                        setSelectedOperation={ setSelectedOperation }
-                        setPostLanguage={ setPostLanguage }
-                        selectedOperation={ selectedOperation }
-                    />
-                </Col>
-            </Row>
-
-
-            {
-                selectedOperation && postLanguage &&
-                <>
-                    {
-                        selectedOperation === 'POST' && <AdminPostImage
-                            language={ postLanguage }
-                        />
-                    }
-                    {
-                        selectedOperation === 'PATCH' && <AdminPatchImage
-                            language={ postLanguage }
-                        />
-                    }
-
-                    {
-                        selectedOperation === 'DELETE' && <AdminDeleteImage
-                            language={ postLanguage }
-                        />
-                    }
-
-                </>
-            }
+            <Col md={{span: 4, offset: 4}}>
+                <h1>Admin</h1>
+                <p className='mainText admin'>Velkommen til admin siden. I denne del af hjemmesiden kan du rette data på hjemmesiden <br />
+                    Brug navigationsbaren til at finde den kategori af data du vil rette.
+                </p>
+            </Col>
 
 
 
-        </Container>
+        </Row>
     )
 }
 

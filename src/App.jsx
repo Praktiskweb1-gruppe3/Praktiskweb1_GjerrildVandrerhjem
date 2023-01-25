@@ -28,8 +28,9 @@ import Kontakt from './pages/Kontakt';
 // Admin
 import Index from './pages/Admin/Index';
 import AdminActivities from './pages/Admin/Activities/AdminActivities';
-import AdminFrontpage from './pages/Admin/Frontpage/AdminFrontpage';
 import AdminNews from './pages/Admin/News/AdminNews';
+import AdminImages from './pages/Admin/Images/AdminImages';
+import AdminFrontpage from './pages/Admin/Frontpage/AdminFrontpage';
 
 
 function App () {
@@ -85,12 +86,13 @@ function App () {
             <Route path="/about" element={ <About /> } />
 
             {/* No Match */ }
-            <Route path="*" element={ <NoMatch /> } />
 
             {/* Admin */ }
             <Route path="admin" element={ <Index /> }>
 
               <Route index element={ <AdminFrontpage /> } />
+
+              <Route path='images' element={<AdminImages />} />
 
               {/* <Route index element={} /> */ }
               <Route path="activities" element={ <AdminActivities /> } />
@@ -99,6 +101,8 @@ function App () {
               <Route path="news" element={ <AdminNews /> } />
 
             </Route>
+
+            <Route path="*" element={ <NoMatch /> } />
 
           </Routes>
 

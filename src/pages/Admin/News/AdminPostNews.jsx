@@ -12,7 +12,6 @@ import axios from 'axios';
 import ChosenImage from '../../../component/Admin/ChosenImage';
 import ShowImages from '../../../component/Admin/ShowImages';
 
-
 const AdminPostNews = ( { postLanguage } ) => {
 
     const [ title, setTitle ] = useState( '' );
@@ -244,9 +243,9 @@ const AdminPostNews = ( { postLanguage } ) => {
                         { isImagesVisible &&
 
                             <ShowImages
-                                images={images}
-                                setId={setId}
-                                setChosenImage={setChosenImage}
+                                images={ images }
+                                setId={ setId }
+                                setChosenImage={ setChosenImage }
                             /> }
                     </Row>
                 </Row>

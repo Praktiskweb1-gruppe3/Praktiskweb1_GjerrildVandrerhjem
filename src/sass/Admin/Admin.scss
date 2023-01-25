@@ -20,6 +20,10 @@
     display: none;
 }
 
+.mainText.admin {
+    text-align: center;
+}
+
 .notAdmin {
     display: flex;
     flex-direction: column;
@@ -96,7 +100,8 @@ input[type="file"]::file-selector-button {
 
 .btn_post,
 .btn_getImages,
-.btn_delete {
+.btn_delete,
+.btn_backToAdmin {
     display: block;
     width: 150px;
     height: 35px;
@@ -156,6 +161,11 @@ input[type="file"]::file-selector-button {
     }
 }
 
+.btn_backToAdmin {
+    width: 200px;
+    margin-inline: 0;
+}
+
 .logoutSection {
     display: flex;
     align-items: center;
@@ -204,5 +214,13 @@ input[type="file"]::file-selector-button {
     border-radius: .4rem;
     background-color: aqua;
 }
+
+/* #endregion */
+
+/* #region  //* News */
+.adminNews{
+    padding-top: 5rem;
+}
+
 
 /* #endregion */

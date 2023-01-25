@@ -11,46 +11,57 @@ import Select from '../../../component/Admin/Select';
 import AdminPatchActicity from './AdminPatchActicity';
 import AdminDeleteActivity from './AdminDeleteActivity';
 
+import BackToAdmin from '../../../component/Admin/BackToAdmin';
+
 const AdminActivities = () => {
 
     const [ selectedOperation, setSelectedOperation ] = useState();
 
     // the language to post the data
-    const [ postLanguage, setPostLanguage ] = useState();  
+    const [ postLanguage, setPostLanguage ] = useState();
 
     return (
-        <Container fluid="lg" className='adminActivities'>
+        <Container fluid className='adminActivities'>
 
             <Row>
-                <Col lg={ { span: 6, offset: 1 } } >
-                    <AdminTitle pageName="aktiviteter" />
+                <Col md={ { span: 4, offset: 1 } }>
+                    <BackToAdmin />
                 </Col>
             </Row>
 
+            <Container fluid="lg">
+
+                <Row>
+                    <Col lg={ { span: 6, offset: 1 } } >
+                        <AdminTitle pageName="aktiviteter" />
+                    </Col>
+                </Row>
+
+                {/* Choose fetch method and language */ }
+                <Row>
+                    <Col lg={ { span: 12, offset: 1 } }>
+                        <Select
+                            setSelectedOperation={ setSelectedOperation }
+                            setPostLanguage={ setPostLanguage }
+                            selectedOperation={ selectedOperation }
+                        />
+                    </Col>
+                </Row>
+
+                { selectedOperation && postLanguage &&
+                    <>
+
+                        { selectedOperation === 'POST' && <PostActivities postLanguage={ postLanguage } /> }
+
+                        { selectedOperation === 'PATCH' && <AdminPatchActicity postLanguage={ postLanguage } /> }
+
+                        { selectedOperation === 'DELETE' && <AdminDeleteActivity /> }
+
+                    </>
+                }
+            </Container>
 
 
-            {/* Choose fetch method and language */ }
-            <Row>
-                <Col lg={ { span: 12, offset: 1 } }>
-                    <Select
-                        setSelectedOperation={ setSelectedOperation }
-                        setPostLanguage={ setPostLanguage }
-                        selectedOperation={ selectedOperation }
-                    />
-                </Col>
-            </Row>
-
-            {   selectedOperation && postLanguage &&
-                <>
-
-                    { selectedOperation === 'POST' && <PostActivities postLanguage={ postLanguage } /> }
-
-                    { selectedOperation === 'PATCH' && <AdminPatchActicity  postLanguage={ postLanguage } /> }
-
-                    {selectedOperation === 'DELETE' && <AdminDeleteActivity />}
-
-                </>
-            }
 
         </Container>
 

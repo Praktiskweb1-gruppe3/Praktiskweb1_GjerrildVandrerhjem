@@ -3,8 +3,6 @@ import { ThinBackend } from 'thin-backend-react';
 
 import { Outlet } from 'react-router-dom';
 
-import { useState } from 'react';
-
 import 'thin-backend-react/auth.css';
 import '../../sass/Admin/Admin.scss'
 
@@ -14,8 +12,6 @@ import { useEffect } from 'react';
 import AdminContent from './AdminContent';
 
 const Index = () => {
-
-    const [ pathname, setPathname ] = useState( '' )
 
     useEffect( () => {
 

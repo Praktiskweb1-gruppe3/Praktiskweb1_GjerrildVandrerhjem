@@ -1,7 +1,7 @@
 import '../../sass/Navigation.scss';
-import { NavLink } from "react-router-dom";
 
 import { useState, useRef, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -79,8 +79,6 @@ const AdminNavbar = () => {
             {error && <div>Error</div>}
             {loading && <div>Loading...</div>}
 
-
-
             {
                 data &&
 
@@ -116,7 +114,7 @@ const AdminNavbar = () => {
                             </li>
 
                             <li>
-                                <NavLink to="/admin" end>{ data.records[ 0 ].fields.Frontpage }</NavLink>
+                                <NavLink to="images" end>{ data.records[ 0 ].fields.Images }</NavLink>
                             </li>
 
                             <li>
