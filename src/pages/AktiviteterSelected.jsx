@@ -136,7 +136,7 @@ const AktiviteterSelected = () => {
 
                                         <section className='Facts'>
                                             <h2>{filteredData[0].fields.Facts}</h2>
-                                            <p className='FactsText'>{location.state.data.fields.Facts}</p>
+                                            <p className='FactsText'>{location.state.data.fields.Facts.slice(0, 1200)}</p>
                                         </section>
                                     </Col>
                                 </Row>
