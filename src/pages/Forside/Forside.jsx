@@ -11,11 +11,6 @@ import Col from 'react-bootstrap/Col';
 
 import {  Slide } from 'react-slideshow-image';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShower, faToilet, faWifi, faWheelchairMove, faWindowClose, faChair } from "@fortawesome/free-solid-svg-icons";
-
-import parse from 'html-react-parser';
-
 import { ImagePathContext } from '../../Context/ImagePathContext';
 import { Image } from 'cloudinary-react';
 
@@ -51,10 +46,10 @@ const Forside = () => {
 
                             <div className="slide-container">
                                 {/* <AutoplaySlider duration={ 5000 }> */}
-                                    <Slide>
-                                        { filteredData.filter(slideImage => slideImage.fields.hasOwnProperty('Images')).slice(0).map((s, i) => (
-                                            <div className="each-slide" key={ i }>
-                                                <figure className='forside_images' key={ s.id }>
+                                    <Slide autoplay infinite arrows={false}>
+                                        { filteredData.map((s, i) => (
+                                            <div className="each-slide" key={ s.id }>
+                                                <figure className='forside_images bigSlider'>
                                                     <picture>
                                                         <source media="(max-width: 991px)" srcSet={ cloudinaryImagePath + s.fields.ImgId_Tablet[0] } />
                                                         <source media="(min-width: 992px)" srcSet={ cloudinaryImagePath + s.fields.ImgId_Desktop[0] } />
