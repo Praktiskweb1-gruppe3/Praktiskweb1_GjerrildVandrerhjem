@@ -5,140 +5,132 @@
 
 .aktivSelectContainer {
     width: 100%;
-    height: auto;
     background-color: $ghost-white;
+}
 
-    //Headline 
+//Headline 
 
-    .HeadlineSelected {
-        color: $col_text;
-        font-family: $font_text;
-        font-size: 6rem;
+.HeadlineSelected {
+    color: $col_text;
+    font-family: $font_text;
+    font-size: 6rem;
+}
+
+//Button to Overview
+
+.BackToOverviewBtn {
+    color: $ghost-white;
+    background-color: $bright-yellow-crayola;
+    padding: 1rem;
+    border-radius: 4px;
+    border: none;
+    font-family: $font_text;
+    color: $col_image_text;
+    font-size: 2rem;
+
+    &:hover {
+        background-color: $caribbean-green;
+        transform: scale(1.1);
+        cursor: pointer;
     }
+}
 
-    //Button to Overview
+// Body of Activity Selected
 
-    .BackToOverviewBtn {
-        color: $ghost-white;
-        background-color: $bright-yellow-crayola;
-        padding: 1rem;
-        border-radius: 4px;
-        border: none;
-        font-family: $font_text;
-        color: $col_image_text;
-        font-size: 2rem;
+.MainContent {
+    width: 100%;
+    height: auto;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+}
 
-        &:hover {
-            background-color: $caribbean-green;
-            transform: scale(1.1);
-            cursor: pointer;
-        }
+
+// Thumbnail picture
+
+.Thumbnail {
+    width: 100%;
+    margin-bottom: 3rem;
+}
+
+// Map Container
+
+#mapContainer {
+    width: 100%;
+    min-height: 50px;
+    height: 60%;
+    z-index: 1;
+    margin-bottom: 3rem;
+    border-radius: .4rem;
+}
+
+//First text
+
+.Apetizer {
+    width: 100%;
+    height: auto;
+    margin-bottom: 3rem;
+    background-color: $cultured;
+    font-family: $font_text;
+    color: $col_text;
+
+}
+
+.ApetizerText {
+    padding: 1rem;
+    font-size: 2rem;
+}
+
+// Button to Activities Homepage
+
+.hostWebpageBtn {
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 3rem;
+    color: $col_image_text;
+    background-color: $bright-yellow-crayola;
+    font-family: $font_text;
+    font-size: 3rem;
+    padding: 1rem;
+    border-radius: 4px;
+    border: none;
+
+    &:hover {
+        background-color: $caribbean-green;
+        transform: scale(1.05);
+        cursor: pointer;
     }
+}
 
-    // Body of Activity Selected
+// Second Text
 
-    .MainContent {
-        width: 100%;
-        height: auto;
-        margin-top: 2rem;
-        display: flex;
-        justify-content: center;
-        gap: 3rem;
+.Facts {
+    width: 100%;
+    margin-bottom: 3rem;
+    background-color: $cultured;
+    font-family: $font_text;
+    color: $col_text;
+    
+}
 
-        // Thumbnail picture
-
-        .Thumbnail {
-            width: 100%;
-            margin-bottom: 3rem;
-        }
-
-        // Map Container
-
-        #mapContainer {
-            width: 100%;
-            min-height: 100px;
-            height: 60%;
-            position: relative;
-            z-index: 1;
-            margin-bottom: 3rem;
-            border-radius: .4rem;
-        }
-
-        //First text
-
-        .Apetizer {
-            position: relative;
-            width: 100%;
-            height: auto;
-            margin-bottom: 3rem;
-            background-color: $cultured;
-            font-family: $font_text;
-            color: $col_text;
-
-            .ApetizerText {
-                height: auto;
-                padding: 1rem;
-                font-size: 2rem;
-            }
-
-            // Button to Activities Homepage
-
-            .hostWebpageBtn {
-                width: 80%;
-                margin-left: 10%;
-                margin-bottom: 3rem;
-                color: $col_image_text;
-                background-color: $bright-yellow-crayola;
-                font-family: $font_text;
-                font-size: 3rem;
-                padding: 1rem;
-                border-radius: 4px;
-                border: none;
-
-                &:hover {
-                    background-color: $caribbean-green;
-                    transform: scale(1.05);
-                    cursor: pointer;
-                }
-            }
-
-        }
-
-        // Second Text
-
-        .Facts {
-            width: 100%;
-            height: auto;
-            margin-bottom: 3rem;
-            background-color: $cultured;
-            font-family: $font_text;
-            color: $col_text;
-
-            .FactsText {
-                height: auto;
-                padding: 1rem;
-                font-size: 2rem;
-            }
-
-        }
-
-
-    }
-
+.FactsText {
+    padding: 1rem;
+    font-size: 2rem;
 }
 
 @media only screen and (max-width: 399px) {
 
-    #mapContainer{
+    #mapContainer {
         display: none;
     }
 
-    .aktivSelectContainer, 
-        .MainContent {
+    .aktivSelectContainer,
+    .MainContent {
         flex-direction: column;
     }
 
-    .Apetizer{
+    .Apetizer {
         width: 100%;
     }
 
@@ -146,11 +138,6 @@
         margin-top: 1rem;
         margin-left: 32%;
 
-    }
-
-    .mapMessage,
-    .mapText {
-        display: block;
     }
 
 }
