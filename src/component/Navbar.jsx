@@ -15,6 +15,8 @@ import { useContext } from 'react';
 import { ImagePathContext } from '../Context/ImagePathContext';
 import { Image } from 'cloudinary-react';
 
+import { useNavigate } from 'react-router-dom';
+
 
 
 const Navbar = () => {
@@ -108,17 +110,17 @@ const Navbar = () => {
 
                         <Link to="/" className='logoContainer'>
                             <picture>
-                                 <source media='(max-width: 575px)' srcSet={ cloudinaryImagePath + filteredData[ 0 ].fields.ImgId_Mobile[0] } />
+                                <source media='(max-width: 575px)' srcSet={ cloudinaryImagePath + filteredData[ 0 ].fields.ImgId_Mobile[ 0 ] } />
 
-                                <source media='(max-width: 991px)' srcSet={ cloudinaryImagePath + filteredData[ 0 ].fields.ImgId_Tablet[0]} />
+                                <source media='(max-width: 991px)' srcSet={ cloudinaryImagePath + filteredData[ 0 ].fields.ImgId_Tablet[ 0 ] } />
 
-                                <source media='(min-width: 992px)' srcSet={ cloudinaryImagePath + filteredData[ 0 ].fields.ImgId_Desktop[0] } /> 
+                                <source media='(min-width: 992px)' srcSet={ cloudinaryImagePath + filteredData[ 0 ].fields.ImgId_Desktop[ 0 ] } />
 
-                                 <Image
+                                <Image
                                     className='navbar__logo'
-                                    cloudName={import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}
-                                    public_id={ filteredData[ 0 ].fields.ImgId_Desktop[0] }
-                                    alt={ filteredData[ 0 ].fields.Image_Description } /> 
+                                    cloudName={ import.meta.env.VITE_CLOUDINARY_CLOUD_NAME }
+                                    public_id={ filteredData[ 0 ].fields.ImgId_Desktop[ 0 ] }
+                                    alt={ filteredData[ 0 ].fields.Image_Description } />
                             </picture>
 
                         </Link>
@@ -167,7 +169,12 @@ const Navbar = () => {
                             </li>
 
                             <li>
-                                <button className="btn__bookroom">{ filteredData[ 0 ].fields.BookRoom }</button>
+                                <button
+                                    className="btn__bookroom"
+                                    onClick={() => window.open('https://gjerrildvandrerhjem.suitcasebooking.com/da/', '_blank')}
+                                >
+                                    { filteredData[ 0 ].fields.BookRoom }
+                                </button>
                             </li>
                         </ul>
                         <div className="hamburger" onClick={ handleClick }>

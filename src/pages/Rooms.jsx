@@ -102,7 +102,7 @@ const Rooms = () => {
                                         className='input_room' />
                                 </div>
 
-                                <button type="submit" className='send_submit-room'>{ filteredData[0].fields.Room_Available }</button>
+                                <button type="submit" className='send_submit-room' onClick={() => window.open(`https://gjerrildvandrerhjem.suitcasebooking.com/da/?datefrom=${dateFrom}&dateto=${dateTo}`)}>{ filteredData[0].fields.Room_Available }</button>
 
                             </form>
                         </Col>
