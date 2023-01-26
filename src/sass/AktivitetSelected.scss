@@ -54,16 +54,7 @@
     margin-bottom: 3rem;
 }
 
-// Map Container
 
-#mapContainer {
-    width: 100%;
-    min-height: 50px;
-    height: 60%;
-    z-index: 1;
-    margin-bottom: 3rem;
-    border-radius: .4rem;
-}
 
 //First text
 
@@ -103,10 +94,22 @@
     }
 }
 
+// Map Container
+
+#mapContainer {
+    width: 100%;
+    min-height: 50px;
+    height: 60%;
+    z-index: 1;
+    margin-bottom: 3rem;
+    border-radius: .4rem;
+}
 // Second Text
 
 .Facts {
     width: 100%;
+    max-height: 450px;
+    overflow-y: scroll;
     margin-bottom: 3rem;
     background-color: $cultured;
     font-family: $font_text;
@@ -118,6 +121,13 @@
     padding: 1rem;
     font-size: 2rem;
 }
+
+
+
+
+
+
+
 
 @media only screen and (max-width: 399px) {
 
