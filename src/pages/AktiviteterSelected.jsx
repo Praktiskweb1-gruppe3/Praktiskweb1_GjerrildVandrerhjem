@@ -115,7 +115,7 @@ const AktiviteterSelected = () => {
                                         md={{ span: 6 }}
                                         sm={{ span: 4 }}>
                                         {
-                                            <MapContainer center={[location.state.data.fields.Latitude, location.state.data.fields.Longitude]} zoom={10} id="mapContainer">
+                                            <MapContainer center={[location.state.data.fields.Latitude, location.state.data.fields.Longitude]} zoom={10} className="mapContainer">
                                                 <TileLayer
                                                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                                                     url='https://tile.openstreetmap.org/{z}/{x}/{y}.png' />
