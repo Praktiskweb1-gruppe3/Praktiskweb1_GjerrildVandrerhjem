@@ -27,6 +27,9 @@ const VoresRooms = () => {
 
     const [numOfGuests, setNumOfGuests] = useState(1);
 
+    const [dateFrom, setDateFrom] = useState()
+    const [dateTo, setDateTo] = useState()
+
     const returnPrices = (oGPrice) => {
 
         if (numOfGuests > 1) {
@@ -90,7 +93,7 @@ const VoresRooms = () => {
                                         className='input_room' />
                                 </div>
 
-                                <button type="submit" className='send_submit-room'>{ filteredData[0].fields.Room_Available }</button>
+                                <button type="submit" className='send_submit-room' onClick={() => window.open(`https://gjerrildvandrerhjem.suitcasebooking.com/da/?datefrom=${dateFrom}&dateto=${dateTo}`, '_blank')}>{ filteredData[0].fields.Room_Available }</button>
 
                             </form>
                         </Col>
