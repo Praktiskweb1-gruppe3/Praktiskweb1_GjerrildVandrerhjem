@@ -42,7 +42,7 @@ const Forside = () => {
                 filteredData && <>
                     <Row>
 
-                        <Col lg={{span: 8, offset: 2}} className="d-none d-md-block px-0">
+                        <Col lg={{span: 10, offset: 1}} className="d-none d-md-block px-0">
 
                             <div className="slide-container">
                                     <Slide autoplay infinite arrows={false}>
@@ -94,7 +94,8 @@ const Forside = () => {
 
                     <Row>
                         <Col>{/* component kontakt */ }
-                            <KontaktOs /></Col>
+                            <KontaktOs />
+                            </Col>
 
                     </Row>
 

@@ -2,6 +2,7 @@ import '../../sass/Forside/VoresRooms.scss';
 import 'react-slideshow-image/dist/styles.css';
 
 import React, { useContext, useEffect, useState } from 'react'
+import { Link } from "react-router-dom";
 
 import UseTranslator from '../../hooks/UseTranslator';
 
@@ -19,6 +20,8 @@ import parse from 'html-react-parser';
 import { ImagePathContext } from '../../Context/ImagePathContext';
 import { Image } from 'cloudinary-react';
 
+import { useNavigate } from 'react-router-dom';
+
 const VoresRooms = () => {
 
     const { filteredData, error, loading } = UseTranslator('Rooms', true)
@@ -26,6 +29,8 @@ const VoresRooms = () => {
     const { cloudinaryImagePath } = useContext(ImagePathContext);
 
     const [numOfGuests, setNumOfGuests] = useState(1);
+
+    const navigate = useNavigate();
 
     const returnPrices = (oGPrice) => {
 
@@ -90,7 +95,7 @@ const VoresRooms = () => {
                                         className='input_room' />
                                 </div>
 
-                                <button type="submit" className='send_submit-room'>{ filteredData[0].fields.Room_Available }</button>
+                                <button type="submit" className='send_submit-room' onClick={ () => navigate("/rooms") }>{ filteredData[0].fields.Room_Available }</button>
 
                             </form>
                         </Col>
@@ -153,7 +158,7 @@ const VoresRooms = () => {
                                 <h2 className='room_price'>
                                     { 'Fra DKK' + returnPrices(filteredData[0].fields.Prices[0]) }
                                 </h2>
-                                
+
                                 <p className='mainText'>Pr. nat</p>
                             </div>
                         </Col>
@@ -169,7 +174,7 @@ const VoresRooms = () => {
 
                 </>
             }
-        </Container>
+        </Container >
     )
 }
 
