@@ -68,7 +68,7 @@ const Kontakt = () => {
 
         try {
             setMessage( {
-                msg: 'Din mail er blevet modtaget',
+                msg: 'Din mail er blevet sent',
                 class: 'success'
             } )
             console.log( data )

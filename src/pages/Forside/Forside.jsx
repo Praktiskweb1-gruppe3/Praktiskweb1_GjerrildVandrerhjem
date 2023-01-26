@@ -45,7 +45,6 @@ const Forside = () => {
                         <Col lg={{span: 8, offset: 2}} className="d-none d-md-block px-0">
 
                             <div className="slide-container">
-                                {/* <AutoplaySlider duration={ 5000 }> */}
                                     <Slide autoplay infinite arrows={false}>
                                         { filteredData.map((s, i) => (
                                             <div className="each-slide" key={ s.id }>
@@ -66,7 +65,6 @@ const Forside = () => {
                                             </div>
                                         )) }
                                     </Slide>
-                                {/* </AutoplaySlider> */}
                             </div>
                         </Col>
 
@@ -99,9 +97,6 @@ const Forside = () => {
                             <KontaktOs /></Col>
 
                     </Row>
-
-
-
 
                 </>
             }
