@@ -2,7 +2,7 @@
 
 .room-container {
     background: $col_background2;
-    padding: 2rem;
+    padding: 2rem 2rem 2rem 0;
 }
 
 .room-icon{
@@ -12,7 +12,6 @@
 
 .vores-room-reservation {
     width: 50%;
-    height: auto;
     background: $col_background;
     border-radius: .5rem;
     box-shadow: 0 15px 75px 0 rgb(0 0 0 / 7%);;
@@ -22,8 +21,9 @@
     justify-content: space-around;
     padding: 2.5rem 1rem;
     position: absolute;
-    top: 90%;
-    left: 25%;
+    bottom: -25%;
+    left: 50%;
+    translate: -50% -25%;
 }
 
 .send_submit-room {
