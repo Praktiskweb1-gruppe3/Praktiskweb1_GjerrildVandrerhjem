@@ -47,6 +47,9 @@ function App () {
   const [ cloudinaryImagePath ] = useState( 'https://res.cloudinary.com/du8bx3kux/image/upload/v1/' );
 
 
+  //* For at kører projektet, brug: 'netlify dev' ellers bliver billederne ikke vist.
+
+
 
   return (
     <Router>
